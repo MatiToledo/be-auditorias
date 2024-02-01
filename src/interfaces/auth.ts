@@ -1,9 +1,15 @@
-import { Auth } from "../models";
-
+import { Transaction } from "sequelize";
+import { Auth, User } from "../models";
 export interface IAuthService {
-  create(data: Partial<Auth>): Promise<boolean>;
+  create(data: BodyCreate, transaction: Transaction): Promise<void>;
 }
 
 export interface IAuthRepository {
-  createInDB(data: Partial<Auth>): Promise<Auth>;
+  create(data: Partial<Auth>, transaction: Transaction): Promise<Auth>;
+  findIfExistByEmail(email: string): Promise<void>;
+}
+
+export interface BodyCreate {
+  Auth: Partial<Auth>;
+  User: Partial<User>;
 }

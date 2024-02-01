@@ -1,5 +1,5 @@
-import { Options, Sequelize } from "sequelize";
 import "dotenv/config";
+import { Options, Sequelize } from "sequelize";
 
 const sequelizeOptions: Options = {
   dialect: "postgres",
@@ -36,4 +36,4 @@ const initDatabase = async () => {
   }
 };
 
-export { sequelize, initDatabase };
+export { initDatabase, sequelize };
