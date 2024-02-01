@@ -1,8 +1,8 @@
 import express from "express";
-import ApiRouter from "./route/index";
+import ApiRouter from "./routes/index";
 
 const Router = express.Router();
 
-Router.use("/example", ApiRouter);
+Router.use("/", ApiRouter);
 
 export { Router };

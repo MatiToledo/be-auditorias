@@ -1,5 +1,5 @@
 import { sequelize } from "./";
-import "../model";
+import "../models";
 
 sequelize.sync({ force: true }).then((res) => {
   console.log("Database synced", res);

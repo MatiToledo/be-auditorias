@@ -4,10 +4,9 @@
  * of the API
  */
 import express from "express";
-import Example from "./example";
-
+import AuthRouter from "./auth";
 const router = express.Router();
 
-router.use("/", Example);
+router.use("/auth", AuthRouter);
 
 export default router;
