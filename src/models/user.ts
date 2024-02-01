@@ -15,6 +15,7 @@ export class User extends Model {
   declare phone: number;
   declare photo: string;
   declare dni: number;
+  declare AuthId: UUID;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
