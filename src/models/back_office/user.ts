@@ -11,11 +11,8 @@ export enum UserBORoleEnum {
 export class User_BO extends Model {
   declare id: CreationOptional<UUID>;
   declare fullName: string;
-  declare phone: number;
-  declare photo: string;
   declare role: UserBORoleEnum;
-  declare dni: number;
-  declare AuthId: UUID;
+  declare AuthBOId: UUID;
   declare BranchId: UUID;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;

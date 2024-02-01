@@ -1,10 +1,10 @@
 import { Transaction } from "sequelize";
 import { BodyCreate, IAuthService } from "../interfaces/auth";
+import { encryptPassword } from "../libs/encrypt_password";
+import { generateToken } from "../libs/jwt";
 import { Auth } from "../models";
 import { AuthRepository } from "../repositories/auth";
 import { UserRepository } from "../repositories/user";
-import { encryptPassword } from "../libs/encrypt_password";
-import { generateToken } from "../libs/jwt";
 // ! Dont handle the error here, the controller must take it.
 
 export class AuthService implements IAuthService {

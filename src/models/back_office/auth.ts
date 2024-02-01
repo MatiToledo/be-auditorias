@@ -1,6 +1,6 @@
+import { UUID } from "crypto";
 import { CreationOptional, DataTypes, Model } from "sequelize";
 import { sequelize } from "../../DB";
-import { UUID } from "crypto";
 
 export class Auth_BO extends Model {
   declare id: CreationOptional<UUID>;

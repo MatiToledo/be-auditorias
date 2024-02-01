@@ -1,8 +1,7 @@
-import { Transaction } from "sequelize";
-import { IAuthRepository } from "../interfaces/auth";
-import { IUserRepository } from "../interfaces/user";
-import { Auth, User } from "../models";
 import { UUID } from "crypto";
+import { Transaction } from "sequelize";
+import { IUserRepository } from "../interfaces/user";
+import { User } from "../models";
 
 export class UserRepository implements IUserRepository {
   async create(data: Partial<User>, transaction: Transaction): Promise<User> {

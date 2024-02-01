@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import { AuthService } from "../services/auth";
-import { responseHandler } from "../libs/response_handler";
-import { sequelize } from "../DB";
 import { Transaction } from "sequelize";
+import { sequelize } from "../DB";
+import { responseHandler } from "../libs/response_handler";
+import { AuthService } from "../services/auth";
 export class AuthController {
   private authService = new AuthService();
 

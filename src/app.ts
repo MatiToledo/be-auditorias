@@ -1,9 +1,9 @@
-import "dotenv/config";
+import bodyParser from "body-parser";
 import cors from "cors";
+import "dotenv/config";
 import express from "express";
 import morgan from "morgan";
 import { initDatabase } from "./DB";
-import bodyParser from "body-parser";
 import Router from "./routes";
 import RouterBackOffice from "./routes/back_office";
 

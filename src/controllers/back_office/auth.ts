@@ -1,8 +1,8 @@
-import { Transaction } from "sequelize";
 import { Request, Response } from "express";
+import { Transaction } from "sequelize";
 import { sequelize } from "../../DB";
-import { Auth_BOService } from "../../services/back_office/auth";
 import { responseHandler } from "../../libs/response_handler";
+import { Auth_BOService } from "../../services/back_office/auth";
 
 export class Auth_BOController {
   private authBOService = new Auth_BOService();
@@ -10,7 +10,7 @@ export class Auth_BOController {
   createAuth = async (req: Request, res: Response) => {
     try {
       await sequelize.transaction(async (transaction: Transaction) => {
-        // await this.authService.create(req.body, transaction);
+        await this.authBOService.create(req.body, transaction);
       });
       res.status(200).json(responseHandler(true, "AUTH_CREATED"));
     } catch (error) {

@@ -1,8 +1,7 @@
-import { UserRepository } from "./../repositories/user";
-import { IUserService } from "../interfaces/user";
-import { Auth, User } from "../models";
-import { AuthRepository } from "../repositories/auth";
 import { Transaction } from "sequelize";
+import { IUserService } from "../interfaces/user";
+import { User } from "../models";
+import { UserRepository } from "./../repositories/user";
 
 export class UserService implements IUserService {
   private userRepository = new UserRepository();
