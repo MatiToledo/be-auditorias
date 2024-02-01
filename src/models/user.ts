@@ -16,6 +16,7 @@ export class User extends Model {
   declare photo: string;
   declare dni: number;
   declare AuthId: UUID;
+  declare BranchId: UUID;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
