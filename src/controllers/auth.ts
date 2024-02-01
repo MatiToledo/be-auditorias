@@ -6,7 +6,7 @@ import { AuthService } from "../services/auth";
 export class AuthController {
   private authService = new AuthService();
 
-  createAuth = async (req: Request, res: Response) => {
+  create = async (req: Request, res: Response) => {
     try {
       await sequelize.transaction(async (transaction: Transaction) => {
         await this.authService.create(req.body, transaction);
