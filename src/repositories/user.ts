@@ -2,6 +2,7 @@ import { Transaction } from "sequelize";
 import { IAuthRepository } from "../interfaces/auth";
 import { IUserRepository } from "../interfaces/user";
 import { Auth, User } from "../models";
+import { UUID } from "crypto";
 
 export class UserRepository implements IUserRepository {
   async create(data: Partial<User>, transaction: Transaction): Promise<User> {
@@ -12,6 +13,17 @@ export class UserRepository implements IUserRepository {
     } catch (error) {
       console.error(error);
       throw new Error(`USER_NOT_CREATED`);
+    }
+  }
+
+  async findByAuthId(id: UUID): Promise<User> {
+    try {
+      return await User.findOne({
+        where: { AuthId: id },
+      });
+    } catch (error) {
+      console.error(error);
+      throw new Error(`USER_NOT_FIND`);
     }
   }
 }

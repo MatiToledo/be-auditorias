@@ -8,11 +8,20 @@ export class AuthController {
 
   createAuth = async (req: Request, res: Response) => {
     try {
-      const body = req.body;
       await sequelize.transaction(async (transaction: Transaction) => {
-        await this.authService.create(body, transaction);
+        await this.authService.create(req.body, transaction);
       });
       res.status(200).json(responseHandler(true, "AUTH_CREATED"));
+    } catch (error) {
+      console.error(error);
+      res.status(400).json(responseHandler(false, error.message));
+    }
+  };
+
+  logIn = async (req: Request, res: Response) => {
+    try {
+      const result = await this.authService.logIn(req.body);
+      res.status(200).json(responseHandler(true, "LOGGED_IN", result));
     } catch (error) {
       console.error(error);
       res.status(400).json(responseHandler(false, error.message));

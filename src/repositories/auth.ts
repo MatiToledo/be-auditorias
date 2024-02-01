@@ -5,7 +5,6 @@ import { Auth } from "../models";
 export class AuthRepository implements IAuthRepository {
   async create(data: Partial<Auth>, transaction: Transaction): Promise<Auth> {
     try {
-      console.log("data: ", data);
       return await Auth.create(data, {
         transaction,
       });
@@ -29,6 +28,23 @@ export class AuthRepository implements IAuthRepository {
         throw new Error(`AUTH_FIND_ERROR`);
       }
       throw new Error(`AUTH_ALREADY_EXISTS`);
+    }
+  }
+  async findIfExistByCredentials(data: Partial<Auth>): Promise<Auth> {
+    try {
+      const auth = await Auth.findOne({
+        where: data,
+      });
+      if (!auth) {
+        throw new Error();
+      }
+      return auth;
+    } catch (error) {
+      console.error(error);
+      if (error.message) {
+        throw new Error(`AUTH_FIND_ERROR`);
+      }
+      throw new Error(`AUTH_NOT_EXISTS`);
     }
   }
 }

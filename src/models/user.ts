@@ -14,6 +14,7 @@ export class User extends Model {
   declare fullName: string;
   declare phone: number;
   declare photo: string;
+  declare role: userRoleEnum;
   declare dni: number;
   declare AuthId: UUID;
   declare BranchId: UUID;
