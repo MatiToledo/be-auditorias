@@ -4,7 +4,8 @@ import express from "express";
 import morgan from "morgan";
 import { initDatabase } from "./DB";
 import bodyParser from "body-parser";
-import { Router } from "./routes";
+import Router from "./routes";
+import RouterBackOffice from "./routes/back_office";
 
 const app = express();
 app.use(bodyParser.json());
@@ -17,6 +18,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/v1", Router);
+app.use("/v1/back_office", RouterBackOffice);
 
 app.listen(process.env.PORT, () => {
   console.log(`Server is running on http://localhost:${process.env.PORT}`);
