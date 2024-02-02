@@ -21,7 +21,7 @@ export class User_BORepository implements IUser_BORepository {
   async findByAuthId(id: UUID): Promise<User_BO> {
     try {
       return await User_BO.findOne({
-        where: { AuthId: id },
+        where: { AuthBOId: id },
       });
     } catch (error) {
       console.error(error);
