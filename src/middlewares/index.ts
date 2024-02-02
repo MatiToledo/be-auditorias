@@ -2,11 +2,11 @@ import { NextFunction, Request, Response } from "express";
 import { responseHandler } from "../libs/response_handler";
 import { decodeToken } from "../libs/jwt";
 import { User } from "../models";
-import { User_BO } from "../models/back_office/user";
+import { UserBO } from "../models/back_office/user";
 import parseToken from "parse-bearer-token";
 
 export interface AuthenticatedRequest extends Request {
-  userData: Partial<User> | Partial<User_BO>;
+  userData: Partial<User> | Partial<UserBO>;
 }
 
 export async function authMiddleware(

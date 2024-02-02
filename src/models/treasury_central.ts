@@ -6,7 +6,7 @@ export enum TreasuryCentralTypeEnum {
   REVENUE = "revenue",
   EXPENSE = "expense",
 }
-export class Treasury_Central extends Model {
+export class TreasuryCentral extends Model {
   declare id: CreationOptional<UUID>;
   declare type: TreasuryCentralTypeEnum;
   declare payment_method: string;
@@ -19,7 +19,7 @@ export class Treasury_Central extends Model {
   public readonly updatedAt!: Date;
 }
 
-Treasury_Central.init(
+TreasuryCentral.init(
   {
     id: {
       type: DataTypes.UUID,
@@ -51,5 +51,5 @@ Treasury_Central.init(
       allowNull: false,
     },
   },
-  { sequelize, modelName: "Treasury_Central" }
+  { sequelize, modelName: "TreasuryCentral" }
 );

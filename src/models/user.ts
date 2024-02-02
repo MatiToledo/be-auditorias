@@ -3,11 +3,11 @@ import { CreationOptional, DataTypes, Model } from "sequelize";
 import { sequelize } from "../DB";
 export enum UserRoleEnum {
   TILL = "till",
-  TILL_BAR = "till_bar",
-  TILL_TICKET = "till_ticket",
+  TillBar = "TillBar",
+  TillTicket = "TillTicket",
   TREASURY = "treasury",
   TREASURY_NIGHT = "treasury_night",
-  TREASURY_CENTRAL = "treasury_central",
+  TreasuryCentral = "TreasuryCentral",
 }
 export class User extends Model {
   declare id: CreationOptional<UUID>;
@@ -49,10 +49,10 @@ User.init(
       type: DataTypes.ENUM,
       values: [
         UserRoleEnum.TILL,
-        UserRoleEnum.TILL_BAR,
-        UserRoleEnum.TILL_TICKET,
+        UserRoleEnum.TillBar,
+        UserRoleEnum.TillTicket,
         UserRoleEnum.TREASURY,
-        UserRoleEnum.TREASURY_CENTRAL,
+        UserRoleEnum.TreasuryCentral,
         UserRoleEnum.TREASURY_NIGHT,
       ],
       allowNull: false,

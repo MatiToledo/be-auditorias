@@ -1,14 +1,14 @@
 import { Transaction } from "sequelize";
-import { IAuth_BORepository } from "../../interfaces/back_office/auth";
-import { Auth_BO } from "../../models/back_office/auth";
+import { IAuthBORepository } from "../../interfaces/back_office/auth";
+import { AuthBO } from "../../models/back_office/auth";
 
-export class Auth_BORepository implements IAuth_BORepository {
+export class AuthBORepository implements IAuthBORepository {
   async create(
-    data: Partial<Auth_BO>,
+    data: Partial<AuthBO>,
     transaction: Transaction
-  ): Promise<Auth_BO> {
+  ): Promise<AuthBO> {
     try {
-      return await Auth_BO.create(data, {
+      return await AuthBO.create(data, {
         transaction,
       });
     } catch (error) {
@@ -18,7 +18,7 @@ export class Auth_BORepository implements IAuth_BORepository {
   }
   async findIfExistByEmail(email: string): Promise<void> {
     try {
-      const auth = await Auth_BO.findOne({
+      const auth = await AuthBO.findOne({
         where: { email },
       });
       if (auth) {
@@ -33,9 +33,9 @@ export class Auth_BORepository implements IAuth_BORepository {
       throw new Error(`AUTH_ALREADY_EXISTS`);
     }
   }
-  async findIfExistByCredentials(data: Partial<Auth_BO>): Promise<Auth_BO> {
+  async findIfExistByCredentials(data: Partial<AuthBO>): Promise<AuthBO> {
     try {
-      const auth = await Auth_BO.findOne({
+      const auth = await AuthBO.findOne({
         where: data,
       });
       if (!auth) {

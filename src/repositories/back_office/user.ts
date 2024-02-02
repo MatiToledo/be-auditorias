@@ -1,15 +1,15 @@
 import { UUID } from "crypto";
 import { Transaction } from "sequelize";
-import { User_BO } from "../../models/back_office/user";
-import { IUser_BORepository } from "../../interfaces/back_office/user";
+import { UserBO } from "../../models/back_office/user";
+import { IUserBORepository } from "../../interfaces/back_office/user";
 
-export class User_BORepository implements IUser_BORepository {
+export class UserBORepository implements IUserBORepository {
   async create(
-    data: Partial<User_BO>,
+    data: Partial<UserBO>,
     transaction: Transaction
-  ): Promise<User_BO> {
+  ): Promise<UserBO> {
     try {
-      return await User_BO.create(data, {
+      return await UserBO.create(data, {
         transaction,
       });
     } catch (error) {
@@ -18,9 +18,9 @@ export class User_BORepository implements IUser_BORepository {
     }
   }
 
-  async findByAuthId(id: UUID): Promise<User_BO> {
+  async findByAuthId(id: UUID): Promise<UserBO> {
     try {
-      return await User_BO.findOne({
+      return await UserBO.findOne({
         where: { AuthBOId: id },
       });
     } catch (error) {

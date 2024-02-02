@@ -1,14 +1,14 @@
 import { Auth } from "./auth";
-import { Auth_BO } from "./back_office/auth";
-import { User_BO } from "./back_office/user";
+import { AuthBO } from "./back_office/auth";
+import { UserBO } from "./back_office/user";
 import { Branch } from "./branch";
 import { Company } from "./company";
 import { Group } from "./group";
-import { Till_Bar } from "./till_bar";
-import { Till_Ticket } from "./till_ticket";
-import { Treasury_Central } from "./treasury_central";
-import { Treasury_Night_Expense } from "./treasury_night_expense";
-import { Treasury_Night_Revenue } from "./treasury_night_revenue";
+import { TillBar } from "./till_bar";
+import { TillTicket } from "./till_ticket";
+import { TreasuryCentral } from "./treasury_central";
+import { TreasuryNightExpense } from "./treasury_night_expense";
+import { TreasuryNightRevenue } from "./treasury_night_revenue";
 import { User } from "./user";
 
 Auth.hasOne(User);
@@ -23,46 +23,46 @@ Branch.belongsTo(Group);
 Branch.hasMany(User);
 User.belongsTo(Branch);
 
-Auth_BO.hasOne(User_BO);
-User_BO.belongsTo(Auth_BO);
+AuthBO.hasOne(UserBO);
+UserBO.belongsTo(AuthBO);
 
-Branch.hasMany(User_BO, {
+Branch.hasMany(UserBO, {
   foreignKey: {
     allowNull: true,
     name: "BranchId",
   },
   constraints: false,
 });
-User_BO.belongsTo(Branch, {
+UserBO.belongsTo(Branch, {
   foreignKey: "BranchId",
 });
 
-Branch.hasMany(Till_Bar);
-Till_Bar.belongsTo(Branch);
+Branch.hasMany(TillBar);
+TillBar.belongsTo(Branch);
 
-Branch.hasMany(Till_Ticket);
-Till_Ticket.belongsTo(Branch);
+Branch.hasMany(TillTicket);
+TillTicket.belongsTo(Branch);
 
-Branch.hasMany(Treasury_Night_Expense);
-Treasury_Night_Expense.belongsTo(Branch);
+Branch.hasMany(TreasuryNightExpense);
+TreasuryNightExpense.belongsTo(Branch);
 
-Branch.hasMany(Treasury_Night_Revenue);
-Treasury_Night_Revenue.belongsTo(Branch);
+Branch.hasMany(TreasuryNightRevenue);
+TreasuryNightRevenue.belongsTo(Branch);
 
-Branch.hasMany(Treasury_Central);
-Treasury_Central.belongsTo(Branch);
+Branch.hasMany(TreasuryCentral);
+TreasuryCentral.belongsTo(Branch);
 
 export {
   Auth,
   User,
-  Auth_BO,
-  User_BO,
+  AuthBO,
+  UserBO,
   Branch,
   Company,
   Group,
-  Till_Bar,
-  Till_Ticket,
-  Treasury_Central,
-  Treasury_Night_Expense,
-  Treasury_Night_Revenue,
+  TillBar,
+  TillTicket,
+  TreasuryCentral,
+  TreasuryNightExpense,
+  TreasuryNightRevenue,
 };

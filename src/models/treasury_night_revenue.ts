@@ -14,7 +14,7 @@ export enum TreasuryNightExpenseConceptEnum {
   OTHER = "other",
 }
 
-export class Treasury_Night_Revenue extends Model {
+export class TreasuryNightRevenue extends Model {
   declare id: CreationOptional<UUID>;
   declare principal: number;
   declare fua_cg: number;
@@ -33,7 +33,7 @@ export class Treasury_Night_Revenue extends Model {
   public readonly updatedAt!: Date;
 }
 
-Treasury_Night_Revenue.init(
+TreasuryNightRevenue.init(
   {
     id: {
       type: DataTypes.UUID,
@@ -85,5 +85,5 @@ Treasury_Night_Revenue.init(
       allowNull: false,
     },
   },
-  { sequelize, modelName: "Treasury_Night_Revenue" }
+  { sequelize, modelName: "TreasuryNightRevenue" }
 );

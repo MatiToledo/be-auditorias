@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { Schema, mixed, object, string } from "yup";
 import { UserBORoleEnum } from "../../../models/back_office/user";
 
-export class Auth_BOValidate {
+export class AuthBOValidate {
   static async create(req: Request, res: Response, next: NextFunction) {
     const schema: Schema = object({
       body: object({

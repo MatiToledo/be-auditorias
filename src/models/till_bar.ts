@@ -3,7 +3,7 @@ import { CreationOptional, DataTypes, Model } from "sequelize";
 import { sequelize } from "../DB";
 import { Branch } from "./branch";
 
-export class Till_Bar extends Model {
+export class TillBar extends Model {
   declare id: CreationOptional<UUID>;
   declare name: string;
   declare retirement_total: number;
@@ -19,7 +19,7 @@ export class Till_Bar extends Model {
   public readonly updatedAt!: Date;
 }
 
-Till_Bar.init(
+TillBar.init(
   {
     id: {
       type: DataTypes.UUID,
@@ -67,5 +67,5 @@ Till_Bar.init(
       allowNull: false,
     },
   },
-  { sequelize, modelName: "Till_Bar" }
+  { sequelize, modelName: "TillBar" }
 );

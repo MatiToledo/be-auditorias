@@ -2,10 +2,10 @@ import { Request, Response } from "express";
 import { Transaction } from "sequelize";
 import { sequelize } from "../../DB";
 import { responseHandler } from "../../libs/response_handler";
-import { Auth_BOService } from "../../services/back_office/auth";
+import { AuthBOService } from "../../services/back_office/auth";
 
-export class Auth_BOController {
-  private authBOService = new Auth_BOService();
+export class AuthBOController {
+  private authBOService = new AuthBOService();
 
   create = async (req: Request, res: Response) => {
     try {

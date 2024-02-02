@@ -18,11 +18,11 @@ export class AuthValidate {
           role: mixed<UserRoleEnum>()
             .oneOf([
               UserRoleEnum.TILL,
-              UserRoleEnum.TILL_BAR,
-              UserRoleEnum.TILL_TICKET,
+              UserRoleEnum.TillBar,
+              UserRoleEnum.TillTicket,
               UserRoleEnum.TREASURY,
               UserRoleEnum.TREASURY_NIGHT,
-              UserRoleEnum.TREASURY_CENTRAL,
+              UserRoleEnum.TreasuryCentral,
             ])
             .required(),
         }),
