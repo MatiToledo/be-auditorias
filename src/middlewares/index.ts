@@ -27,3 +27,24 @@ export async function authMiddleware(
     res.status(401).json(responseHandler(false, "UNAUTHORIZED"));
   }
 }
+export async function authAdminMiddleware(
+  req: AuthenticatedRequest,
+  res: Response,
+  next: NextFunction
+): Promise<void> {
+  try {
+    const token = parseToken(req);
+    if (!token) {
+      throw new Error();
+    }
+    const tokenData = decodeToken(token);
+    if (!["admin", "partner", "auditor"].includes(tokenData.data.role)) {
+      throw new Error();
+    }
+    req.userData = tokenData.data;
+    next();
+  } catch (error) {
+    console.error(error);
+    res.status(401).json(responseHandler(false, "UNAUTHORIZED"));
+  }
+}

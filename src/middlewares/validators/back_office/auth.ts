@@ -12,7 +12,7 @@ export class AuthBOValidate {
         }),
         User: object({
           fullName: string().required(),
-          BranchId: string().uuid().required(),
+          BranchId: string().uuid().optional(),
           role: mixed<UserBORoleEnum>()
             .oneOf([
               UserBORoleEnum.ADMIN,
@@ -29,7 +29,7 @@ export class AuthBOValidate {
       const validate = await schema.validate({ body: req.body });
       if (validate) return next();
     } catch (error) {
-      return res.status(400).json({ field: "body", message: error.message });
+      return res.status(400).json({ field: "body", message: "BAD_REQUEST" });
     }
   }
   static async logIn(req: Request, res: Response, next: NextFunction) {
@@ -45,7 +45,7 @@ export class AuthBOValidate {
       const validate = await schema.validate({ body: req.body });
       if (validate) return next();
     } catch (error) {
-      return res.status(400).json({ field: "body", message: error.message });
+      return res.status(400).json({ field: "body", message: "BAD_REQUEST" });
     }
   }
 }

@@ -3,14 +3,22 @@ import "../models";
 import { Company } from "../models/company";
 import { Group } from "../models/group";
 import { Branch } from "../models/branch";
-import { RegisterBar, RegisterTicket } from "../models";
+import {
+  Auth,
+  AuthBO,
+  RegisterBar,
+  RegisterTicket,
+  User,
+  UserBO,
+} from "../models";
+import { encryptPassword } from "../libs/encrypt_password";
 
 sequelize.sync({ force: true }).then((res) => {
   console.log("Database synced", res);
-  createBulkBranchs();
+  createBulkDev();
 });
 
-export async function createBulkBranchs() {
+export async function createBulkDev() {
   try {
     const company = await Company.create({
       name: "BOTTOM",
@@ -49,6 +57,27 @@ export async function createBulkBranchs() {
         BranchId: branchs[0].id,
       },
     ]);
+    const auth = await Auth.create({
+      email: "mati@gmail.com",
+      password: encryptPassword("123"),
+    });
+    const authBO = await AuthBO.create({
+      email: "mati@gmail.com",
+      password: encryptPassword("123"),
+    });
+    await User.create({
+      fullName: "Matias Toledo",
+      dni: 42336523,
+      phone: 3518048259,
+      role: "register",
+      BranchId: branchs[0].id,
+      AuthId: auth.id,
+    });
+    await UserBO.create({
+      fullName: "Matias Toledo",
+      role: "admin",
+      AuthBOId: authBO.id,
+    });
   } catch (error) {
     console.error(error);
   }

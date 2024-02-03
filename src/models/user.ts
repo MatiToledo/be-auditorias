@@ -2,9 +2,9 @@ import { UUID } from "crypto";
 import { CreationOptional, DataTypes, Model } from "sequelize";
 import { sequelize } from "../DB";
 export enum UserRoleEnum {
-  Register = "Register",
-  RegisterBarClosure = "RegisterBarClosure",
-  RegisterTicketClosure = "RegisterTicketClosure",
+  Register = "register",
+  RegisterBarClosure = "registerBarClosure",
+  RegisterTicketClosure = "registerTicketClosure",
   TREASURY = "treasury",
   TREASURY_NIGHT = "treasury_night",
   TreasuryCentral = "TreasuryCentral",

@@ -18,7 +18,7 @@ export class RegisterTicketClosureValidate {
         persons_cant_bar: number().required(),
         observations: string().required(),
         photo: string().required(),
-        BranchId: string().uuid().required(),
+        RegisterTicketId: string().uuid().required(),
       })
         .noUnknown(true)
         .strict(true),

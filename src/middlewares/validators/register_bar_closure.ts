@@ -15,7 +15,7 @@ export class RegisterBarClosureValidate {
         observations: string().required(),
         consumptions: string().required(),
         photo: string().required(),
-        BranchId: string().uuid().required(),
+        RegisterBarId: string().uuid().required(),
       })
         .noUnknown(true)
         .strict(true),
