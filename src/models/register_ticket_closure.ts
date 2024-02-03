@@ -3,7 +3,7 @@ import { CreationOptional, DataTypes, Model } from "sequelize";
 import { sequelize } from "../DB";
 import { Branch } from "./branch";
 
-export class TillTicket extends Model {
+export class RegisterTicketClosure extends Model {
   declare id: CreationOptional<UUID>;
   declare retirement_total: number;
   declare retirement_finish: number;
@@ -24,7 +24,7 @@ export class TillTicket extends Model {
   public readonly updatedAt!: Date;
 }
 
-TillTicket.init(
+RegisterTicketClosure.init(
   {
     id: {
       type: DataTypes.UUID,
@@ -84,5 +84,5 @@ TillTicket.init(
       allowNull: false,
     },
   },
-  { sequelize, modelName: "TillTicket" }
+  { sequelize, modelName: "RegisterTicketClosure" }
 );

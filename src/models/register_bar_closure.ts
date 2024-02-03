@@ -1,34 +1,31 @@
 import { UUID } from "crypto";
 import { CreationOptional, DataTypes, Model } from "sequelize";
 import { sequelize } from "../DB";
-import { Branch } from "./branch";
+import { RegisterBar } from "./register_bar";
 
-export class TillBar extends Model {
+export class RegisterBarClosure extends Model {
   declare id: CreationOptional<UUID>;
-  declare name: string;
   declare retirement_total: number;
   declare retirement_finish: number;
+  declare expenses_total: number;
+  declare expenses_observations: string;
   declare postnet_total: number;
   declare transfers_total: number;
-  declare expenses_observations: string;
   declare consumptions: string;
+  declare observations: string;
   declare photo: string;
-  declare BranchId: UUID;
-  declare Branch: Branch;
+  declare RegisterBarId: UUID;
+  declare RegisterBar: RegisterBar;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
 
-TillBar.init(
+RegisterBarClosure.init(
   {
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
-    },
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false,
     },
     retirement_total: {
       type: DataTypes.BIGINT,
@@ -67,5 +64,5 @@ TillBar.init(
       allowNull: false,
     },
   },
-  { sequelize, modelName: "TillBar" }
+  { sequelize, modelName: "RegisterBarClosure" }
 );

@@ -4,8 +4,10 @@ import { UserBO } from "./back_office/user";
 import { Branch } from "./branch";
 import { Company } from "./company";
 import { Group } from "./group";
-import { TillBar } from "./till_bar";
-import { TillTicket } from "./till_ticket";
+import { RegisterBar } from "./register_bar";
+import { RegisterBarClosure } from "./register_bar_closure";
+import { RegisterTicket } from "./register_ticket";
+import { RegisterTicketClosure } from "./register_ticket_closure";
 import { TreasuryCentral } from "./treasury_central";
 import { TreasuryNightExpense } from "./treasury_night_expense";
 import { TreasuryNightRevenue } from "./treasury_night_revenue";
@@ -37,11 +39,17 @@ UserBO.belongsTo(Branch, {
   foreignKey: "BranchId",
 });
 
-Branch.hasMany(TillBar);
-TillBar.belongsTo(Branch);
+Branch.hasMany(RegisterBar);
+RegisterBar.belongsTo(Branch);
 
-Branch.hasMany(TillTicket);
-TillTicket.belongsTo(Branch);
+RegisterBar.hasMany(RegisterBarClosure);
+RegisterBarClosure.belongsTo(RegisterBar);
+
+Branch.hasMany(RegisterTicket);
+RegisterTicket.belongsTo(Branch);
+
+RegisterTicket.hasMany(RegisterTicketClosure);
+RegisterTicketClosure.belongsTo(RegisterTicket);
 
 Branch.hasMany(TreasuryNightExpense);
 TreasuryNightExpense.belongsTo(Branch);
@@ -60,8 +68,10 @@ export {
   Branch,
   Company,
   Group,
-  TillBar,
-  TillTicket,
+  RegisterBarClosure,
+  RegisterTicketClosure,
+  RegisterBar,
+  RegisterTicket,
   TreasuryCentral,
   TreasuryNightExpense,
   TreasuryNightRevenue,

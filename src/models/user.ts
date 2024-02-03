@@ -2,9 +2,9 @@ import { UUID } from "crypto";
 import { CreationOptional, DataTypes, Model } from "sequelize";
 import { sequelize } from "../DB";
 export enum UserRoleEnum {
-  TILL = "till",
-  TillBar = "TillBar",
-  TillTicket = "TillTicket",
+  Register = "Register",
+  RegisterBarClosure = "RegisterBarClosure",
+  RegisterTicketClosure = "RegisterTicketClosure",
   TREASURY = "treasury",
   TREASURY_NIGHT = "treasury_night",
   TreasuryCentral = "TreasuryCentral",
@@ -48,9 +48,9 @@ User.init(
     role: {
       type: DataTypes.ENUM,
       values: [
-        UserRoleEnum.TILL,
-        UserRoleEnum.TillBar,
-        UserRoleEnum.TillTicket,
+        UserRoleEnum.Register,
+        UserRoleEnum.RegisterBarClosure,
+        UserRoleEnum.RegisterTicketClosure,
         UserRoleEnum.TREASURY,
         UserRoleEnum.TreasuryCentral,
         UserRoleEnum.TREASURY_NIGHT,

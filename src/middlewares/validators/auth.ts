@@ -17,9 +17,9 @@ export class AuthValidate {
           dni: number().required(),
           role: mixed<UserRoleEnum>()
             .oneOf([
-              UserRoleEnum.TILL,
-              UserRoleEnum.TillBar,
-              UserRoleEnum.TillTicket,
+              UserRoleEnum.Register,
+              UserRoleEnum.RegisterBarClosure,
+              UserRoleEnum.RegisterTicketClosure,
               UserRoleEnum.TREASURY,
               UserRoleEnum.TREASURY_NIGHT,
               UserRoleEnum.TreasuryCentral,
