@@ -1,11 +1,10 @@
 import { NextFunction, Request, Response } from "express";
-import { Schema, number, object, string } from "yup";
+import { Schema, array, number, object, string } from "yup";
 
 export class RegisterBarClosureValidate {
   static async create(req: Request, res: Response, next: NextFunction) {
     const schema: Schema = object({
       body: object({
-        name: string().required(),
         retirement_total: number().required(),
         retirement_finish: number().required(),
         postnet_total: number().required(),
@@ -13,7 +12,14 @@ export class RegisterBarClosureValidate {
         expenses_total: number().required(),
         expenses_observations: string().required(),
         observations: string().required(),
-        consumptions: string().required(),
+        consumptions: array()
+          .of(
+            object({
+              description: string().required(),
+              quantity: number().required(),
+            })
+          )
+          .required(),
         photo: string().required(),
         RegisterBarId: string().uuid().required(),
       })

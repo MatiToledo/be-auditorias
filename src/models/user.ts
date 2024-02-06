@@ -1,6 +1,8 @@
 import { UUID } from "crypto";
 import { CreationOptional, DataTypes, Model } from "sequelize";
 import { sequelize } from "../DB";
+import { Auth } from "./auth";
+import { Branch } from "./branch";
 export enum UserRoleEnum {
   Register = "register",
   RegisterBarClosure = "registerBarClosure",
@@ -17,7 +19,9 @@ export class User extends Model {
   declare role: UserRoleEnum;
   declare dni: number;
   declare AuthId: UUID;
+  declare Auth: Auth;
   declare BranchId: UUID;
+  declare Branch: Branch;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
