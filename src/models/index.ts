@@ -1,9 +1,16 @@
 import { Auth } from "./auth";
-import { Auth_BO } from "./back_office/auth";
-import { User_BO } from "./back_office/user";
+import { AuthBO } from "./back_office/auth";
+import { UserBO } from "./back_office/user";
 import { Branch } from "./branch";
 import { Company } from "./company";
 import { Group } from "./group";
+import { RegisterBar } from "./register_bar";
+import { RegisterBarClosure } from "./register_bar_closure";
+import { RegisterTicket } from "./register_ticket";
+import { RegisterTicketClosure } from "./register_ticket_closure";
+import { TreasuryCentral } from "./treasury_central";
+import { TreasuryNightExpense } from "./treasury_night_expense";
+import { TreasuryNightRevenue } from "./treasury_night_revenue";
 import { User } from "./user";
 
 Auth.hasOne(User);
@@ -18,18 +25,54 @@ Branch.belongsTo(Group);
 Branch.hasMany(User);
 User.belongsTo(Branch);
 
-Auth_BO.hasOne(User_BO);
-User_BO.belongsTo(Auth_BO);
+AuthBO.hasOne(UserBO);
+UserBO.belongsTo(AuthBO);
 
-Branch.hasMany(User_BO, {
+Branch.hasMany(UserBO, {
   foreignKey: {
     allowNull: true,
     name: "BranchId",
   },
   constraints: false,
 });
-User_BO.belongsTo(Branch, {
+UserBO.belongsTo(Branch, {
   foreignKey: "BranchId",
 });
 
-export { Auth, User };
+Branch.hasMany(RegisterBar);
+RegisterBar.belongsTo(Branch);
+
+RegisterBar.hasMany(RegisterBarClosure);
+RegisterBarClosure.belongsTo(RegisterBar);
+
+Branch.hasMany(RegisterTicket);
+RegisterTicket.belongsTo(Branch);
+
+RegisterTicket.hasMany(RegisterTicketClosure);
+RegisterTicketClosure.belongsTo(RegisterTicket);
+
+Branch.hasMany(TreasuryNightExpense);
+TreasuryNightExpense.belongsTo(Branch);
+
+Branch.hasMany(TreasuryNightRevenue);
+TreasuryNightRevenue.belongsTo(Branch);
+
+Branch.hasMany(TreasuryCentral);
+TreasuryCentral.belongsTo(Branch);
+
+export {
+  Auth,
+  User,
+  AuthBO,
+  UserBO,
+  Branch,
+  Company,
+  Group,
+  RegisterBarClosure,
+  RegisterTicketClosure,
+  RegisterBar,
+  RegisterTicket,
+  TreasuryCentral,
+  TreasuryNightExpense,
+  TreasuryNightRevenue,
+};

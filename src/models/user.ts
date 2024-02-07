@@ -1,13 +1,15 @@
 import { UUID } from "crypto";
 import { CreationOptional, DataTypes, Model } from "sequelize";
 import { sequelize } from "../DB";
+import { Auth } from "./auth";
+import { Branch } from "./branch";
 export enum UserRoleEnum {
-  TILL = "till",
-  TILL_BAR = "till_bar",
-  TILL_TICKET = "till_ticket",
+  Register = "register",
+  RegisterBarClosure = "registerBarClosure",
+  RegisterTicketClosure = "registerTicketClosure",
   TREASURY = "treasury",
   TREASURY_NIGHT = "treasury_night",
-  TREASURY_CENTRAL = "treasury_central",
+  TreasuryCentral = "TreasuryCentral",
 }
 export class User extends Model {
   declare id: CreationOptional<UUID>;
@@ -17,7 +19,9 @@ export class User extends Model {
   declare role: UserRoleEnum;
   declare dni: number;
   declare AuthId: UUID;
+  declare Auth: Auth;
   declare BranchId: UUID;
+  declare Branch: Branch;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
@@ -48,11 +52,11 @@ User.init(
     role: {
       type: DataTypes.ENUM,
       values: [
-        UserRoleEnum.TILL,
-        UserRoleEnum.TILL_BAR,
-        UserRoleEnum.TILL_TICKET,
+        UserRoleEnum.Register,
+        UserRoleEnum.RegisterBarClosure,
+        UserRoleEnum.RegisterTicketClosure,
         UserRoleEnum.TREASURY,
-        UserRoleEnum.TREASURY_CENTRAL,
+        UserRoleEnum.TreasuryCentral,
         UserRoleEnum.TREASURY_NIGHT,
       ],
       allowNull: false,

@@ -1,18 +1,18 @@
 import { Transaction } from "sequelize";
-import { Auth_BO } from "../../models/back_office/auth";
-import { User_BO } from "../../models/back_office/user";
-export interface IAuth_BOService {
+import { AuthBO } from "../../models/back_office/auth";
+import { UserBO } from "../../models/back_office/user";
+export interface IAuthBOService {
   create(body: BodyCreate, transaction: Transaction): Promise<void>;
-  logIn(body: Partial<Auth_BO>): Promise<string>;
+  logIn(body: Partial<AuthBO>): Promise<string>;
 }
 
-export interface IAuth_BORepository {
-  create(data: Partial<Auth_BO>, transaction: Transaction): Promise<Auth_BO>;
+export interface IAuthBORepository {
+  create(data: Partial<AuthBO>, transaction: Transaction): Promise<AuthBO>;
   findIfExistByEmail(email: string): Promise<void>;
-  findIfExistByCredentials(data: Partial<Auth_BO>): Promise<Auth_BO>;
+  findIfExistByCredentials(data: Partial<AuthBO>): Promise<AuthBO>;
 }
 
 export interface BodyCreate {
-  Auth: Partial<Auth_BO>;
-  User: Partial<User_BO>;
+  Auth: Partial<AuthBO>;
+  User: Partial<UserBO>;
 }

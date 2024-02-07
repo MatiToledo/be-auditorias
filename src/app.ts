@@ -14,8 +14,15 @@ if (process.env.NODE_ENV !== "production") {
   app.use(morgan("dev"));
 }
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.json({ limit: "50mb" }));
+app.use(
+  bodyParser.urlencoded({
+    limit: "50mb",
+    extended: true,
+    parameterLimit: 50000,
+  })
+);
+app.use(bodyParser.text({ limit: "200mb" }));
 
 app.use("/v1", Router);
 app.use("/v1/back_office", RouterBackOffice);

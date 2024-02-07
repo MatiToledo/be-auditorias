@@ -8,7 +8,7 @@ export enum UserBORoleEnum {
   AUDITOR = "auditor",
 }
 
-export class User_BO extends Model {
+export class UserBO extends Model {
   declare id: CreationOptional<UUID>;
   declare fullName: string;
   declare role: UserBORoleEnum;
@@ -18,7 +18,7 @@ export class User_BO extends Model {
   public readonly updatedAt!: Date;
 }
 
-User_BO.init(
+UserBO.init(
   {
     id: {
       type: DataTypes.UUID,
@@ -39,5 +39,5 @@ User_BO.init(
       allowNull: false,
     },
   },
-  { sequelize, modelName: "User_BO" }
+  { sequelize, modelName: "UserBO" }
 );

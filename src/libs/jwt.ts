@@ -1,13 +1,13 @@
 import "dotenv/config";
 import * as jwt from "jsonwebtoken";
 import { User } from "../models";
-import { User_BO } from "../models/back_office/user";
+import { UserBO } from "../models/back_office/user";
 interface TokenData {
-  data: Partial<User> | Partial<User_BO>;
+  data: Partial<User> | Partial<UserBO>;
   iat: number;
 }
 
-export function generateToken(data: Partial<User> | Partial<User_BO>): string {
+export function generateToken(data: Partial<User> | Partial<UserBO>): string {
   try {
     return jwt.sign({ data }, process.env.JWT_SECRET);
   } catch (error) {

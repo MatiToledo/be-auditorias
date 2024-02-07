@@ -2,7 +2,7 @@ import { UUID } from "crypto";
 import { CreationOptional, DataTypes, Model } from "sequelize";
 import { sequelize } from "../../DB";
 
-export class Auth_BO extends Model {
+export class AuthBO extends Model {
   declare id: CreationOptional<UUID>;
   declare email: string;
   declare password: string;
@@ -10,7 +10,7 @@ export class Auth_BO extends Model {
   public readonly updatedAt!: Date;
 }
 
-Auth_BO.init(
+AuthBO.init(
   {
     id: {
       type: DataTypes.UUID,
@@ -27,5 +27,5 @@ Auth_BO.init(
       allowNull: false,
     },
   },
-  { sequelize, modelName: "Auth_BO", paranoid: true }
+  { sequelize, modelName: "AuthBO", paranoid: true }
 );
