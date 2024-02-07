@@ -5,6 +5,7 @@ export class RegisterTicketClosureValidate {
   static async create(req: Request, res: Response, next: NextFunction) {
     const schema: Schema = object({
       body: object({
+        date: string().required(),
         retirement_total: number().required(),
         retirement_finish: number().required(),
         expenses_total: number().required(),

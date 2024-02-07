@@ -1,17 +1,13 @@
-import { IRegisterTicketClosureService } from "../interfaces/register_ticket_closure";
-import { RegisterTicketClosure } from "../models";
-import { RegisterTicketClosureRepository } from "../repositories/register_ticket_closure";
+import { UUID } from "crypto";
+import { IRegisterTicketService } from "../interfaces/register_ticket";
+import { RegisterTicket } from "../models";
+import { RegisterTicketRepository } from "../repositories/register_ticket";
 
-export class RegisterTicketClosureService
-  implements IRegisterTicketClosureService
-{
-  private registerTicketClosureRepository =
-    new RegisterTicketClosureRepository();
-  async create(
-    body: Partial<RegisterTicketClosure>
-  ): Promise<RegisterTicketClosure> {
-    return await this.registerTicketClosureRepository.create(body);
+export class RegisterTicketService implements IRegisterTicketService {
+  private registerTicketRepository = new RegisterTicketRepository();
+
+  async findByBranchId(BranchId: UUID): Promise<RegisterTicket[]> {
+    return await this.registerTicketRepository.findByBranchId(BranchId);
   }
-
   /////////////////////////////////////////////////////////////////////////////////////////////
 }

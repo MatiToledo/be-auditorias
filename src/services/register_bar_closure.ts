@@ -8,5 +8,13 @@ export class RegisterBarClosureService implements IRegisterBarClosureService {
     return await this.registerBarClosureRepository.create(body);
   }
 
+  async checkIfAlreadyCloseThatDay(date: Date): Promise<boolean> {
+    const registerBarClosure =
+      await this.registerBarClosureRepository.checkIfAlreadyCloseThatDay(date);
+
+    if (!registerBarClosure) return false;
+    return true;
+  }
+
   /////////////////////////////////////////////////////////////////////////////////////////////
 }

@@ -10,7 +10,19 @@ export class RegisterBarClosureRepository
       return await RegisterBarClosure.create(data);
     } catch (error) {
       console.error(error);
-      throw new Error(`REGISTER_BAR_NOT_CREATED`);
+      throw new Error(`REGISTER_BAR_CLOSURE_NOT_CREATED`);
+    }
+  }
+  async checkIfAlreadyCloseThatDay(date: Date): Promise<RegisterBarClosure> {
+    try {
+      return await RegisterBarClosure.findOne({
+        where: {
+          date,
+        },
+      });
+    } catch (error) {
+      console.error(error);
+      throw new Error(`REGISTER_BAR_CLOSURE_NOT_FIND`);
     }
   }
 }

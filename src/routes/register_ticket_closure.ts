@@ -12,5 +12,9 @@ router.post(
   RegisterTicketClosureValidate.create,
   registerTicketClosureController.create
 );
-
+router.post(
+  "/check",
+  authMiddleware,
+  registerTicketClosureController.checkIfAlreadyCloseThatDay
+);
 export default router;

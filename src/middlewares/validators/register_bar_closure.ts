@@ -1,10 +1,11 @@
 import { NextFunction, Request, Response } from "express";
-import { Schema, array, number, object, string } from "yup";
+import { Schema, array, date, number, object, string } from "yup";
 
 export class RegisterBarClosureValidate {
   static async create(req: Request, res: Response, next: NextFunction) {
     const schema: Schema = object({
       body: object({
+        date: string().required(),
         retirement_total: number().required(),
         retirement_finish: number().required(),
         postnet_total: number().required(),
@@ -28,9 +29,9 @@ export class RegisterBarClosureValidate {
     });
     try {
       const validate = await schema.validate({ body: req.body });
-
       if (validate) return next();
     } catch (error) {
+      console.error(error);
       return res.status(400).json({ field: "body", message: "BAD_REQUEST" });
     }
   }

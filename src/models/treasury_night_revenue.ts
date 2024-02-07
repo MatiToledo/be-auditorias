@@ -26,6 +26,7 @@ export class TreasuryNightRevenue extends Model {
   declare bar_hours: number;
   declare tickets_men: number;
   declare tickets_woman: number;
+  declare tickets_total: number;
   declare total_cash_rendered: number;
   declare BranchId: UUID;
   declare Branch: Branch;
@@ -77,6 +78,10 @@ TreasuryNightRevenue.init(
       allowNull: false,
     },
     tickets_woman: {
+      type: DataTypes.BIGINT,
+      allowNull: false,
+    },
+    ticets_total: {
       type: DataTypes.BIGINT,
       allowNull: false,
     },

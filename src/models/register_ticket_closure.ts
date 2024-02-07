@@ -5,6 +5,7 @@ import { Branch } from "./branch";
 
 export class RegisterTicketClosure extends Model {
   declare id: CreationOptional<UUID>;
+  declare date: Date;
   declare retirement_total: number;
   declare retirement_finish: number;
   declare expenses_total: number;
@@ -30,6 +31,10 @@ RegisterTicketClosure.init(
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
+    },
+    date: {
+      type: DataTypes.DATE,
+      allowNull: false,
     },
     retirement_total: {
       type: DataTypes.BIGINT,

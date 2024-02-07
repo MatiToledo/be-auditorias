@@ -13,4 +13,10 @@ router.post(
   registerBarClosureController.create
 );
 
+router.post(
+  "/check",
+  authMiddleware,
+  registerBarClosureController.checkIfAlreadyCloseThatDay
+);
+
 export default router;

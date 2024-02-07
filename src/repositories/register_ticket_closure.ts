@@ -15,4 +15,17 @@ export class RegisterTicketClosureRepository
       throw new Error(`REGISTER_BAR_NOT_CREATED`);
     }
   }
+
+  async checkIfAlreadyCloseThatDay(date: Date): Promise<RegisterTicketClosure> {
+    try {
+      return await RegisterTicketClosure.findOne({
+        where: {
+          date,
+        },
+      });
+    } catch (error) {
+      console.error(error);
+      throw new Error(`REGISTER_TICKET_CLOSURE_NOT_FIND`);
+    }
+  }
 }

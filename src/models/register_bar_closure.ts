@@ -5,6 +5,7 @@ import { RegisterBar } from "./register_bar";
 
 export class RegisterBarClosure extends Model {
   declare id: CreationOptional<UUID>;
+  declare date: Date;
   declare retirement_total: number;
   declare retirement_finish: number;
   declare expenses_total: number;
@@ -26,6 +27,10 @@ RegisterBarClosure.init(
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
+    },
+    date: {
+      type: DataTypes.DATE,
+      allowNull: false,
     },
     retirement_total: {
       type: DataTypes.BIGINT,
