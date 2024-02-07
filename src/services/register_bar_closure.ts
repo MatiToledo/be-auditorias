@@ -1,5 +1,5 @@
 import { IRegisterBarClosureService } from "../interfaces/register_bar_closure";
-import { RegisterBarClosure } from "../models";
+import { RegisterBarClosure, RegisterTicketClosure } from "../models";
 import { RegisterBarClosureRepository } from "../repositories/register_bar_closure";
 
 export class RegisterBarClosureService implements IRegisterBarClosureService {
@@ -8,9 +8,14 @@ export class RegisterBarClosureService implements IRegisterBarClosureService {
     return await this.registerBarClosureRepository.create(body);
   }
 
-  async checkIfAlreadyCloseThatDay(date: Date): Promise<boolean> {
+  async checkIfAlreadyCloseThatDay(
+    body: Partial<RegisterBarClosure>
+  ): Promise<boolean> {
     const registerBarClosure =
-      await this.registerBarClosureRepository.checkIfAlreadyCloseThatDay(date);
+      await this.registerBarClosureRepository.checkIfAlreadyCloseThatDay(
+        body.date,
+        body.RegisterBarId
+      );
 
     if (!registerBarClosure) return false;
     return true;

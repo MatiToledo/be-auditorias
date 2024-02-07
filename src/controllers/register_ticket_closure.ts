@@ -20,7 +20,7 @@ export class RegisterTicketClosureController {
     try {
       const result =
         await this.registerTicketClosureService.checkIfAlreadyCloseThatDay(
-          req.body.date as Date
+          req.body
         );
       res
         .status(200)

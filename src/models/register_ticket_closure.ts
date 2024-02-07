@@ -19,8 +19,8 @@ export class RegisterTicketClosure extends Model {
   declare persons_cant_bar: number;
   declare observations: string;
   declare photo: string;
-  declare BranchId: UUID;
-  declare Branch: Branch;
+  declare RegisterTicketId: UUID;
+  declare RegisterTicket: Branch;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }

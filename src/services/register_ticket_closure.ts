@@ -15,12 +15,14 @@ export class RegisterTicketClosureService
 
   /////////////////////////////////////////////////////////////////////////////////////////////
 
-  async checkIfAlreadyCloseThatDay(date: Date): Promise<boolean> {
+  async checkIfAlreadyCloseThatDay(
+    body: Partial<RegisterTicketClosure>
+  ): Promise<boolean> {
     const registerBarClosure =
       await this.registerTicketClosureRepository.checkIfAlreadyCloseThatDay(
-        date
+        body.date,
+        body.RegisterTicketId
       );
-
     if (!registerBarClosure) return false;
     return true;
   }

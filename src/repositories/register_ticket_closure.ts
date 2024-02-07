@@ -1,6 +1,7 @@
 import { Transaction } from "sequelize";
 import { RegisterTicketClosure, User } from "../models";
 import { IRegisterTicketClosureRepository } from "../interfaces/register_ticket_closure";
+import { UUID } from "crypto";
 
 export class RegisterTicketClosureRepository
   implements IRegisterTicketClosureRepository
@@ -16,11 +17,15 @@ export class RegisterTicketClosureRepository
     }
   }
 
-  async checkIfAlreadyCloseThatDay(date: Date): Promise<RegisterTicketClosure> {
+  async checkIfAlreadyCloseThatDay(
+    date: Date,
+    RegisterTicketId: UUID
+  ): Promise<RegisterTicketClosure> {
     try {
       return await RegisterTicketClosure.findOne({
         where: {
           date,
+          RegisterTicketId,
         },
       });
     } catch (error) {
