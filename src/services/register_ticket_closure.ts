@@ -1,3 +1,4 @@
+import { UUID } from "crypto";
 import { IRegisterTicketClosureService } from "../interfaces/register_ticket_closure";
 import { RegisterTicketClosure } from "../models";
 import { RegisterTicketClosureRepository } from "../repositories/register_ticket_closure";
@@ -25,5 +26,12 @@ export class RegisterTicketClosureService
       );
     if (!registerBarClosure) return false;
     return true;
+  }
+
+  /////////////////////////////////////////////////////////////////////////////////////////////
+  async getAllByBranchId(BranchId: UUID): Promise<RegisterTicketClosure[]> {
+    return await this.registerTicketClosureRepository.getAllByBranchId(
+      BranchId
+    );
   }
 }

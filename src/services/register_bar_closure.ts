@@ -1,3 +1,4 @@
+import { UUID } from "crypto";
 import { IRegisterBarClosureService } from "../interfaces/register_bar_closure";
 import { RegisterBarClosure, RegisterTicketClosure } from "../models";
 import { RegisterBarClosureRepository } from "../repositories/register_bar_closure";
@@ -8,6 +9,7 @@ export class RegisterBarClosureService implements IRegisterBarClosureService {
     return await this.registerBarClosureRepository.create(body);
   }
 
+  /////////////////////////////////////////////////////////////////////////////////////////////
   async checkIfAlreadyCloseThatDay(
     body: Partial<RegisterBarClosure>
   ): Promise<boolean> {
@@ -22,4 +24,8 @@ export class RegisterBarClosureService implements IRegisterBarClosureService {
   }
 
   /////////////////////////////////////////////////////////////////////////////////////////////
+
+  async getAllByBranchId(BranchId: UUID): Promise<RegisterBarClosure[]> {
+    return await this.registerBarClosureRepository.getAllByBranchId(BranchId);
+  }
 }

@@ -1,5 +1,5 @@
 import { UUID } from "crypto";
-import { Transaction } from "sequelize";
+import { Transaction, WhereOptions } from "sequelize";
 import { IUserRepository } from "../interfaces/user";
 import { Auth, Branch, Company, Group, User } from "../models";
 
@@ -12,6 +12,15 @@ export class UserRepository implements IUserRepository {
     } catch (error) {
       console.error(error);
       throw new Error(`USER_NOT_CREATED`);
+    }
+  }
+
+  async getAll(where: WhereOptions): Promise<{ rows: User[]; count: number }> {
+    try {
+      return await User.findAndCountAll({ where });
+    } catch (error) {
+      console.error(error);
+      throw new Error(`USERS_NOT_FIND`);
     }
   }
 

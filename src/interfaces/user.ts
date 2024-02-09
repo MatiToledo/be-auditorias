@@ -24,3 +24,7 @@ export interface UserMeType {
   group: string;
   company: string;
 }
+
+export interface QueriesGetAll {
+  q?: string;
+}
