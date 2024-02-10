@@ -1,8 +1,8 @@
 import { Transaction } from "sequelize";
-import { IGroupRepository } from "../interfaces/group";
-import { Group } from "../models";
+import { IGroupBackOfficeRepository } from "../../interfaces/back_office/group";
+import { Group } from "../../models";
 
-export class GroupRepository implements IGroupRepository {
+export class GroupBackOfficeRepository implements IGroupBackOfficeRepository {
   async bulkCreate(
     data: Partial<Group>[],
     transaction: Transaction

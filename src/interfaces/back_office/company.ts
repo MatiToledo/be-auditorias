@@ -1,8 +1,27 @@
-import { Company } from "../../models";
+import { Transaction } from "sequelize";
+import { Company, RegisterBar, RegisterTicket } from "../../models";
+import { UUID } from "crypto";
 export interface ICompanyBackOfficeService {
-  getAll(): Promise<{ rows: Company[]; count: number }>;
+  getAll(): Promise<Company[]>;
+  create(body: BodyCreateCompany, transaction: Transaction): Promise<void>;
 }
 
 export interface ICompanyBackOfficeRepository {
-  getAll(): Promise<{ rows: Company[]; count: number }>;
+  getAll(): Promise<Company[]>;
+  create(data: Partial<Company>, transaction: Transaction): Promise<Company>;
+}
+
+export interface GroupBodyCreate {
+  name: string;
+  CompanyId: UUID;
+  Branches: {
+    name: string;
+    RegisterBars: Partial<RegisterBar>[];
+    RegisterTickets: Partial<RegisterTicket>[];
+  }[];
+}
+
+export interface BodyCreateCompany {
+  Company: Partial<Company>;
+  Groups: GroupBodyCreate[];
 }

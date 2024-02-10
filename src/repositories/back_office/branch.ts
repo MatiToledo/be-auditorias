@@ -1,8 +1,9 @@
 import { Transaction } from "sequelize";
-import { IBranchRepository } from "../interfaces/branch";
-import { Branch } from "../models";
+import { IBranchRepository } from "../../interfaces/branch";
+import { Branch } from "../../models";
+import { IBranchBackOfficeRepository } from "../../interfaces/back_office/branch";
 
-export class BranchRepository implements IBranchRepository {
+export class BranchBackOfficeRepository implements IBranchBackOfficeRepository {
   async bulkCreate(
     data: Partial<Branch>[],
     transaction: Transaction

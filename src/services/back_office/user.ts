@@ -1,4 +1,4 @@
-import { Op, Sequelize, WhereOptions } from "sequelize";
+import { Op, Sequelize, Transaction, WhereOptions } from "sequelize";
 import {
   AllUser,
   IUserBackOfficeService,
@@ -6,6 +6,8 @@ import {
 } from "../../interfaces/back_office/user";
 import { buildPagination } from "../../libs/buildPagination";
 import { UserBackOfficeRepository } from "../../repositories/back_office/user";
+import { UserBO } from "../../models";
+import { UUID } from "crypto";
 
 export class UserBackOfficeService implements IUserBackOfficeService {
   private userBackOfficeRepository = new UserBackOfficeRepository();
@@ -55,5 +57,16 @@ export class UserBackOfficeService implements IUserBackOfficeService {
     }
 
     return where as WhereOptions;
+  }
+
+  async create(
+    data: Partial<UserBO>,
+    transaction: Transaction
+  ): Promise<UserBO> {
+    return await this.userBackOfficeRepository.create(data, transaction);
+  }
+
+  async findByAuthId(id: UUID): Promise<UserBO> {
+    return await this.userBackOfficeRepository.findByAuthId(id);
   }
 }

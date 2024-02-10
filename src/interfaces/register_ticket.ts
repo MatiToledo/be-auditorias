@@ -7,9 +7,5 @@ export interface IRegisterTicketService {
 }
 
 export interface IRegisterTicketRepository {
-  bulkCreate(
-    data: Partial<RegisterTicket>[],
-    transaction: Transaction
-  ): Promise<RegisterTicket[]>;
   findByBranchId(BranchId: UUID): Promise<RegisterTicket[]>;
 }

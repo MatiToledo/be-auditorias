@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { Schema, array, object, string } from "yup";
 
-export class CompanyValidate {
+export class CompanyBackOfficeValidate {
   static async create(req: Request, res: Response, next: NextFunction) {
     const schema: Schema = object({
       body: object({

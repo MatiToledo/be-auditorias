@@ -3,6 +3,8 @@ import { Transaction } from "sequelize";
 import { UserBO } from "../../models/back_office/user";
 export interface IUserBackOfficeService {
   getAll(queries: QueriesGetAll): Promise<{ rows: AllUser[]; count: number }>;
+  create(data: Partial<UserBO>, transaction: Transaction): Promise<UserBO>;
+  findByAuthId(id: UUID): Promise<UserBO>;
 }
 
 export interface IUserBackOfficeRepository {

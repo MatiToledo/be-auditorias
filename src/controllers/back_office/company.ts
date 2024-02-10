@@ -1,8 +1,8 @@
 import { Response } from "express";
-import { QueriesGetAll } from "../../interfaces/back_office/user";
+import { Transaction } from "sequelize";
+import { sequelize } from "../../DB";
 import { responseHandler } from "../../libs/response_handler";
 import { AuthenticatedRequest } from "../../middlewares";
-import { UserBackOfficeService } from "../../services/back_office/user";
 import { CompanyBackOfficeService } from "../../services/back_office/company";
 
 export class CompanyBackOfficeController {
@@ -11,6 +11,18 @@ export class CompanyBackOfficeController {
     try {
       const result = await this.companyBackOfficeService.getAll();
       res.status(200).json(responseHandler(true, "USERS_FIND", result));
+    } catch (error) {
+      console.error(error);
+      res.status(400).json(responseHandler(false, error.message));
+    }
+  };
+
+  create = async (req: AuthenticatedRequest, res: Response) => {
+    try {
+      await sequelize.transaction(async (transaction: Transaction) => {
+        await this.companyBackOfficeService.create(req.body, transaction);
+      });
+      res.status(200).json(responseHandler(true, "COMPANY_CREATED"));
     } catch (error) {
       console.error(error);
       res.status(400).json(responseHandler(false, error.message));

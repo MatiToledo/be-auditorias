@@ -1,16 +1,16 @@
 import express from "express";
+import { CompanyBackOfficeController } from "../controllers/back_office/company";
 import { authAdminMiddleware } from "../middlewares";
-import { CompanyController } from "../controllers/company";
-import { CompanyValidate } from "../middlewares/validators/company";
+import { CompanyBackOfficeValidate } from "../middlewares/validators/back_office/company";
 
 const router = express.Router();
-const companyController = new CompanyController();
+const companyBackOfficeController = new CompanyBackOfficeController();
 
 router.post(
   "/",
   authAdminMiddleware,
-  CompanyValidate.create,
-  companyController.create
+  CompanyBackOfficeValidate.create,
+  companyBackOfficeController.create
 );
 
 export default router;

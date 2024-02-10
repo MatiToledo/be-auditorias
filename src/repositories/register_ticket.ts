@@ -4,19 +4,6 @@ import { RegisterBar, RegisterTicket } from "../models";
 import { UUID } from "crypto";
 
 export class RegisterTicketRepository implements IRegisterTicketRepository {
-  async bulkCreate(
-    data: Partial<RegisterTicket>[],
-    transaction: Transaction
-  ): Promise<RegisterTicket[]> {
-    try {
-      return await RegisterTicket.bulkCreate(data, {
-        transaction,
-      });
-    } catch (error) {
-      console.error(error);
-      throw new Error(`REGISTER_TICKETS_NOT_CREATED`);
-    }
-  }
   async findByBranchId(BranchId: UUID): Promise<RegisterTicket[]> {
     try {
       return await RegisterTicket.findAll({

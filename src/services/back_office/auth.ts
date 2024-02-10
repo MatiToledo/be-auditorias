@@ -1,3 +1,4 @@
+import { UserBackOfficeService } from "./user";
 import { Transaction } from "sequelize";
 import {
   BodyCreate,
@@ -9,9 +10,9 @@ import { AuthBO } from "../../models/back_office/auth";
 import { AuthBackOfficeRepository } from "../../repositories/back_office/auth";
 import { UserBackOfficeRepository } from "../../repositories/back_office/user";
 
-export class AuthBOService implements IAuthBackOfficeService {
+export class AuthBackOfficeService implements IAuthBackOfficeService {
   private authBackOfficeRepository = new AuthBackOfficeRepository();
-  private userBORepository = new UserBackOfficeRepository();
+  private userBackOfficeService = new UserBackOfficeService();
   async create(body: BodyCreate, transaction: Transaction): Promise<void> {
     await this.authBackOfficeRepository.findIfExistByEmail(body.Auth.email);
     const encryptedPassword = encryptPassword(body.Auth.password);
@@ -19,7 +20,7 @@ export class AuthBOService implements IAuthBackOfficeService {
       { ...body.Auth, password: encryptedPassword },
       transaction
     );
-    await this.userBORepository.create(
+    await this.userBackOfficeService.create(
       { AuthBOId: auth.id, ...body.User },
       transaction
     );
@@ -32,7 +33,7 @@ export class AuthBOService implements IAuthBackOfficeService {
       ...body,
       password: encryptedPassword,
     });
-    const user = await this.userBORepository.findByAuthId(auth.id);
+    const user = await this.userBackOfficeService.findByAuthId(auth.id);
     const token = generateToken({ id: user.id, role: user.role });
     return token;
   }
