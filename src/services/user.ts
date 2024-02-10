@@ -1,8 +1,8 @@
+import { UUID } from "crypto";
 import { Transaction } from "sequelize";
 import { IUserService, UserMeType } from "../interfaces/user";
 import { User } from "../models";
 import { UserRepository } from "./../repositories/user";
-import { UUID } from "crypto";
 
 export class UserService implements IUserService {
   private userRepository = new UserRepository();

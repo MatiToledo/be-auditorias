@@ -1,0 +1,16 @@
+import express from "express";
+import { UserBackOfficeController } from "../../controllers/back_office/user";
+import { authAdminMiddleware } from "../../middlewares";
+import { UserBackOfficeValidate } from "../../middlewares/validators/back_office/user";
+
+const router = express.Router();
+const userBackOfficeController = new UserBackOfficeController();
+
+router.get(
+  "/all",
+  authAdminMiddleware,
+  UserBackOfficeValidate.getAll,
+  userBackOfficeController.getAll
+);
+
+export default router;

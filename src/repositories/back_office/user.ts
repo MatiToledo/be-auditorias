@@ -1,9 +1,10 @@
 import { UUID } from "crypto";
-import { Transaction } from "sequelize";
+import { Op, Transaction, WhereOptions } from "sequelize";
 import { UserBO } from "../../models/back_office/user";
-import { IUserBORepository } from "../../interfaces/back_office/user";
+import { IUserBackOfficeRepository } from "../../interfaces/back_office/user";
+import { User, Auth, Branch } from "../../models";
 
-export class UserBORepository implements IUserBORepository {
+export class UserBackOfficeRepository implements IUserBackOfficeRepository {
   async create(
     data: Partial<UserBO>,
     transaction: Transaction
@@ -26,6 +27,27 @@ export class UserBORepository implements IUserBORepository {
     } catch (error) {
       console.error(error);
       throw new Error(`USER_NOT_FIND`);
+    }
+  }
+
+  async getAll(
+    where: WhereOptions,
+    pagination: { offset: number; limit: number }
+  ): Promise<{ rows: User[]; count: number }> {
+    try {
+      console.log("where: ", where[Op.and][0]);
+      return await User.findAndCountAll({
+        where,
+        include: [
+          { model: Auth, attributes: ["id", "email"] },
+          { model: Branch, attributes: ["id", "name"] },
+        ],
+        limit: pagination.limit,
+        offset: pagination.offset,
+      });
+    } catch (error) {
+      console.error(error);
+      throw new Error(`USERS_NOT_FIND`);
     }
   }
 }

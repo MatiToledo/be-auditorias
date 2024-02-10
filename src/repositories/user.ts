@@ -1,5 +1,5 @@
 import { UUID } from "crypto";
-import { Transaction } from "sequelize";
+import { Op, Transaction, WhereOptions } from "sequelize";
 import { IUserRepository } from "../interfaces/user";
 import { Auth, Branch, Company, Group, User } from "../models";
 

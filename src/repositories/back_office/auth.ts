@@ -1,8 +1,8 @@
 import { Transaction } from "sequelize";
-import { IAuthBORepository } from "../../interfaces/back_office/auth";
+import { IAuthBackOfficeRepository } from "../../interfaces/back_office/auth";
 import { AuthBO } from "../../models/back_office/auth";
 
-export class AuthBORepository implements IAuthBORepository {
+export class AuthBackOfficeRepository implements IAuthBackOfficeRepository {
   async create(
     data: Partial<AuthBO>,
     transaction: Transaction

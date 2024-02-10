@@ -1,6 +1,6 @@
 import { Transaction } from "sequelize";
 import { IRegisterBarClosureRepository } from "../interfaces/register_bar_closure";
-import { RegisterBarClosure, User } from "../models";
+import { RegisterBar, RegisterBarClosure, User } from "../models";
 import { UUID } from "crypto";
 
 export class RegisterBarClosureRepository
@@ -28,6 +28,17 @@ export class RegisterBarClosureRepository
     } catch (error) {
       console.error(error);
       throw new Error(`REGISTER_BAR_CLOSURE_NOT_FIND`);
+    }
+  }
+
+  async getAllByBranchId(BranchId: UUID): Promise<RegisterBarClosure[]> {
+    try {
+      return await RegisterBarClosure.findAll({
+        include: [{ model: RegisterBar, where: { BranchId }, required: true }],
+      });
+    } catch (error) {
+      console.error(error);
+      throw new Error(`REGISTER_BAR_CLOSURES_NOT_FIND`);
     }
   }
 }

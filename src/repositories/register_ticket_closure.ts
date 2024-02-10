@@ -1,5 +1,5 @@
 import { Transaction } from "sequelize";
-import { RegisterTicketClosure, User } from "../models";
+import { RegisterTicket, RegisterTicketClosure, User } from "../models";
 import { IRegisterTicketClosureRepository } from "../interfaces/register_ticket_closure";
 import { UUID } from "crypto";
 
@@ -31,6 +31,19 @@ export class RegisterTicketClosureRepository
     } catch (error) {
       console.error(error);
       throw new Error(`REGISTER_TICKET_CLOSURE_NOT_FIND`);
+    }
+  }
+
+  async getAllByBranchId(BranchId: UUID): Promise<RegisterTicketClosure[]> {
+    try {
+      return await RegisterTicketClosure.findAll({
+        include: [
+          { model: RegisterTicket, where: { BranchId }, required: true },
+        ],
+      });
+    } catch (error) {
+      console.error(error);
+      throw new Error(`REGISTER_TICKET_CLOSURES_NOT_FIND`);
     }
   }
 }

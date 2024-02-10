@@ -15,6 +15,13 @@ router.post(
 router.post(
   "/check",
   authMiddleware,
+  RegisterTicketClosureValidate.checkIfAlreadyCloseThatDay,
   registerTicketClosureController.checkIfAlreadyCloseThatDay
+);
+
+router.get(
+  "/all/:BranchId",
+  authMiddleware,
+  registerTicketClosureController.getAllByBranchId
 );
 export default router;
