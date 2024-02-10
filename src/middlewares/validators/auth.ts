@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { Schema, array, boolean, mixed, number, object, string } from "yup";
+import { Schema, mixed, number, object, string } from "yup";
 import { UserRoleEnum } from "../../models/user";
 
 export class AuthValidate {

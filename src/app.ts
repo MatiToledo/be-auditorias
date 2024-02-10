@@ -25,7 +25,7 @@ app.use(
 app.use(bodyParser.text({ limit: "200mb" }));
 
 app.use("/v1", Router);
-app.use("/v1/back_office", RouterBackOffice);
+app.use("/v1/backoffice", RouterBackOffice);
 
 app.listen(process.env.PORT, () => {
   console.log(`Server is running on http://localhost:${process.env.PORT}`);
