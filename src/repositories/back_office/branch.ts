@@ -17,4 +17,15 @@ export class BranchBackOfficeRepository implements IBranchBackOfficeRepository {
       throw new Error(`BRANCHES_NOT_CREATED`);
     }
   }
+
+  async getAllByGroupId(GroupId: string): Promise<Branch[]> {
+    try {
+      return await Branch.findAll({
+        where: { GroupId },
+      });
+    } catch (error) {
+      console.error(error);
+      throw new Error(`BRANCHES_NOT_FOUND`);
+    }
+  }
 }

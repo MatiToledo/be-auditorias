@@ -30,7 +30,7 @@ export class RegisterTicketClosureRepository
       });
     } catch (error) {
       console.error(error);
-      throw new Error(`REGISTER_TICKET_CLOSURE_NOT_FIND`);
+      throw new Error(`REGISTER_TICKET_CLOSURE_NOT_FOUND`);
     }
   }
 
@@ -43,7 +43,7 @@ export class RegisterTicketClosureRepository
       });
     } catch (error) {
       console.error(error);
-      throw new Error(`REGISTER_TICKET_CLOSURES_NOT_FIND`);
+      throw new Error(`REGISTER_TICKET_CLOSURES_NOT_FOUND`);
     }
   }
 }

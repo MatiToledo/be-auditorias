@@ -16,4 +16,15 @@ export class GroupBackOfficeRepository implements IGroupBackOfficeRepository {
       throw new Error(`GROUPS_NOT_CREATED`);
     }
   }
+
+  async getAllByCompanyId(CompanyId: string): Promise<Group[]> {
+    try {
+      return await Group.findAll({
+        where: { CompanyId },
+      });
+    } catch (error) {
+      console.error(error);
+      throw new Error(`GROUPS_NOT_FOUND`);
+    }
+  }
 }

@@ -10,7 +10,9 @@ export class RegisterBarController {
       const result = await this.registerBarService.findByBranchId(
         req.params.BranchId as UUID
       );
-      res.status(200).json(responseHandler(true, "REGISTER_BARS_FIND", result));
+      res
+        .status(200)
+        .json(responseHandler(true, "REGISTER_BARS_FOUND", result));
     } catch (error) {
       console.error(error);
       res.status(400).json(responseHandler(false, error.message));

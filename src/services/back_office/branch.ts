@@ -11,4 +11,8 @@ export class BranchBackOfficeService implements IBranchBackOfficeService {
   ): Promise<Branch[]> {
     return await this.branchBackOfficeRepository.bulkCreate(data, transaction);
   }
+
+  async getAllByGroupId(GroupId: string): Promise<Branch[]> {
+    return await this.branchBackOfficeRepository.getAllByGroupId(GroupId);
+  }
 }

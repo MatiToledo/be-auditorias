@@ -22,7 +22,7 @@ export class UserRepository implements IUserRepository {
       });
     } catch (error) {
       console.error(error);
-      throw new Error(`USER_NOT_FIND`);
+      throw new Error(`USER_NOT_FOUND`);
     }
   }
 
@@ -40,7 +40,7 @@ export class UserRepository implements IUserRepository {
       });
     } catch (error) {
       console.error(error);
-      throw new Error(`USER_NOT_FIND`);
+      throw new Error(`USER_NOT_FOUND`);
     }
   }
 }

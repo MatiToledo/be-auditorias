@@ -6,6 +6,8 @@ export interface IGroupBackOfficeService {
     data: Partial<Group>[],
     transaction: Transaction
   ): Promise<Group[]>;
+
+  getAllByCompanyId(CompanyId: string): Promise<Group[]>;
 }
 
 export interface IGroupBackOfficeRepository {
@@ -13,4 +15,5 @@ export interface IGroupBackOfficeRepository {
     data: Partial<Group>[],
     transaction: Transaction
   ): Promise<Group[]>;
+  getAllByCompanyId(CompanyId: string): Promise<Group[]>;
 }

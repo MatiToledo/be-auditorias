@@ -30,7 +30,7 @@ export class RegisterBarClosureController {
         );
       res
         .status(200)
-        .json(responseHandler(true, "REGISTER_BAR_CLOSURE_FIND", result));
+        .json(responseHandler(true, "REGISTER_BAR_CLOSURE_FOUND", result));
     } catch (error) {
       console.error(error);
       res.status(400).json(responseHandler(false, error.message));
@@ -45,7 +45,7 @@ export class RegisterBarClosureController {
       );
       res
         .status(200)
-        .json(responseHandler(true, "REGISTER_BAR_CLOSURES_FIND", result));
+        .json(responseHandler(true, "REGISTER_BAR_CLOSURES_FOUND", result));
     } catch (error) {
       console.error(error);
       res.status(400).json(responseHandler(false, error.message));

@@ -26,7 +26,7 @@ export class UserBackOfficeRepository implements IUserBackOfficeRepository {
       });
     } catch (error) {
       console.error(error);
-      throw new Error(`USER_NOT_FIND`);
+      throw new Error(`USER_NOT_FOUND`);
     }
   }
 
@@ -47,7 +47,7 @@ export class UserBackOfficeRepository implements IUserBackOfficeRepository {
       });
     } catch (error) {
       console.error(error);
-      throw new Error(`USERS_NOT_FIND`);
+      throw new Error(`USERS_NOT_FOUND`);
     }
   }
 }

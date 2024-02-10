@@ -27,7 +27,7 @@ export class RegisterBarClosureRepository
       });
     } catch (error) {
       console.error(error);
-      throw new Error(`REGISTER_BAR_CLOSURE_NOT_FIND`);
+      throw new Error(`REGISTER_BAR_CLOSURE_NOT_FOUND`);
     }
   }
 
@@ -38,7 +38,7 @@ export class RegisterBarClosureRepository
       });
     } catch (error) {
       console.error(error);
-      throw new Error(`REGISTER_BAR_CLOSURES_NOT_FIND`);
+      throw new Error(`REGISTER_BAR_CLOSURES_NOT_FOUND`);
     }
   }
 }

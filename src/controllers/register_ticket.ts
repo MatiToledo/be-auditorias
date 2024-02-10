@@ -13,7 +13,7 @@ export class RegisterTicketController {
       );
       res
         .status(200)
-        .json(responseHandler(true, "REGISTER_TICKETS_FIND", result));
+        .json(responseHandler(true, "REGISTER_TICKETS_FOUND", result));
     } catch (error) {
       console.error(error);
       res.status(400).json(responseHandler(false, error.message));

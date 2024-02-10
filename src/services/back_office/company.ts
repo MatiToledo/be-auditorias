@@ -16,13 +16,15 @@ import { CompanyBackOfficeRepository } from "../../repositories/back_office/comp
 import { BranchBackOfficeService } from "./branch";
 import { GroupBackOfficeService } from "./group";
 import { RegisterBarBackOfficeService } from "./register_bar";
+import { RegisterTicketBackOfficeService } from "./register_ticket";
 
 export class CompanyBackOfficeService implements ICompanyBackOfficeService {
   private companyBackOfficeRepository = new CompanyBackOfficeRepository();
   private groupBackOfficeService = new GroupBackOfficeService();
   private branchBackOfficeService = new BranchBackOfficeService();
   private registerBarBackOfficeService = new RegisterBarBackOfficeService();
-  private registerTicketBackOfficeService = new RegisterBarBackOfficeService();
+  private registerTicketBackOfficeService =
+    new RegisterTicketBackOfficeService();
   async getAll(): Promise<Company[]> {
     return await this.companyBackOfficeRepository.getAll();
   }

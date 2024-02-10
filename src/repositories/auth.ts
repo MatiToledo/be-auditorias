@@ -25,7 +25,7 @@ export class AuthRepository implements IAuthRepository {
     } catch (error) {
       console.error(error);
       if (error.message) {
-        throw new Error(`AUTH_FIND_ERROR`);
+        throw new Error(`AUTH_FOUND_ERROR`);
       }
       throw new Error(`AUTH_ALREADY_EXISTS`);
     }
@@ -42,7 +42,7 @@ export class AuthRepository implements IAuthRepository {
     } catch (error) {
       console.error(error);
       if (error.message) {
-        throw new Error(`AUTH_FIND_ERROR`);
+        throw new Error(`AUTH_FOUND_ERROR`);
       }
       throw new Error(`AUTH_NOT_EXISTS`);
     }

@@ -3,9 +3,10 @@ import { IRegisterBarBackOfficeService } from "../../interfaces/back_office/regi
 import { RegisterBarBackOfficeRepository } from "../../repositories/back_office/register_bar";
 import { RegisterBar, RegisterTicket } from "../../models";
 import { RegisterTicketBackOfficeRepository } from "../../repositories/back_office/register_ticket";
+import { IRegisterTicketBackOfficeService } from "../../interfaces/back_office/register_ticket";
 
-export class RegisterBarBackOfficeService
-  implements IRegisterBarBackOfficeService
+export class RegisterTicketBackOfficeService
+  implements IRegisterTicketBackOfficeService
 {
   /////////////////////////////////////////////////////////////////////////////////////////////
   private registerTicketBackOfficeRepository =

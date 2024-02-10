@@ -10,7 +10,7 @@ export class CompanyBackOfficeRepository
       return await Company.findAll();
     } catch (error) {
       console.error(error);
-      throw new Error(`COMPANIES_NOT_FIND`);
+      throw new Error(`COMPANIES_NOT_FOUND`);
     }
   }
 

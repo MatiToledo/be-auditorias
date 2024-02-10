@@ -9,7 +9,7 @@ export class UserController {
     try {
       const id = req.userData.id;
       const result = await this.userService.me(id);
-      res.status(200).json(responseHandler(true, "USER_FIND", result));
+      res.status(200).json(responseHandler(true, "USER_FOUND", result));
     } catch (error) {
       console.error(error);
       res.status(400).json(responseHandler(false, error.message));

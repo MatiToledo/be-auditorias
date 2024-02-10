@@ -11,7 +11,7 @@ export class UserBackOfficeController {
       const result = await this.userBackOfficeService.getAll(
         req.query as QueriesGetAll
       );
-      res.status(200).json(responseHandler(true, "USERS_FIND", result));
+      res.status(200).json(responseHandler(true, "USERS_FOUND", result));
     } catch (error) {
       console.error(error);
       res.status(400).json(responseHandler(false, error.message));

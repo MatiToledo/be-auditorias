@@ -5,6 +5,7 @@ export interface IBranchBackOfficeService {
     data: Partial<Branch>[],
     transaction: Transaction
   ): Promise<Branch[]>;
+  getAllByGroupId(GroupId: string): Promise<Branch[]>;
 }
 
 export interface IBranchBackOfficeRepository {
@@ -12,4 +13,5 @@ export interface IBranchBackOfficeRepository {
     data: Partial<Branch>[],
     transaction: Transaction
   ): Promise<Branch[]>;
+  getAllByGroupId(GroupId: string): Promise<Branch[]>;
 }

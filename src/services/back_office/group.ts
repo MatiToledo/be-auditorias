@@ -11,4 +11,8 @@ export class GroupBackOfficeService implements IGroupBackOfficeService {
   ): Promise<Group[]> {
     return await this.groupBackOfficeRepository.bulkCreate(data, transaction);
   }
+
+  async getAllByCompanyId(CompanyId: string): Promise<Group[]> {
+    return await this.groupBackOfficeRepository.getAllByCompanyId(CompanyId);
+  }
 }

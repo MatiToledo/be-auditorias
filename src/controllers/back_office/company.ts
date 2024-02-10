@@ -10,7 +10,7 @@ export class CompanyBackOfficeController {
   getAll = async (req: AuthenticatedRequest, res: Response) => {
     try {
       const result = await this.companyBackOfficeService.getAll();
-      res.status(200).json(responseHandler(true, "USERS_FIND", result));
+      res.status(200).json(responseHandler(true, "USERS_FOUND", result));
     } catch (error) {
       console.error(error);
       res.status(400).json(responseHandler(false, error.message));
