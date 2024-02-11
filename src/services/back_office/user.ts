@@ -29,6 +29,8 @@ export class UserBackOfficeService implements IUserBackOfficeService {
         photo: user.photo,
         phone: user.phone,
         branch: user.Branch.name,
+        group: user.Branch.Group.name,
+        company: user.Branch.Group.Company.name,
       })),
     };
   }
@@ -43,11 +45,24 @@ export class UserBackOfficeService implements IUserBackOfficeService {
           case "q":
             where[Op.and].push({
               [Op.or]: [
-                {
-                  fullName: { [Op.iLike]: `%${queries.q}%` },
-                },
-                Sequelize.literal(`"Auth"."email" ILIKE '%${queries.q}%'`),
-              ].filter(Boolean),
+                { fullName: { [Op.iLike]: `%${queries.q}%` } },
+                { "$Auth.email$": { [Op.iLike]: `%${queries.q}%` } },
+              ],
+            });
+            break;
+          case "CompanyId":
+            where[Op.and].push({
+              "$Branch.Group.Company.id$": { [Op.eq]: queries.CompanyId },
+            });
+            break;
+          case "GroupId":
+            where[Op.and].push({
+              "$Branch.Group.id$": { [Op.eq]: queries.GroupId },
+            });
+            break;
+          case "BranchId":
+            where[Op.and].push({
+              "$Branch.id$": { [Op.eq]: queries.BranchId },
             });
             break;
           default:

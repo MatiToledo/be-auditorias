@@ -1,13 +1,17 @@
-import { Transaction } from "sequelize";
+import { Transaction, WhereOptions } from "sequelize";
 import { Company, RegisterBar, RegisterTicket } from "../../models";
 import { UUID } from "crypto";
 export interface ICompanyBackOfficeService {
-  getAll(): Promise<Company[]>;
-  create(body: BodyCreateCompany, transaction: Transaction): Promise<void>;
+  getAll(
+    queries: QueriesGetAll
+  ): Promise<{ rows: AllCompany[]; count: number }>;
 }
 
 export interface ICompanyBackOfficeRepository {
-  getAll(): Promise<Company[]>;
+  getAll(
+    where: WhereOptions,
+    pagination: { offset: number; limit: number }
+  ): Promise<{ rows: Company[]; count: number }>;
   create(data: Partial<Company>, transaction: Transaction): Promise<Company>;
 }
 
@@ -24,4 +28,17 @@ export interface GroupBodyCreate {
 export interface BodyCreateCompany {
   Company: Partial<Company>;
   Groups: GroupBodyCreate[];
+}
+
+export interface AllCompany {
+  id: UUID;
+  name: string;
+  groupsCant: number;
+  branchesCant: number;
+}
+
+export interface QueriesGetAll {
+  q?: string;
+  limit?: string;
+  page?: string;
 }

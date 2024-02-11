@@ -1,3 +1,6 @@
+import { Company } from "./company";
+import { RegisterTicket } from "./register_ticket";
+import { RegisterBar } from "./register_bar";
 import { UUID } from "crypto";
 import { CreationOptional, DataTypes, Model } from "sequelize";
 import { sequelize } from "../DB";
@@ -8,6 +11,8 @@ export class Branch extends Model {
   declare name: string;
   declare GroupId: UUID;
   declare Group: Group;
+  declare RegisterBars: RegisterBar[];
+  declare RegisterTickets: RegisterTicket[];
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }

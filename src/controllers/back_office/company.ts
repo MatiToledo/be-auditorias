@@ -9,8 +9,8 @@ export class CompanyBackOfficeController {
   private companyBackOfficeService = new CompanyBackOfficeService();
   getAll = async (req: AuthenticatedRequest, res: Response) => {
     try {
-      const result = await this.companyBackOfficeService.getAll();
-      res.status(200).json(responseHandler(true, "USERS_FOUND", result));
+      const result = await this.companyBackOfficeService.getAll(req.query);
+      res.status(200).json(responseHandler(true, "COMPANIES_FOUND", result));
     } catch (error) {
       console.error(error);
       res.status(400).json(responseHandler(false, error.message));
@@ -20,7 +20,7 @@ export class CompanyBackOfficeController {
   create = async (req: AuthenticatedRequest, res: Response) => {
     try {
       await sequelize.transaction(async (transaction: Transaction) => {
-        await this.companyBackOfficeService.create(req.body, transaction);
+        // await this.companyBackOfficeService.g(req.body, transaction);
       });
       res.status(200).json(responseHandler(true, "COMPANY_CREATED"));
     } catch (error) {

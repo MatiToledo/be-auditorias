@@ -2,7 +2,7 @@ import { UUID } from "crypto";
 import { Op, Transaction, WhereOptions } from "sequelize";
 import { UserBO } from "../../models/back_office/user";
 import { IUserBackOfficeRepository } from "../../interfaces/back_office/user";
-import { User, Auth, Branch } from "../../models";
+import { User, Auth, Branch, Group, Company } from "../../models";
 
 export class UserBackOfficeRepository implements IUserBackOfficeRepository {
   async create(
@@ -40,7 +40,17 @@ export class UserBackOfficeRepository implements IUserBackOfficeRepository {
         where,
         include: [
           { model: Auth, attributes: ["id", "email"] },
-          { model: Branch, attributes: ["id", "name"] },
+          {
+            model: Branch,
+            attributes: ["id", "name"],
+            include: [
+              {
+                model: Group,
+                attributes: ["id", "name"],
+                include: [{ model: Company, attributes: ["id", "name"] }],
+              },
+            ],
+          },
         ],
         limit: pagination.limit,
         offset: pagination.offset,

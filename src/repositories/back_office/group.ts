@@ -1,6 +1,6 @@
-import { Transaction } from "sequelize";
+import { Transaction, WhereOptions } from "sequelize";
 import { IGroupBackOfficeRepository } from "../../interfaces/back_office/group";
-import { Group } from "../../models";
+import { Branch, Company, Group } from "../../models";
 
 export class GroupBackOfficeRepository implements IGroupBackOfficeRepository {
   async bulkCreate(
@@ -17,6 +17,23 @@ export class GroupBackOfficeRepository implements IGroupBackOfficeRepository {
     }
   }
 
+  async getAll(
+    where: WhereOptions,
+    pagination: { offset: number; limit: number }
+  ): Promise<{ rows: Group[]; count: number }> {
+    try {
+      return await Group.findAndCountAll({
+        where,
+        include: [{ model: Branch }, { model: Company, required: true }],
+        distinct: true,
+        limit: pagination.limit,
+        offset: pagination.offset,
+      });
+    } catch (error) {
+      console.error(error);
+      throw new Error(`GROUPS_NOT_FOUND`);
+    }
+  }
   async getAllByCompanyId(CompanyId: string): Promise<Group[]> {
     try {
       return await Group.findAll({

@@ -12,5 +12,11 @@ router.get(
   BranchBackOfficeValidate.getAllByGroupId,
   branchBackOfficeController.getAllByCompanyId
 );
+router.get(
+  "/all",
+  authAdminMiddleware,
+  BranchBackOfficeValidate.getAll,
+  branchBackOfficeController.getAll
+);
 
 export default router;

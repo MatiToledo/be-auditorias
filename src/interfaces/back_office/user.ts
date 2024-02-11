@@ -21,10 +21,15 @@ export interface AllUser {
   photo: string;
   phone: number;
   branch: string;
+  group: string;
+  company: string;
 }
 
 export interface QueriesGetAll {
   q?: string;
   limit?: string;
   page?: string;
+  CompanyId?: string;
+  GroupId?: string;
+  BranchId?: string;
 }

@@ -8,6 +8,9 @@ export class UserBackOfficeValidate {
         q: string().optional(),
         page: string().optional(),
         limit: string().optional(),
+        CompanyId: string().optional(),
+        GroupId: string().optional(),
+        BranchId: string().optional(),
       })
         .noUnknown(true)
         .strict(true),

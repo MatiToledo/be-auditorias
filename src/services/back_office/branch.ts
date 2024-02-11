@@ -1,7 +1,13 @@
-import { Transaction } from "sequelize";
-import { IBranchBackOfficeService } from "../../interfaces/back_office/branch";
+import { RegisterBar } from "./../../models/register_bar";
+import { Op, Transaction, WhereOptions } from "sequelize";
+import {
+  AllBranch,
+  IBranchBackOfficeService,
+  QueriesGetAll,
+} from "../../interfaces/back_office/branch";
 import { Branch } from "../../models";
 import { BranchBackOfficeRepository } from "../../repositories/back_office/branch";
+import { buildPagination } from "../../libs/buildPagination";
 
 export class BranchBackOfficeService implements IBranchBackOfficeService {
   private branchBackOfficeRepository = new BranchBackOfficeRepository();
@@ -12,6 +18,58 @@ export class BranchBackOfficeService implements IBranchBackOfficeService {
     return await this.branchBackOfficeRepository.bulkCreate(data, transaction);
   }
 
+  async getAll(
+    queries: QueriesGetAll
+  ): Promise<{ rows: AllBranch[]; count: number }> {
+    const where = this.buildQueriesFilters(queries);
+    const pagination = buildPagination(queries);
+    const branches = await this.branchBackOfficeRepository.getAll(
+      where,
+      pagination
+    );
+    return {
+      count: branches.count,
+      rows: branches.rows.map((branch) => ({
+        id: branch.id,
+        name: branch.name,
+        group: branch.Group.name,
+        company: branch.Group.Company.name,
+        barsCant: branch.RegisterBars.length,
+        ticketsCant: branch.RegisterTickets.length,
+      })),
+    };
+  }
+
+  private buildQueriesFilters(queries: QueriesGetAll) {
+    const where = {
+      [Op.and]: [],
+    };
+    for (const query of Object.keys(queries) as []) {
+      if (queries[query]) {
+        switch (query) {
+          case "q":
+            where[Op.and].push({
+              [Op.or]: [{ name: { [Op.iLike]: `%${queries.q}%` } }],
+            });
+            break;
+          case "GroupId":
+            where[Op.and].push({
+              "$Group.id$": { [Op.eq]: queries.GroupId },
+            });
+            break;
+          case "CompanyId":
+            where[Op.and].push({
+              "$Group.Company.id$": { [Op.eq]: queries.CompanyId },
+            });
+            break;
+          default:
+            break;
+        }
+      }
+    }
+
+    return where as WhereOptions;
+  }
   async getAllByGroupId(GroupId: string): Promise<Branch[]> {
     return await this.branchBackOfficeRepository.getAllByGroupId(GroupId);
   }

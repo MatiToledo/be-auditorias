@@ -2,12 +2,14 @@ import { UUID } from "crypto";
 import { CreationOptional, DataTypes, Model } from "sequelize";
 import { sequelize } from "../DB";
 import { Company } from "./company";
+import { Branch } from "./branch";
 
 export class Group extends Model {
   declare id: CreationOptional<UUID>;
   declare name: string;
   declare CompanyId: UUID;
   declare Company: Company;
+  declare Branches: Branch[];
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
