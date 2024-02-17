@@ -2,6 +2,7 @@ import { Auth } from "./auth";
 import { AuthBO } from "./back_office/auth";
 import { UserBO } from "./back_office/user";
 import { Branch } from "./branch";
+import { CashRegister } from "./cash_register";
 import { Company } from "./company";
 import { Group } from "./group";
 import { RegisterBar } from "./register_bar";
@@ -63,6 +64,9 @@ TreasuryNightRetirementFinish.belongsTo(Branch);
 
 Branch.hasMany(TreasuryCentral);
 TreasuryCentral.belongsTo(Branch);
+
+Branch.hasMany(CashRegister);
+CashRegister.belongsTo(Branch);
 
 export {
   Auth,

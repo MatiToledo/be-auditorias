@@ -7,7 +7,9 @@ import RegisterTicketRouter from "./register_ticket";
 import RegisterTicketClosureRouter from "./register_ticket_closure";
 import CompanyRouter from "./company";
 import TreasuryNightRetirementRouter from "./treasury_night_retirement";
+import TreasuryNightExpenseRouter from "./treasury_night_expense";
 import TreasuryNightRetirementFinishRouter from "./treasury_night_retirement_finish";
+import CashRegisterRouter from "./cash_register";
 const router = express.Router();
 
 router.use("/auth", AuthRouter);
@@ -22,5 +24,7 @@ router.use(
   "/treasury_night_retirement_finish",
   TreasuryNightRetirementFinishRouter
 );
+router.use("/treasury_night_expense", TreasuryNightExpenseRouter);
+router.use("/cash_register", CashRegisterRouter);
 
 export default router;

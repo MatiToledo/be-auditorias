@@ -1,22 +1,21 @@
+import { date } from "yup";
 import { UUID } from "crypto";
 import { CreationOptional, DataTypes, Model } from "sequelize";
 import { sequelize } from "../DB";
 import { Branch } from "./branch";
 
-export class TreasuryNightExpense extends Model {
+export class CashRegister extends Model {
   declare id: CreationOptional<UUID>;
-  declare concept: string;
-  declare description: string;
-  declare quantity: number;
-  declare unit_price: number;
-  declare total: number;
+  declare actual_amount: number;
+  declare theoretical_amount: number;
+  declare difference: number;
   declare BranchId: UUID;
   declare Branch: Branch;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
 
-TreasuryNightExpense.init(
+CashRegister.init(
   {
     id: {
       type: DataTypes.UUID,
@@ -27,26 +26,18 @@ TreasuryNightExpense.init(
       type: DataTypes.DATE,
       allowNull: false,
     },
-    concept: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    description: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    quantity: {
+    actual_amount: {
       type: DataTypes.BIGINT,
       allowNull: false,
     },
-    unit_price: {
+    theoretical_amount: {
       type: DataTypes.BIGINT,
       allowNull: false,
     },
-    total: {
+    difference: {
       type: DataTypes.BIGINT,
       allowNull: false,
     },
   },
-  { sequelize, modelName: "TreasuryNightExpense" }
+  { sequelize, modelName: "CashRegister" }
 );
