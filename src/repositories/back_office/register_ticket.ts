@@ -1,6 +1,6 @@
-import { Transaction } from "sequelize";
+import { Transaction, WhereOptions } from "sequelize";
 import { IRegisterTicketBackOfficeRepository } from "../../interfaces/back_office/register_ticket";
-import { RegisterTicket } from "../../models";
+import { Branch, Company, Group, RegisterTicket } from "../../models";
 
 export class RegisterTicketBackOfficeRepository
   implements IRegisterTicketBackOfficeRepository
@@ -16,6 +16,36 @@ export class RegisterTicketBackOfficeRepository
     } catch (error) {
       console.error(error);
       throw new Error(`REGISTER_TICKETS_NOT_CREATED`);
+    }
+  }
+
+  async getAll(
+    where: WhereOptions,
+    pagination: { offset: number; limit: number }
+  ): Promise<{ rows: RegisterTicket[]; count: number }> {
+    try {
+      return await RegisterTicket.findAndCountAll({
+        where,
+        include: [
+          {
+            model: Branch,
+            required: true,
+            include: [
+              {
+                model: Group,
+                required: true,
+                include: [{ model: Company, required: true }],
+              },
+            ],
+          },
+        ],
+        distinct: true,
+        limit: pagination.limit,
+        offset: pagination.offset,
+      });
+    } catch (error) {
+      console.error(error);
+      throw new Error(`REGISTER_BARS_NOT_FOUND`);
     }
   }
 }

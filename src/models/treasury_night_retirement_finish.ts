@@ -3,12 +3,12 @@ import { CreationOptional, DataTypes, Model } from "sequelize";
 import { sequelize } from "../DB";
 import { Branch } from "./branch";
 
-export enum TreasuryNightRevenueTypeEnum {
+export enum TreasuryNightRetirementTypeEnum {
   TICKET = "ticket",
   BAR = "bar",
 }
 
-export class TreasuryNightRevenue extends Model {
+export class TreasuryNightRetirementFinish extends Model {
   declare id: CreationOptional<UUID>;
   declare tickets_men: number;
   declare tickets_woman: number;
@@ -20,7 +20,7 @@ export class TreasuryNightRevenue extends Model {
   public readonly updatedAt!: Date;
 }
 
-TreasuryNightRevenue.init(
+TreasuryNightRetirementFinish.init(
   {
     id: {
       type: DataTypes.UUID,
@@ -30,27 +30,31 @@ TreasuryNightRevenue.init(
     type: {
       type: DataTypes.ENUM,
       values: [
-        TreasuryNightRevenueTypeEnum.TICKET,
-        TreasuryNightRevenueTypeEnum.BAR,
+        TreasuryNightRetirementTypeEnum.TICKET,
+        TreasuryNightRetirementTypeEnum.BAR,
       ],
       allowNull: false,
     },
-    tickets_men: {
+    date: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    expenses: {
       type: DataTypes.BIGINT,
       allowNull: true,
     },
-    tickets_woman: {
+    postnet: {
       type: DataTypes.BIGINT,
       allowNull: true,
     },
-    ticets_total: {
+    transfers: {
       type: DataTypes.BIGINT,
       allowNull: true,
     },
-    total_cash_rendered: {
+    amount: {
       type: DataTypes.BIGINT,
       allowNull: true,
     },
   },
-  { sequelize, modelName: "TreasuryNightRevenue" }
+  { sequelize, modelName: "TreasuryNightRetirementFinish" }
 );

@@ -6,6 +6,7 @@ import { UserBackOfficeValidate } from "../../middlewares/validators/back_office
 const router = express.Router();
 const userBackOfficeController = new UserBackOfficeController();
 
+router.get("/me", authAdminMiddleware, userBackOfficeController.getMe);
 router.get(
   "/all",
   authAdminMiddleware,

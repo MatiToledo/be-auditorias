@@ -10,7 +10,8 @@ import { RegisterTicket } from "./register_ticket";
 import { RegisterTicketClosure } from "./register_ticket_closure";
 import { TreasuryCentral } from "./treasury_central";
 import { TreasuryNightExpense } from "./treasury_night_expense";
-import { TreasuryNightRevenue } from "./treasury_night_revenue";
+import { TreasuryNightRetirement } from "./treasury_night_retirement";
+import { TreasuryNightRetirementFinish } from "./treasury_night_retirement_finish";
 import { User } from "./user";
 
 Auth.hasOne(User);
@@ -54,8 +55,11 @@ RegisterTicketClosure.belongsTo(RegisterTicket);
 Branch.hasMany(TreasuryNightExpense);
 TreasuryNightExpense.belongsTo(Branch);
 
-Branch.hasMany(TreasuryNightRevenue);
-TreasuryNightRevenue.belongsTo(Branch);
+Branch.hasMany(TreasuryNightRetirement);
+TreasuryNightRetirement.belongsTo(Branch);
+
+Branch.hasMany(TreasuryNightRetirementFinish);
+TreasuryNightRetirementFinish.belongsTo(Branch);
 
 Branch.hasMany(TreasuryCentral);
 TreasuryCentral.belongsTo(Branch);
@@ -74,5 +78,6 @@ export {
   RegisterTicket,
   TreasuryCentral,
   TreasuryNightExpense,
-  TreasuryNightRevenue,
+  TreasuryNightRetirement,
+  TreasuryNightRetirementFinish,
 };

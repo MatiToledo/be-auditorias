@@ -11,7 +11,9 @@ import { UUID } from "crypto";
 
 export class UserBackOfficeService implements IUserBackOfficeService {
   private userBackOfficeRepository = new UserBackOfficeRepository();
-
+  async getMe(id: UUID): Promise<UserBO> {
+    return await this.userBackOfficeRepository.findById(id);
+  }
   async getAll(
     queries: QueriesGetAll
   ): Promise<{ rows: AllUser[]; count: number }> {

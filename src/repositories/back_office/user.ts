@@ -1,8 +1,9 @@
 import { UUID } from "crypto";
-import { Op, Transaction, WhereOptions } from "sequelize";
-import { UserBO } from "../../models/back_office/user";
+import { Op, Sequelize, Transaction, WhereOptions } from "sequelize";
 import { IUserBackOfficeRepository } from "../../interfaces/back_office/user";
-import { User, Auth, Branch, Group, Company } from "../../models";
+import { Auth, AuthBO, Branch, Company, Group, User } from "../../models";
+import { UserBO } from "../../models/back_office/user";
+import sequelize from "sequelize";
 
 export class UserBackOfficeRepository implements IUserBackOfficeRepository {
   async create(
@@ -19,6 +20,28 @@ export class UserBackOfficeRepository implements IUserBackOfficeRepository {
     }
   }
 
+  async findById(id: UUID): Promise<UserBO> {
+    try {
+      return await UserBO.findOne({
+        where: { id },
+        include: [
+          {
+            model: AuthBO,
+            attributes: [],
+          },
+        ],
+        attributes: [
+          "id",
+          "fullName",
+          [Sequelize.literal('"AuthBO"."email"'), "email"],
+        ],
+        raw: true, // Indicamos que deseamos
+      });
+    } catch (error) {
+      console.error(error);
+      throw new Error(`USER_NOT_FOUND`);
+    }
+  }
   async findByAuthId(id: UUID): Promise<UserBO> {
     try {
       return await UserBO.findOne({
