@@ -29,7 +29,7 @@ RegisterBarClosure.init(
       primaryKey: true,
     },
     date: {
-      type: DataTypes.DATE,
+      type: DataTypes.DATEONLY,
       allowNull: false,
     },
     retirement_total: {

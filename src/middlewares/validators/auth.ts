@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { Schema, mixed, number, object, string } from "yup";
+import { Schema, mixed, object, string, number } from "yup";
 import { UserRoleEnum } from "../../models/user";
 
 export class AuthValidate {
@@ -35,6 +35,7 @@ export class AuthValidate {
 
       if (validate) return next();
     } catch (error) {
+      console.error(error);
       return res.status(400).json({ field: "body", message: "BAD_REQUEST" });
     }
   }
@@ -51,6 +52,7 @@ export class AuthValidate {
       const validate = await schema.validate({ body: req.body });
       if (validate) return next();
     } catch (error) {
+      console.error(error);
       return res.status(400).json({ field: "body", message: error.message });
     }
   }

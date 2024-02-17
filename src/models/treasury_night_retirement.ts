@@ -4,18 +4,16 @@ import { sequelize } from "../DB";
 import { Branch } from "./branch";
 
 export enum TreasuryNightRetirementTypeEnum {
-  TICKET = "ticket",
-  BAR = "bar",
+  TICKET = "register_ticket",
+  BAR = "register_bar",
 }
 
 export class TreasuryNightRetirement extends Model {
   declare id: CreationOptional<UUID>;
-  declare tickets_men: number;
-  declare tickets_woman: number;
-  declare tickets_total: number;
-  declare total_cash_rendered: number;
-  declare BranchId: UUID;
-  declare Branch: Branch;
+  declare type: TreasuryNightRetirementTypeEnum;
+  declare date: Date;
+  declare amount: number;
+
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
@@ -36,16 +34,8 @@ TreasuryNightRetirement.init(
       allowNull: false,
     },
     date: {
-      type: DataTypes.DATE,
+      type: DataTypes.DATEONLY,
       allowNull: false,
-    },
-    tickets_men: {
-      type: DataTypes.BIGINT,
-      allowNull: true,
-    },
-    tickets_woman: {
-      type: DataTypes.BIGINT,
-      allowNull: true,
     },
     amount: {
       type: DataTypes.BIGINT,

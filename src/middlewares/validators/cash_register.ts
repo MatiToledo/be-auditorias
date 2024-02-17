@@ -7,7 +7,6 @@ export class CashRegisterValidate {
       body: object({
         date: string().required(),
         actual_amount: number().required(),
-        theoretical_amount: number().required(),
         BranchId: string().uuid().required(),
       })
         .noUnknown(true)
@@ -18,6 +17,7 @@ export class CashRegisterValidate {
 
       if (validate) return next();
     } catch (error) {
+      console.error(error);
       return res.status(400).json({ field: "body", message: "BAD_REQUEST" });
     }
   }

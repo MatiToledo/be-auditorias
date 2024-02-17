@@ -56,11 +56,17 @@ RegisterTicketClosure.belongsTo(RegisterTicket);
 Branch.hasMany(TreasuryNightExpense);
 TreasuryNightExpense.belongsTo(Branch);
 
-Branch.hasMany(TreasuryNightRetirement);
-TreasuryNightRetirement.belongsTo(Branch);
+RegisterBar.hasMany(TreasuryNightRetirement);
+TreasuryNightRetirement.belongsTo(RegisterBar);
 
-Branch.hasMany(TreasuryNightRetirementFinish);
-TreasuryNightRetirementFinish.belongsTo(Branch);
+RegisterTicket.hasMany(TreasuryNightRetirement);
+TreasuryNightRetirement.belongsTo(RegisterTicket);
+
+RegisterBar.hasMany(TreasuryNightRetirementFinish);
+TreasuryNightRetirementFinish.belongsTo(RegisterBar);
+
+RegisterTicket.hasMany(TreasuryNightRetirementFinish);
+TreasuryNightRetirementFinish.belongsTo(RegisterTicket);
 
 Branch.hasMany(TreasuryCentral);
 TreasuryCentral.belongsTo(Branch);

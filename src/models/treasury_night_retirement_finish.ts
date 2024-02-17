@@ -3,9 +3,9 @@ import { CreationOptional, DataTypes, Model } from "sequelize";
 import { sequelize } from "../DB";
 import { Branch } from "./branch";
 
-export enum TreasuryNightRetirementTypeEnum {
-  TICKET = "ticket",
-  BAR = "bar",
+export enum TreasuryNightRetirementFinishTypeEnum {
+  TICKET = "register_ticket",
+  BAR = "register_bar",
 }
 
 export class TreasuryNightRetirementFinish extends Model {
@@ -30,13 +30,13 @@ TreasuryNightRetirementFinish.init(
     type: {
       type: DataTypes.ENUM,
       values: [
-        TreasuryNightRetirementTypeEnum.TICKET,
-        TreasuryNightRetirementTypeEnum.BAR,
+        TreasuryNightRetirementFinishTypeEnum.TICKET,
+        TreasuryNightRetirementFinishTypeEnum.BAR,
       ],
       allowNull: false,
     },
     date: {
-      type: DataTypes.DATE,
+      type: DataTypes.DATEONLY,
       allowNull: false,
     },
     expenses: {

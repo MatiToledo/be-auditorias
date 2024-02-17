@@ -1,4 +1,3 @@
-import { date } from "yup";
 import { UUID } from "crypto";
 import { CreationOptional, DataTypes, Model } from "sequelize";
 import { sequelize } from "../DB";
@@ -7,6 +6,7 @@ import { Branch } from "./branch";
 export class CashRegister extends Model {
   declare id: CreationOptional<UUID>;
   declare actual_amount: number;
+  declare date: Date;
   declare theoretical_amount: number;
   declare difference: number;
   declare BranchId: UUID;
@@ -23,7 +23,7 @@ CashRegister.init(
       primaryKey: true,
     },
     date: {
-      type: DataTypes.DATE,
+      type: DataTypes.DATEONLY,
       allowNull: false,
     },
     actual_amount: {

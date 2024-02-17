@@ -17,7 +17,8 @@ export class TreasuryNightRetirementFinishValidate {
         postnet: number().required(),
         transfers: number().required(),
         amount: number().required(),
-        BranchId: string().uuid().required(),
+        RegisterBarId: string().uuid().optional(),
+        RegisterTicketId: string().uuid().optional(),
       })
         .noUnknown(true)
         .strict(true),
@@ -27,6 +28,7 @@ export class TreasuryNightRetirementFinishValidate {
 
       if (validate) return next();
     } catch (error) {
+      console.error(error);
       return res.status(400).json({ field: "body", message: "BAD_REQUEST" });
     }
   }

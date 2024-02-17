@@ -1,4 +1,5 @@
 import "dotenv/config";
+require("pg").defaults.parseInt8 = true;
 import { Options, Sequelize } from "sequelize";
 
 const sequelizeOptions: Options = {
