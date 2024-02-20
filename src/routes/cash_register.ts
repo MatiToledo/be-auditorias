@@ -13,4 +13,11 @@ router.post(
   cashRegisterController.create
 );
 
+router.post(
+  "/check",
+  authMiddleware,
+  CashRegisterValidate.checkIfExistByDayAndBranchId,
+  cashRegisterController.checkIfExistByDayAndBranchId
+);
+
 export default router;

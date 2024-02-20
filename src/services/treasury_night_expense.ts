@@ -1,3 +1,4 @@
+import { UUID } from "crypto";
 import { ITreasuryNightExpenseService } from "../interfaces/treasury_night_expense";
 import { TreasuryNightExpense } from "../models";
 import { TreasuryNightExpenseRepository } from "../repositories/treasury_night_expense";
@@ -13,5 +14,14 @@ export class TreasuryNightExpenseService
       ...body,
       total: body.quantity * body.unit_price,
     });
+  }
+
+  async getAllByBranchAndDateId(conditions: {
+    BranchId: UUID;
+    date: Date;
+  }): Promise<TreasuryNightExpense[]> {
+    return await this.treasuryNightExpenseRepository.getAllByBranchAndDateId(
+      conditions
+    );
   }
 }

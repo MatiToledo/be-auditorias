@@ -5,10 +5,16 @@ import { Branch } from "./branch";
 
 export class CashRegister extends Model {
   declare id: CreationOptional<UUID>;
-  declare actual_amount: number;
   declare date: Date;
-  declare theoretical_amount: number;
+  declare amount_actual: number;
+  declare amount_theoretical: number;
+  declare retirements_total: number;
+  declare retirements_finish_total: number;
+  declare retirements_finish_expenses_total: number;
+  declare treasury_expenses_total: number;
+  declare expenses_total: number;
   declare difference: number;
+  declare cash_total: number;
   declare BranchId: UUID;
   declare Branch: Branch;
   public readonly createdAt!: Date;
@@ -26,14 +32,39 @@ CashRegister.init(
       type: DataTypes.DATEONLY,
       allowNull: false,
     },
-    actual_amount: {
+    amount_actual: {
       type: DataTypes.BIGINT,
       allowNull: false,
     },
-    theoretical_amount: {
+    amount_theoretical: {
       type: DataTypes.BIGINT,
       allowNull: false,
     },
+    retirements_total: {
+      type: DataTypes.BIGINT,
+      allowNull: false,
+    },
+    retirements_finish_total: {
+      type: DataTypes.BIGINT,
+      allowNull: false,
+    },
+    retirements_finish_expenses_total: {
+      type: DataTypes.BIGINT,
+      allowNull: false,
+    },
+    treasury_expenses_total: {
+      type: DataTypes.BIGINT,
+      allowNull: false,
+    },
+    expenses_total: {
+      type: DataTypes.BIGINT,
+      allowNull: false,
+    },
+    cash_total: {
+      type: DataTypes.BIGINT,
+      allowNull: false,
+    },
+
     difference: {
       type: DataTypes.BIGINT,
       allowNull: false,

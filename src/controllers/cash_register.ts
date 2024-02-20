@@ -17,4 +17,20 @@ export class CashRegisterController {
       res.status(400).json(responseHandler(false, error.message));
     }
   };
+
+  checkIfExistByDayAndBranchId = async (
+    req: AuthenticatedRequest,
+    res: Response
+  ) => {
+    try {
+      const result =
+        await this.cashRegisterService.checkIfExistByDayAndBranchId(req.body);
+      res
+        .status(200)
+        .json(responseHandler(true, "CASH_REGISTER_FOUND", result));
+    } catch (error) {
+      console.error(error);
+      res.status(400).json(responseHandler(false, error.message));
+    }
+  };
 }

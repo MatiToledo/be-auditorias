@@ -1,5 +1,6 @@
+import { UUID } from "crypto";
 import { ITreasuryNightExpenseRepository } from "../interfaces/treasury_night_expense";
-import { TreasuryNightExpense } from "../models";
+import { Branch, TreasuryNightExpense } from "../models";
 
 export class TreasuryNightExpenseRepository
   implements ITreasuryNightExpenseRepository
@@ -12,6 +13,25 @@ export class TreasuryNightExpenseRepository
     } catch (error) {
       console.error(error);
       throw new Error(`TREASURY_NIGHT_EXPENSE_NOT_CREATED`);
+    }
+  }
+
+  async getAllByBranchAndDateId(conditions: {
+    BranchId: UUID;
+    date: Date;
+  }): Promise<TreasuryNightExpense[]> {
+    try {
+      const result = await TreasuryNightExpense.findAll({
+        // attributes: ["id", "amount"],
+        where: {
+          date: conditions.date,
+          BranchId: conditions.BranchId,
+        },
+      });
+      return result;
+    } catch (error) {
+      console.error(error);
+      throw new Error(`TREASURY_NIGHT_EXPENSES_NOT_FOUND`);
     }
   }
 }

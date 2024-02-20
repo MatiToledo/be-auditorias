@@ -10,12 +10,12 @@ export enum TreasuryNightRetirementFinishTypeEnum {
 
 export class TreasuryNightRetirementFinish extends Model {
   declare id: CreationOptional<UUID>;
-  declare tickets_men: number;
-  declare tickets_woman: number;
-  declare tickets_total: number;
-  declare total_cash_rendered: number;
-  declare BranchId: UUID;
-  declare Branch: Branch;
+  declare type: TreasuryNightRetirementFinishTypeEnum;
+  declare date: Date;
+  declare expenses: number;
+  declare postnet: number;
+  declare transfers: number;
+  declare amount: number;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }

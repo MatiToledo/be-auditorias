@@ -10,4 +10,20 @@ export class CashRegisterRepository implements ICashRegisterRepository {
       throw new Error(`CASH_REGISTER_NOT_CREATED`);
     }
   }
+
+  async checkIfExistByDayAndBranchId(
+    data: Partial<CashRegister>
+  ): Promise<CashRegister> {
+    try {
+      return await CashRegister.findOne({
+        where: {
+          date: data.date,
+          BranchId: data.BranchId,
+        },
+      });
+    } catch (error) {
+      console.error(error);
+      throw new Error(`CASH_REGISTER_NOT_FOUND`);
+    }
+  }
 }
