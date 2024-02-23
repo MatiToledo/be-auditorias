@@ -16,6 +16,8 @@ export class TreasuryNightRetirementFinish extends Model {
   declare postnet: number;
   declare transfers: number;
   declare amount: number;
+  declare RegisterBarId: UUID;
+  declare RegisterTicketId: UUID;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }

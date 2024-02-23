@@ -19,5 +19,11 @@ router.post(
   CashRegisterValidate.checkIfExistByDayAndBranchId,
   cashRegisterController.checkIfExistByDayAndBranchId
 );
+router.get(
+  "/movements",
+  authMiddleware,
+  CashRegisterValidate.getMovementsByDayAndBranchId,
+  cashRegisterController.getMovementsByDayAndBranchId
+);
 
 export default router;

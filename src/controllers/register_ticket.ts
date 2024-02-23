@@ -3,10 +3,11 @@ import { responseHandler } from "../libs/response_handler";
 import { RegisterBarService } from "../services/register_bar";
 import { UUID } from "crypto";
 import { RegisterTicketService } from "../services/register_ticket";
+import { AuthenticatedRequest } from "../middlewares";
 export class RegisterTicketController {
   private registerTicketService = new RegisterTicketService();
 
-  findByBranchId = async (req: Request, res: Response) => {
+  findByBranchId = async (req: AuthenticatedRequest, res: Response) => {
     try {
       const result = await this.registerTicketService.findByBranchId(
         req.params.BranchId as UUID
