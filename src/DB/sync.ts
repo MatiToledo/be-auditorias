@@ -345,7 +345,7 @@ export async function createBulkDev() {
     );
     await TreasuryNightRetirementFinish.bulkCreate(
       [
-        Array.from({ length: 2 }).map(() => ({
+        Array.from({ length: 1 }).map(() => ({
           date: new Date(),
           expenses: Math.floor(Math.random() * 1000) + 1,
           type: "register_ticket",
@@ -354,7 +354,7 @@ export async function createBulkDev() {
           amount: Math.floor(Math.random() * 1000) + 1,
           RegisterTicketId: register_tickets[0].id,
         })),
-        Array.from({ length: 2 }).map(() => ({
+        Array.from({ length: 1 }).map(() => ({
           date: new Date(),
           expenses: Math.floor(Math.random() * 1000) + 1,
           postnet: Math.floor(Math.random() * 1000) + 1,
@@ -363,7 +363,7 @@ export async function createBulkDev() {
           type: "register_bar",
           RegisterBarId: register_bars[0].id,
         })),
-        Array.from({ length: 3 }).map(() => ({
+        Array.from({ length: 1 }).map(() => ({
           date: new Date(),
           expenses: Math.floor(Math.random() * 1000) + 1,
           postnet: Math.floor(Math.random() * 1000) + 1,
@@ -372,7 +372,7 @@ export async function createBulkDev() {
           amount: Math.floor(Math.random() * 1000) + 1,
           RegisterTicketId: register_tickets[1].id,
         })),
-        Array.from({ length: 3 }).map(() => ({
+        Array.from({ length: 1 }).map(() => ({
           date: new Date(),
           expenses: Math.floor(Math.random() * 1000) + 1,
           postnet: Math.floor(Math.random() * 1000) + 1,
@@ -456,20 +456,44 @@ export async function createBulkDev() {
       ].flat()
     );
     const auth = await Auth.create({
-      email: "mati@gmail.com",
-      password: encryptPassword("123"),
-    });
-    const authBO = await AuthBO.create({
-      email: "mati@gmail.com",
+      email: "cajero@gmail.com",
       password: encryptPassword("123"),
     });
     await User.create({
-      fullName: "Matias Toledo",
+      fullName: "Cajero General",
       dni: 42336523,
       phone: 3518048259,
       role: "register",
       BranchId: branchs[0].id,
       AuthId: auth.id,
+    });
+    const authtn = await Auth.create({
+      email: "tn@gmail.com",
+      password: encryptPassword("123"),
+    });
+    await User.create({
+      fullName: "Tesorero Nocturno",
+      dni: 42336523,
+      phone: 3518048259,
+      role: "treasury_night",
+      BranchId: branchs[0].id,
+      AuthId: authtn.id,
+    });
+    const autht = await Auth.create({
+      email: "tesorero@gmail.com",
+      password: encryptPassword("123"),
+    });
+    await User.create({
+      fullName: "Tesorero General",
+      dni: 42336523,
+      phone: 3518048259,
+      role: "treasury",
+      BranchId: branchs[0].id,
+      AuthId: autht.id,
+    });
+    const authBO = await AuthBO.create({
+      email: "mati@gmail.com",
+      password: encryptPassword("123"),
     });
     await UserBO.create({
       fullName: "Matias Toledo",

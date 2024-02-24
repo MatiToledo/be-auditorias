@@ -8,6 +8,7 @@ export enum TreasuryCentralTypeEnum {
 }
 export class TreasuryCentral extends Model {
   declare id: CreationOptional<UUID>;
+  declare date: Date;
   declare type: TreasuryCentralTypeEnum;
   declare payment_method: string;
   declare concept: string;
@@ -25,6 +26,10 @@ TreasuryCentral.init(
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
+    },
+    date: {
+      type: DataTypes.DATEONLY,
+      allowNull: false,
     },
     type: {
       type: DataTypes.ENUM,

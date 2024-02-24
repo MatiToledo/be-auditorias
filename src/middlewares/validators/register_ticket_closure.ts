@@ -42,7 +42,7 @@ export class RegisterTicketClosureValidate {
     const schema: Schema = object({
       body: object({
         date: string().required(),
-        RegisterBarId: string().uuid().required(),
+        RegisterTicketId: string().uuid().required(),
       })
         .noUnknown(true)
         .strict(true),
