@@ -13,4 +13,25 @@ router.post(
   treasuryCentralController.create
 );
 
+router.put(
+  "/",
+  authMiddleware,
+  TreasuryCentralValidate.update,
+  treasuryCentralController.update
+);
+
+router.delete(
+  "/:id",
+  authMiddleware,
+  TreasuryCentralValidate.delete,
+  treasuryCentralController.delete
+);
+
+router.get(
+  "/all/:BranchId",
+  authMiddleware,
+  // TreasuryCentralValidate.create,
+  treasuryCentralController.getAllByBranchId
+);
+
 export default router;

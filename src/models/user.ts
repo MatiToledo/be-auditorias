@@ -4,12 +4,12 @@ import { sequelize } from "../DB";
 import { Auth } from "./auth";
 import { Branch } from "./branch";
 export enum UserRoleEnum {
-  Register = "register",
-  RegisterBarClosure = "registerBarClosure",
-  RegisterTicketClosure = "registerTicketClosure",
+  REGISTER = "register",
+  REGISTER_BAR_CLOSURE = "register_bar_closure",
+  REGISTER_TICKET_CLOSURE = "register_ticket_closure",
   TREASURY = "treasury",
   TREASURY_NIGHT = "treasury_night",
-  TreasuryCentral = "TreasuryCentral",
+  TREASURY_CENTRAL = "treasury_central",
 }
 export class User extends Model {
   declare id: CreationOptional<UUID>;
@@ -52,11 +52,11 @@ User.init(
     role: {
       type: DataTypes.ENUM,
       values: [
-        UserRoleEnum.Register,
-        UserRoleEnum.RegisterBarClosure,
-        UserRoleEnum.RegisterTicketClosure,
+        UserRoleEnum.REGISTER,
+        UserRoleEnum.REGISTER_BAR_CLOSURE,
+        UserRoleEnum.REGISTER_TICKET_CLOSURE,
         UserRoleEnum.TREASURY,
-        UserRoleEnum.TreasuryCentral,
+        UserRoleEnum.TREASURY_CENTRAL,
         UserRoleEnum.TREASURY_NIGHT,
       ],
       allowNull: false,

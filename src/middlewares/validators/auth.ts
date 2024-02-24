@@ -17,12 +17,12 @@ export class AuthValidate {
           dni: number().required(),
           role: mixed<UserRoleEnum>()
             .oneOf([
-              UserRoleEnum.Register,
-              UserRoleEnum.RegisterBarClosure,
-              UserRoleEnum.RegisterTicketClosure,
+              UserRoleEnum.REGISTER,
+              UserRoleEnum.REGISTER_BAR_CLOSURE,
+              UserRoleEnum.REGISTER_TICKET_CLOSURE,
               UserRoleEnum.TREASURY,
               UserRoleEnum.TREASURY_NIGHT,
-              UserRoleEnum.TreasuryCentral,
+              UserRoleEnum.TREASURY_CENTRAL,
             ])
             .required(),
         }),

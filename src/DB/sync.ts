@@ -487,7 +487,7 @@ export async function createBulkDev() {
       fullName: "Tesorero General",
       dni: 42336523,
       phone: 3518048259,
-      role: "treasury",
+      role: "treasury_central",
       BranchId: branchs[0].id,
       AuthId: autht.id,
     });
