@@ -2,6 +2,7 @@ import { UUID } from "crypto";
 import {
   ITreasuryCentralService,
   TreasuryCentralMovements,
+  TreasuryCentralQuery,
 } from "../interfaces/treasury_central";
 import { TreasuryCentral } from "../models";
 import { TreasuryCentralRepository } from "../repositories/treasury_central";
@@ -20,9 +21,13 @@ export class TreasuryCentralService implements ITreasuryCentralService {
     return deleted === 1;
   }
 
-  async getAllByBranchId(BranchId: UUID): Promise<TreasuryCentralMovements[]> {
+  async getAllByBranchId(
+    BranchId: UUID,
+    queries: TreasuryCentralQuery
+  ): Promise<TreasuryCentralMovements[]> {
     const movements = await this.treasuryCentralRepository.getAllByBranchId(
-      BranchId
+      BranchId,
+      queries
     );
     let balance = 0;
     const movementsWithBalance: TreasuryCentralMovements[] = movements.map(

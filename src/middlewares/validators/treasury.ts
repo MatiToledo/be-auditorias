@@ -65,4 +65,26 @@ export class TreasuryCentralValidate {
       return res.status(400).json({ field: "params", message: "BAD_REQUEST" });
     }
   }
+  static async getAllByBranchId(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) {
+    const schema: Schema = object({
+      query: object({
+        startDate: string().required(),
+        endDate: string().required(),
+      })
+        .noUnknown(true)
+        .strict(true),
+    });
+    try {
+      const validate = await schema.validate({ query: req.query });
+
+      if (validate) return next();
+    } catch (error) {
+      console.error(error);
+      return res.status(400).json({ field: "query", message: "BAD_REQUEST" });
+    }
+  }
 }

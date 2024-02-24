@@ -30,7 +30,7 @@ router.delete(
 router.get(
   "/all/:BranchId",
   authMiddleware,
-  // TreasuryCentralValidate.create,
+  TreasuryCentralValidate.getAllByBranchId,
   treasuryCentralController.getAllByBranchId
 );
 

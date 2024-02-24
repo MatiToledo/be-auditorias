@@ -13,6 +13,10 @@ export interface ITreasuryCentralRepository {
   create(data: Partial<TreasuryCentral>): Promise<TreasuryCentral>;
 }
 
+export interface TreasuryCentralQuery {
+  startDate?: Date;
+  endDate?: Date;
+}
 export interface TreasuryCentralMovements {
   id: UUID;
   date: Date;

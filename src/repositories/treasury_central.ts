@@ -1,6 +1,10 @@
 import { UUID } from "crypto";
-import { ITreasuryCentralRepository } from "../interfaces/treasury_central";
+import {
+  ITreasuryCentralRepository,
+  TreasuryCentralQuery,
+} from "../interfaces/treasury_central";
 import { TreasuryCentral } from "../models";
+import { Op } from "sequelize";
 
 export class TreasuryCentralRepository implements ITreasuryCentralRepository {
   async create(data: Partial<TreasuryCentral>): Promise<TreasuryCentral> {
@@ -33,10 +37,18 @@ export class TreasuryCentralRepository implements ITreasuryCentralRepository {
     }
   }
 
-  async getAllByBranchId(BranchId: UUID): Promise<TreasuryCentral[]> {
+  async getAllByBranchId(
+    BranchId: UUID,
+    queries: TreasuryCentralQuery
+  ): Promise<TreasuryCentral[]> {
     try {
       return await TreasuryCentral.findAll({
-        where: { BranchId },
+        where: {
+          BranchId,
+          date: {
+            [Op.between]: [queries.startDate, queries.endDate],
+          },
+        },
         order: [["createdAt", "ASC"]],
       });
     } catch (error) {

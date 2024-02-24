@@ -47,7 +47,8 @@ export class TreasuryCentralController {
     try {
       const { BranchId } = req.params;
       const result = await this.treasuryCentralService.getAllByBranchId(
-        BranchId as UUID
+        BranchId as UUID,
+        req.query
       );
       res
         .status(200)
