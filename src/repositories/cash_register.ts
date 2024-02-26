@@ -1,4 +1,4 @@
-import { ICashRegisterRepository } from "../interfaces/casg_register";
+import { ICashRegisterRepository } from "../interfaces/cash_register";
 import { CashRegister } from "../models/cash_register";
 
 export class CashRegisterRepository implements ICashRegisterRepository {

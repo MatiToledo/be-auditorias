@@ -1,5 +1,5 @@
 import { UUID } from "crypto";
-import { ICashRegisterService } from "../interfaces/casg_register";
+import { ICashRegisterService } from "../interfaces/cash_register";
 import {
   RegisterBar,
   RegisterTicket,

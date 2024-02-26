@@ -1,3 +1,4 @@
+import { Concept } from "./concepts";
 import { Auth } from "./auth";
 import { AuthBO } from "./back_office/auth";
 import { UserBO } from "./back_office/user";
@@ -88,6 +89,7 @@ export {
   RegisterTicket,
   TreasuryCentral,
   TreasuryNightExpense,
+  Concept,
   TreasuryNightRetirement,
   TreasuryNightRetirementFinish,
 };

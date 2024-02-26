@@ -6,6 +6,7 @@ import { Branch } from "../models/branch";
 import {
   Auth,
   AuthBO,
+  Concept,
   RegisterBar,
   RegisterTicket,
   TreasuryNightExpense,
@@ -500,6 +501,530 @@ export async function createBulkDev() {
       role: "admin",
       AuthBOId: authBO.id,
     });
+    await Concept.bulkCreate([
+      {
+        name: "CARGAS FISCALES",
+        level: 3,
+      },
+      {
+        name: "COMPRAS",
+        level: 3,
+      },
+      {
+        name: "COSTO LABORAL",
+        level: 3,
+      },
+      {
+        name: "GASTOS OPERATAVIOS",
+        level: 3,
+      },
+      {
+        name: "INGRESOS",
+        level: 3,
+      },
+      {
+        name: "MANTENIMIENTO Y REPARACIONES",
+        level: 3,
+      },
+      {
+        name: "OTROS EGRESOS",
+        level: 3,
+      },
+      {
+        name: "OTROS INGRESOS",
+        level: 3,
+      },
+      {
+        name: "IMPUESTO MUNICIPAL",
+        type: "CARGAS FISCALES",
+        level: 2,
+      },
+      {
+        name: "IMPUESTO NACIONAL",
+        type: "CARGAS FISCALES",
+        level: 2,
+      },
+      {
+        name: "IMPUESTOS",
+        type: "CARGAS FISCALES",
+        level: 2,
+      },
+      {
+        name: "PROVEEDORES",
+        type: "COMPRAS",
+        level: 2,
+      },
+      {
+        name: "PROVEEDORES BEBIDA",
+        type: "COMPRAS",
+        level: 2,
+      },
+      {
+        name: "PROVEEDORES COMIDA",
+        type: "COMPRAS",
+        level: 2,
+      },
+      {
+        name: "SUELDOS",
+        type: "COSTO LABORAL",
+        level: 2,
+      },
+      {
+        name: "SUELDOS JERARQUICOS",
+        type: "COSTO LABORAL",
+        level: 2,
+      },
+      {
+        name: "SUELDOS OPERATIVOS",
+        type: "COSTO LABORAL",
+        level: 2,
+      },
+      {
+        name: "ADMINISTRACION",
+        type: "GASTOS OPERATAVIOS",
+        level: 2,
+      },
+      {
+        name: "ALQUILERES EQUIPOS",
+        type: "GASTOS OPERATAVIOS",
+        level: 2,
+      },
+      {
+        name: "ALQUILERES INMOBILIARIOS",
+        type: "GASTOS OPERATAVIOS",
+        level: 2,
+      },
+      {
+        name: "GASTOS VARIOS",
+        type: "GASTOS OPERATAVIOS",
+        level: 2,
+      },
+      {
+        name: "SERVICIOS",
+        type: "GASTOS OPERATAVIOS",
+        level: 2,
+      },
+      {
+        name: "PAGOS EXTRAS",
+        type: "GASTOS OPERATAVIOS",
+        level: 2,
+      },
+      {
+        name: "PERMISOS",
+        type: "GASTOS OPERATAVIOS",
+        level: 2,
+      },
+      {
+        name: "PUBLICIDAD",
+        type: "GASTOS OPERATAVIOS",
+        level: 2,
+      },
+      {
+        name: "SERVICIOS",
+        type: "GASTOS OPERATAVIOS",
+        level: 2,
+      },
+      {
+        name: "MOVIMIENTOS CONTABLES",
+        type: "INGRESOS",
+        level: 2,
+      },
+      {
+        name: "MOVIMIENTOS CONTABLES",
+        type: "INGRESOS",
+        level: 2,
+      },
+      {
+        name: "MATERIALES MANTENIMIENTO",
+        type: "MANTENIMIENTO Y REPARACIONES",
+        level: 2,
+      },
+      {
+        name: "MO DE MANTENIMIENTO",
+        type: "MANTENIMIENTO Y REPARACIONES",
+        level: 2,
+      },
+      {
+        name: "INVERSION",
+        type: "OTROS EGRESOS",
+        level: 2,
+      },
+      {
+        name: "RETIRO UTILIDADES",
+        type: "OTROS EGRESOS",
+        level: 2,
+      },
+      {
+        name: "MOVIMIENTOS CONTABLES",
+        type: "OTROS EGRESOS",
+        level: 2,
+      },
+      {
+        name: "RETORNO",
+        type: "OTROS INGRESOS",
+        level: 2,
+      },
+      {
+        name: "MOVIMIENTOS CONTABLES",
+        type: "OTROS INGRESOS",
+        level: 2,
+      },
+      {
+        name: "MUNICIPALIDAD",
+        type: "IMPUESTO MUNICIPAL",
+        level: 1,
+      },
+      {
+        name: "AFIP ",
+        type: "IMPUESTO NACIONAL ",
+        level: 1,
+      },
+      {
+        name: "PLAN DE PAGO AFIP",
+        type: "IMPUESTO NACIONAL ",
+        level: 1,
+      },
+      {
+        name: "F931",
+        type: "IMPUESTO NACIONAL ",
+        level: 1,
+      },
+      {
+        name: "UTHGRA (SINDICATO)",
+        type: "IMPUESTO NACIONAL ",
+        level: 1,
+      },
+      {
+        name: "INGRESOS BRUTOS",
+        type: "IMPUESTO NACIONAL ",
+        level: 1,
+      },
+      {
+        name: "COSTO MERCADO PAGO",
+        type: "IMPUESTOS",
+        level: 1,
+      },
+      {
+        name: "DESCARTABLES",
+        type: "PROVEEDORES",
+        level: 1,
+      },
+      {
+        name: "PRODUCTOS DE LIMPIEZA",
+        type: "PROVEEDORES",
+        level: 1,
+      },
+      {
+        name: "MOSTO",
+        type: "PROVEEDORES BEBIDA",
+        level: 1,
+      },
+      {
+        name: "ALPES",
+        type: "PROVEEDORES BEBIDA",
+        level: 1,
+      },
+      {
+        name: "QUILMES",
+        type: "PROVEEDORES BEBIDA",
+        level: 1,
+      },
+      {
+        name: "COCA COLA",
+        type: "PROVEEDORES BEBIDA",
+        level: 1,
+      },
+      {
+        name: "ALO JAPON SRL",
+        type: "PROVEEDORES BEBIDA",
+        level: 1,
+      },
+      {
+        name: "ASD",
+        type: "PROVEEDORES BEBIDA",
+        level: 1,
+      },
+      {
+        name: "WAGGON SRL",
+        type: "PROVEEDORES COMIDA",
+        level: 1,
+      },
+      {
+        name: "SUELDOS COMPRAS",
+        type: "SUELDOS",
+        level: 1,
+      },
+      {
+        name: "SUELDOS SEGURIDAD",
+        type: "SUELDOS",
+        level: 1,
+      },
+      {
+        name: "PUBLICAS",
+        type: "SUELDOS",
+        level: 1,
+      },
+      {
+        name: "SUELDOS ENCARGADOS",
+        type: "SUELDOS JERARQUICOS",
+        level: 1,
+      },
+      {
+        name: "SUELDOS GERENTES",
+        type: "SUELDOS JERARQUICOS",
+        level: 1,
+      },
+      {
+        name: "SUELDOS SOCIOS",
+        type: "SUELDOS JERARQUICOS",
+        level: 1,
+      },
+      {
+        name: "SUELDOS BARRAS/SALON ",
+        type: "SUELDOS OPERATIVOS",
+        level: 1,
+      },
+      {
+        name: "SUELDOS COCINA",
+        type: "SUELDOS OPERATIVOS",
+        level: 1,
+      },
+      {
+        name: "SUELDOS TESORERIA NOCTURNA",
+        type: "SUELDOS OPERATIVOS",
+        level: 1,
+      },
+      {
+        name: "SUELDOS TESORERIA CENTRAL",
+        type: "SUELDOS OPERATIVOS",
+        level: 1,
+      },
+      {
+        name: "CONSULTORIA",
+        type: "ADMINISTRACION",
+        level: 1,
+      },
+      {
+        name: "ABOGADO",
+        type: "ADMINISTRACION",
+        level: 1,
+      },
+      {
+        name: "CONTADOR",
+        type: "ADMINISTRACION",
+        level: 1,
+      },
+      {
+        name: "AUDITORIA STOCK",
+        type: "ADMINISTRACION",
+        level: 1,
+      },
+      {
+        name: "HONORARIOS",
+        type: "ADMINISTRACION",
+        level: 1,
+      },
+      {
+        name: "ALQUILER SONIDO BASICO ",
+        type: "ALQUILERES EQUIPOS",
+        level: 1,
+      },
+      {
+        name: "ALQUILER LUCES BASICO",
+        type: "ALQUILERES EQUIPOS",
+        level: 1,
+      },
+      {
+        name: "ALQUILER SONIDO EXTRA",
+        type: "ALQUILERES EQUIPOS",
+        level: 1,
+      },
+      {
+        name: "ALQUILER LUCES EXTRA",
+        type: "ALQUILERES EQUIPOS",
+        level: 1,
+      },
+      {
+        name: "ALQUILER MOBILIARIO",
+        type: "ALQUILERES EQUIPOS",
+        level: 1,
+      },
+      {
+        name: "ALQUILER LOCAL",
+        type: "ALQUILERES INMOBILIARIOS",
+        level: 1,
+      },
+      {
+        name: "LIBRERIA",
+        type: "GASTOS VARIOS",
+        level: 1,
+      },
+      {
+        name: "LIMPIEZA",
+        type: "SERVICIOS",
+        level: 1,
+      },
+      {
+        name: "AGUA",
+        type: "SERVICIOS",
+        level: 1,
+      },
+      {
+        name: "LUZ",
+        type: "SERVICIOS",
+        level: 1,
+      },
+      {
+        name: "GAS",
+        type: "SERVICIOS",
+        level: 1,
+      },
+      {
+        name: "INTERNET",
+        type: "SERVICIOS",
+        level: 1,
+      },
+      {
+        name: "JUGADORES SEMANAL",
+        type: "PAGOS EXTRAS",
+        level: 1,
+      },
+      {
+        name: "JUGADORES MENSUAL",
+        type: "PAGOS EXTRAS",
+        level: 1,
+      },
+      {
+        name: "TASAS Y PERMISOS",
+        type: "PERMISOS",
+        level: 1,
+      },
+      {
+        name: "SADAIC",
+        type: "PERMISOS",
+        level: 1,
+      },
+      {
+        name: "ADICAPIF",
+        type: "PERMISOS",
+        level: 1,
+      },
+      {
+        name: "HABILITACION ",
+        type: "PERMISOS",
+        level: 1,
+      },
+      {
+        name: "PAGO COMUNICACION PUBLICIDAD",
+        type: "PUBLICIDAD",
+        level: 1,
+      },
+      {
+        name: "RECOLECCION DE BASURA",
+        type: "SERVICIOS",
+        level: 1,
+      },
+      {
+        name: "SISTEMA INFORMATICO VENTAS",
+        type: "SERVICIOS",
+        level: 1,
+      },
+      {
+        name: "SALDO INCIAL ",
+        type: "MOVIMIENTOS CONTABLES",
+        level: 1,
+      },
+      {
+        name: "INGRESOS CAJAS",
+        type: "MOVIMIENTOS CONTABLES",
+        level: 1,
+      },
+      {
+        name: "ELECTRICISTA MATERIALES",
+        type: "MATERIALES MANTENIMIENTO",
+        level: 1,
+      },
+      {
+        name: "GASISTA MATERIALES",
+        type: "MATERIALES MANTENIMIENTO",
+        level: 1,
+      },
+      {
+        name: "PLOMERO MATERIAL",
+        type: "MATERIALES MANTENIMIENTO",
+        level: 1,
+      },
+      {
+        name: "OBRA MATERIALES",
+        type: "MATERIALES MANTENIMIENTO",
+        level: 1,
+      },
+      {
+        name: "ELECTRICISTA MO ",
+        type: "MO DE MANTENIMIENTO",
+        level: 1,
+      },
+      {
+        name: "GASISTA MO",
+        type: "MO DE MANTENIMIENTO",
+        level: 1,
+      },
+      {
+        name: "PLOMERO MO",
+        type: "MO DE MANTENIMIENTO",
+        level: 1,
+      },
+      {
+        name: "OBRA MO",
+        type: "MO DE MANTENIMIENTO",
+        level: 1,
+      },
+      {
+        name: "INVERSION OBRA",
+        type: "INVERSION",
+        level: 1,
+      },
+      {
+        name: "INVERSION EQUIPOS",
+        type: "INVERSION",
+        level: 1,
+      },
+      {
+        name: "RETIRO SOCIOS",
+        type: "RETIRO UTILIDADES",
+        level: 1,
+      },
+      {
+        name: "RETORNO PROVEEDORES",
+        type: "RETORNO",
+        level: 1,
+      },
+      {
+        name: "DEVOLUCION DE PRESTAMO",
+        type: "MOVIMIENTOS CONTABLES",
+        level: 1,
+      },
+      {
+        name: "INGRESO DE PRESTAMO REALIZADO",
+        type: "MOVIMIENTOS CONTABLES",
+        level: 1,
+      },
+      {
+        name: "PRESTAMO A SUCURSALES ",
+        type: "MOVIMIENTOS CONTABLES",
+        level: 1,
+      },
+      {
+        name: "ACREDITACIONES TEORICAS",
+        type: "MOVIMIENTOS CONTABLES",
+        level: 1,
+      },
+      {
+        name: "MOVIMIENTO ENTRE CUENTAS",
+        type: "MOVIMIENTOS CONTABLES",
+        level: 1,
+      },
+    ]);
   } catch (error) {
     console.error(error);
   }
