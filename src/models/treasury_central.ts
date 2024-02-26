@@ -11,7 +11,6 @@ export class TreasuryCentral extends Model {
   declare date: Date;
   declare type: TreasuryCentralTypeEnum;
   declare payment_method: string;
-  declare concept: string;
   declare description: string;
   declare amount: number;
   declare BranchId: UUID;
@@ -43,10 +42,7 @@ TreasuryCentral.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    concept: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
+
     description: {
       type: DataTypes.STRING,
       allowNull: false,

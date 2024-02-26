@@ -6,8 +6,8 @@ export class TreasuryNightExpenseValidate {
     const schema: Schema = object({
       body: object({
         date: string().required(),
-        concept: string().required(),
         description: string().required(),
+        ConceptId: string().uuid().required(),
         quantity: number().required(),
         unit_price: number().required(),
         BranchId: string().uuid().required(),

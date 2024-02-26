@@ -57,6 +57,9 @@ RegisterTicketClosure.belongsTo(RegisterTicket);
 Branch.hasMany(TreasuryNightExpense);
 TreasuryNightExpense.belongsTo(Branch);
 
+Concept.hasOne(TreasuryNightExpense);
+TreasuryNightExpense.belongsTo(Concept);
+
 RegisterBar.hasMany(TreasuryNightRetirement);
 TreasuryNightRetirement.belongsTo(RegisterBar);
 
@@ -71,6 +74,9 @@ TreasuryNightRetirementFinish.belongsTo(RegisterTicket);
 
 Branch.hasMany(TreasuryCentral);
 TreasuryCentral.belongsTo(Branch);
+
+Concept.hasOne(TreasuryCentral);
+TreasuryCentral.belongsTo(Concept);
 
 Branch.hasMany(CashRegister);
 CashRegister.belongsTo(Branch);

@@ -35,7 +35,7 @@ export class UserBackOfficeRepository implements IUserBackOfficeRepository {
           "fullName",
           [Sequelize.literal('"AuthBO"."email"'), "email"],
         ],
-        raw: true, // Indicamos que deseamos
+        raw: true,
       });
     } catch (error) {
       console.error(error);

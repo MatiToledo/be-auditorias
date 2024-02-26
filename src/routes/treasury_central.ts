@@ -1,7 +1,7 @@
 import express from "express";
 import { TreasuryCentralController } from "../controllers/treasury_central";
 import { authMiddleware } from "../middlewares";
-import { TreasuryCentralValidate } from "../middlewares/validators/treasury";
+import { TreasuryCentralValidate } from "../middlewares/validators/treasury_central";
 
 const router = express.Router();
 const treasuryCentralController = new TreasuryCentralController();

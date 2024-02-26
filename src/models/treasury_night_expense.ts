@@ -5,7 +5,6 @@ import { Branch } from "./branch";
 
 export class TreasuryNightExpense extends Model {
   declare id: CreationOptional<UUID>;
-  declare concept: string;
   declare description: string;
   declare quantity: number;
   declare unit_price: number;
@@ -25,10 +24,6 @@ TreasuryNightExpense.init(
     },
     date: {
       type: DataTypes.DATEONLY,
-      allowNull: false,
-    },
-    concept: {
-      type: DataTypes.STRING,
       allowNull: false,
     },
     description: {

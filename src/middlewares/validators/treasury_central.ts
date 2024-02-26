@@ -8,7 +8,7 @@ export class TreasuryCentralValidate {
         date: string().required(),
         type: string().required(),
         payment_method: string().required(),
-        concept: string().required(),
+        ConceptId: string().uuid().required(),
         amount: number().required(),
         description: string().required(),
         BranchId: string().uuid().required(),
@@ -32,7 +32,6 @@ export class TreasuryCentralValidate {
         date: string().required(),
         type: string().required(),
         payment_method: string().required(),
-        concept: string().required(),
         amount: number().required(),
         description: string().required(),
       })

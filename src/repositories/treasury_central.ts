@@ -3,8 +3,8 @@ import {
   ITreasuryCentralRepository,
   TreasuryCentralQuery,
 } from "../interfaces/treasury_central";
-import { TreasuryCentral } from "../models";
-import { Op } from "sequelize";
+import { Concept, TreasuryCentral } from "../models";
+import { Op, Sequelize } from "sequelize";
 
 export class TreasuryCentralRepository implements ITreasuryCentralRepository {
   async create(data: Partial<TreasuryCentral>): Promise<TreasuryCentral> {
@@ -49,6 +49,16 @@ export class TreasuryCentralRepository implements ITreasuryCentralRepository {
             [Op.between]: [queries.startDate, queries.endDate],
           },
         },
+        attributes: [
+          "id",
+          "date",
+          "type",
+          "payment_method",
+          "description",
+          "amount",
+          [Sequelize.literal('"Concept"."name"'), "concept"],
+        ],
+        include: [{ model: Concept, attributes: [] }],
         order: [["createdAt", "ASC"]],
       });
     } catch (error) {
