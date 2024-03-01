@@ -8,7 +8,9 @@ import {
   AuthBO,
   Concept,
   RegisterBar,
+  RegisterBarClosure,
   RegisterTicket,
+  RegisterTicketClosure,
   TreasuryNightExpense,
   TreasuryNightRetirement,
   TreasuryNightRetirementFinish,
@@ -28,25 +30,25 @@ export async function createBulkDev() {
       {
         name: "BOTTOM",
       },
-      // { name: "414" },
+      { name: "414" },
     ]);
     const group = await Group.bulkCreate([
       {
         name: "CENTRAL",
         CompanyId: company[0].id,
       },
-      // {
-      //   name: "GUEMES",
-      //   CompanyId: company[1].id,
-      // },
-      // {
-      //   name: "NORTE",
-      //   CompanyId: company[1].id,
-      // },
-      // {
-      //   name: "SUR",
-      //   CompanyId: company[1].id,
-      // },
+      {
+        name: "GUEMES",
+        CompanyId: company[1].id,
+      },
+      {
+        name: "NORTE",
+        CompanyId: company[1].id,
+      },
+      {
+        name: "SUR",
+        CompanyId: company[1].id,
+      },
     ]);
     const branchs = await Branch.bulkCreate([
       {
@@ -57,22 +59,22 @@ export async function createBulkDev() {
         name: "CERRO",
         GroupId: group[0].id,
       },
-      // {
-      //   name: "PASEO GUEMES",
-      //   GroupId: group[1].id,
-      // },
-      // {
-      //   name: "CLUB GUEMES",
-      //   GroupId: group[1].id,
-      // },
-      // {
-      //   name: "NORTE",
-      //   GroupId: group[2].id,
-      // },
-      // {
-      //   name: "SUR",
-      //   GroupId: group[3].id,
-      // },
+      {
+        name: "PASEO GUEMES",
+        GroupId: group[1].id,
+      },
+      {
+        name: "CLUB GUEMES",
+        GroupId: group[1].id,
+      },
+      {
+        name: "NORTE",
+        GroupId: group[2].id,
+      },
+      {
+        name: "SUR",
+        GroupId: group[3].id,
+      },
     ]);
     const register_bars = await RegisterBar.bulkCreate([
       {
@@ -83,47 +85,71 @@ export async function createBulkDev() {
         name: "Barra 2",
         BranchId: branchs[0].id,
       },
-      // {
-      //   name: "Barra 1",
-      //   BranchId: branchs[1].id,
-      // },
-      // {
-      //   name: "Barra 2",
-      //   BranchId: branchs[1].id,
-      // },
-      // {
-      //   name: "Barra 1",
-      //   BranchId: branchs[2].id,
-      // },
-      // {
-      //   name: "Barra 2",
-      //   BranchId: branchs[2].id,
-      // },
-      // {
-      //   name: "Barra 1",
-      //   BranchId: branchs[3].id,
-      // },
-      // {
-      //   name: "Barra 2",
-      //   BranchId: branchs[3].id,
-      // },
-      // {
-      //   name: "Barra 1",
-      //   BranchId: branchs[4].id,
-      // },
-      // {
-      //   name: "Barra 2",
-      //   BranchId: branchs[4].id,
-      // },
-      // {
-      //   name: "Barra 1",
-      //   BranchId: branchs[5].id,
-      // },
-      // {
-      //   name: "Barra 2",
-      //   BranchId: branchs[5].id,
-      // },
+      {
+        name: "Barra 1",
+        BranchId: branchs[1].id,
+      },
+      {
+        name: "Barra 2",
+        BranchId: branchs[1].id,
+      },
+      {
+        name: "Barra 1",
+        BranchId: branchs[2].id,
+      },
+      {
+        name: "Barra 2",
+        BranchId: branchs[2].id,
+      },
+      {
+        name: "Barra 1",
+        BranchId: branchs[3].id,
+      },
+      {
+        name: "Barra 2",
+        BranchId: branchs[3].id,
+      },
+      {
+        name: "Barra 1",
+        BranchId: branchs[4].id,
+      },
+      {
+        name: "Barra 2",
+        BranchId: branchs[4].id,
+      },
+      {
+        name: "Barra 1",
+        BranchId: branchs[5].id,
+      },
+      {
+        name: "Barra 2",
+        BranchId: branchs[5].id,
+      },
     ]);
+    for (const register_bar of register_bars) {
+      await RegisterBarClosure.bulkCreate(
+        [
+          Array.from({ length: 4 }).map(() => ({
+            date: new Date(),
+            retirement_total: Math.floor(Math.random() * 1000) + 1,
+            retirement_finish: Math.floor(Math.random() * 1000) + 1,
+            expenses_total: Math.floor(Math.random() * 1000) + 1,
+            expenses_observations: "expenses observations",
+            postnet_total: Math.floor(Math.random() * 1000) + 1,
+            transfers_total: Math.floor(Math.random() * 1000) + 1,
+            consumptions: [
+              {
+                description: "descriptions",
+                quantity: 2,
+              },
+            ],
+            observations: "observations",
+            photo: "photo",
+            RegisterBarId: register_bar.dataValues.id,
+          })),
+        ].flat()
+      );
+    }
     const register_tickets = await RegisterTicket.bulkCreate([
       {
         name: "Ticket 1",
@@ -133,47 +159,70 @@ export async function createBulkDev() {
         name: "Ticket 2",
         BranchId: branchs[0].id,
       },
-      // {
-      //   name: "Ticket 1",
-      //   BranchId: branchs[1].id,
-      // },
-      // {
-      //   name: "Ticket 2",
-      //   BranchId: branchs[1].id,
-      // },
-      // {
-      //   name: "Ticket 1",
-      //   BranchId: branchs[2].id,
-      // },
-      // {
-      //   name: "Ticket 2",
-      //   BranchId: branchs[2].id,
-      // },
-      // {
-      //   name: "Ticket 1",
-      //   BranchId: branchs[3].id,
-      // },
-      // {
-      //   name: "Ticket 2",
-      //   BranchId: branchs[3].id,
-      // },
-      // {
-      //   name: "Ticket 1",
-      //   BranchId: branchs[4].id,
-      // },
-      // {
-      //   name: "Ticket 2",
-      //   BranchId: branchs[4].id,
-      // },
-      // {
-      //   name: "Ticket 1",
-      //   BranchId: branchs[5].id,
-      // },
-      // {
-      //   name: "Ticket 2",
-      //   BranchId: branchs[5].id,
-      // },
+      {
+        name: "Ticket 1",
+        BranchId: branchs[1].id,
+      },
+      {
+        name: "Ticket 2",
+        BranchId: branchs[1].id,
+      },
+      {
+        name: "Ticket 1",
+        BranchId: branchs[2].id,
+      },
+      {
+        name: "Ticket 2",
+        BranchId: branchs[2].id,
+      },
+      {
+        name: "Ticket 1",
+        BranchId: branchs[3].id,
+      },
+      {
+        name: "Ticket 2",
+        BranchId: branchs[3].id,
+      },
+      {
+        name: "Ticket 1",
+        BranchId: branchs[4].id,
+      },
+      {
+        name: "Ticket 2",
+        BranchId: branchs[4].id,
+      },
+      {
+        name: "Ticket 1",
+        BranchId: branchs[5].id,
+      },
+      {
+        name: "Ticket 2",
+        BranchId: branchs[5].id,
+      },
     ]);
+    for (const register_ticket of register_tickets) {
+      await RegisterTicketClosure.bulkCreate(
+        [
+          Array.from({ length: 4 }).map(() => ({
+            date: new Date(),
+            retirement_total: Math.floor(Math.random() * 1000) + 1,
+            retirement_finish: Math.floor(Math.random() * 1000) + 1,
+            expenses_total: Math.floor(Math.random() * 1000) + 1,
+            expenses_observations: "expenses observations",
+            postnet_total: Math.floor(Math.random() * 1000) + 1,
+            transfers_total: Math.floor(Math.random() * 1000) + 1,
+            sold_total: Math.floor(Math.random() * 1000) + 1,
+            ticket_persons: Math.floor(Math.random() * 500) + 1,
+            ticket_price: Math.floor(Math.random() * 1000) + 1,
+            persons_cant_branch: Math.floor(Math.random() * 1000) + 1,
+            persons_cant_bar: Math.floor(Math.random() * 1000) + 1,
+            observations: "observations",
+            photo: "photo",
+            RegisterTicketId: register_ticket.dataValues.id,
+          })),
+        ].flat()
+      );
+    }
     const concepts = await Concept.bulkCreate([
       {
         name: "CARGAS FISCALES",
@@ -698,7 +747,6 @@ export async function createBulkDev() {
         level: 1,
       },
     ]);
-
     await TreasuryNightExpense.bulkCreate(
       [
         Array.from({ length: 5 }).map(() => {
@@ -731,66 +779,66 @@ export async function createBulkDev() {
             BranchId: branchs[1].id,
           };
         }),
-        // Array.from({ length: 5 }).map(() => {
-        //   const quantity = Math.floor(Math.random() * 10) + 1;
-        //   const unit_price = Math.floor(Math.random() * 100) + 1;
-        //   const total = quantity * unit_price;
+        Array.from({ length: 5 }).map(() => {
+          const quantity = Math.floor(Math.random() * 10) + 1;
+          const unit_price = Math.floor(Math.random() * 100) + 1;
+          const total = quantity * unit_price;
 
-        //   return {
-        //     date: new Date(),
-        //     conceptId:concepts[100].id,
-        //     description: "test",
-        //     quantity: quantity,
-        //     unit_price: unit_price,
-        //     total: total,
-        //     BranchId: branchs[2].id,
-        //   };
-        // }),
-        // Array.from({ length: 5 }).map(() => {
-        //   const quantity = Math.floor(Math.random() * 10) + 1;
-        //   const unit_price = Math.floor(Math.random() * 100) + 1;
-        //   const total = quantity * unit_price;
+          return {
+            date: new Date(),
+            conceptId: concepts[100].id,
+            description: "test",
+            quantity: quantity,
+            unit_price: unit_price,
+            total: total,
+            BranchId: branchs[2].id,
+          };
+        }),
+        Array.from({ length: 5 }).map(() => {
+          const quantity = Math.floor(Math.random() * 10) + 1;
+          const unit_price = Math.floor(Math.random() * 100) + 1;
+          const total = quantity * unit_price;
 
-        //   return {
-        //     date: new Date(),
-        //     conceptId:concepts[100].id,
-        //     description: "test",
-        //     quantity: quantity,
-        //     unit_price: unit_price,
-        //     total: total,
-        //     BranchId: branchs[3].id,
-        //   };
-        // }),
-        // Array.from({ length: 5 }).map(() => {
-        //   const quantity = Math.floor(Math.random() * 10) + 1;
-        //   const unit_price = Math.floor(Math.random() * 100) + 1;
-        //   const total = quantity * unit_price;
+          return {
+            date: new Date(),
+            conceptId: concepts[100].id,
+            description: "test",
+            quantity: quantity,
+            unit_price: unit_price,
+            total: total,
+            BranchId: branchs[3].id,
+          };
+        }),
+        Array.from({ length: 5 }).map(() => {
+          const quantity = Math.floor(Math.random() * 10) + 1;
+          const unit_price = Math.floor(Math.random() * 100) + 1;
+          const total = quantity * unit_price;
 
-        //   return {
-        //     date: new Date(),
-        //     conceptId:concepts[100].id,
-        //     description: "test",
-        //     quantity: quantity,
-        //     unit_price: unit_price,
-        //     total: total,
-        //     BranchId: branchs[4].id,
-        //   };
-        // }),
-        // Array.from({ length: 5 }).map(() => {
-        //   const quantity = Math.floor(Math.random() * 10) + 1;
-        //   const unit_price = Math.floor(Math.random() * 100) + 1;
-        //   const total = quantity * unit_price;
+          return {
+            date: new Date(),
+            conceptId: concepts[100].id,
+            description: "test",
+            quantity: quantity,
+            unit_price: unit_price,
+            total: total,
+            BranchId: branchs[4].id,
+          };
+        }),
+        Array.from({ length: 5 }).map(() => {
+          const quantity = Math.floor(Math.random() * 10) + 1;
+          const unit_price = Math.floor(Math.random() * 100) + 1;
+          const total = quantity * unit_price;
 
-        //   return {
-        //     date: new Date(),
-        //     conceptId:concepts[100].id,
-        //     description: "test",
-        //     quantity: quantity,
-        //     unit_price: unit_price,
-        //     total: total,
-        //     BranchId: branchs[5].id,
-        //   };
-        // }),
+          return {
+            date: new Date(),
+            conceptId: concepts[100].id,
+            description: "test",
+            quantity: quantity,
+            unit_price: unit_price,
+            total: total,
+            BranchId: branchs[5].id,
+          };
+        }),
       ].flat()
     );
     await TreasuryNightRetirement.bulkCreate(
@@ -819,54 +867,54 @@ export async function createBulkDev() {
           type: "register_bar",
           RegisterBarId: register_bars[1].id,
         })),
-        // Array.from({ length: 2 }).map(() => ({
-        //   date: new Date(),
-        //   amount: Math.floor(Math.random() * 1000) + 1,
-        //   type: "register_ticket",
-        //   RegisterTicketId: register_tickets[2].id,
-        // })),
-        // Array.from({ length: 2 }).map(() => ({
-        //   date: new Date(),
-        //   amount: Math.floor(Math.random() * 1000) + 1,
-        //   type: "register_bar",
-        //   RegisterBarId: register_bars[2].id,
-        // })),
-        // Array.from({ length: 3 }).map(() => ({
-        //   date: new Date(),
-        //   amount: Math.floor(Math.random() * 1000) + 1,
-        //   type: "register_ticket",
-        //   RegisterTicketId: register_tickets[3].id,
-        // })),
-        // Array.from({ length: 3 }).map(() => ({
-        //   date: new Date(),
-        //   amount: Math.floor(Math.random() * 1000) + 1,
-        //   type: "register_bar",
-        //   RegisterBarId: register_bars[3].id,
-        // })),
-        // Array.from({ length: 2 }).map(() => ({
-        //   date: new Date(),
-        //   amount: Math.floor(Math.random() * 1000) + 1,
-        //   type: "register_ticket",
-        //   RegisterTicketId: register_tickets[4].id,
-        // })),
-        // Array.from({ length: 2 }).map(() => ({
-        //   date: new Date(),
-        //   amount: Math.floor(Math.random() * 1000) + 1,
-        //   type: "register_bar",
-        //   RegisterBarId: register_bars[4].id,
-        // })),
-        // Array.from({ length: 3 }).map(() => ({
-        //   date: new Date(),
-        //   amount: Math.floor(Math.random() * 1000) + 1,
-        //   type: "register_ticket",
-        //   RegisterTicketId: register_tickets[5].id,
-        // })),
-        // Array.from({ length: 3 }).map(() => ({
-        //   date: new Date(),
-        //   amount: Math.floor(Math.random() * 1000) + 1,
-        //   type: "register_bar",
-        //   RegisterBarId: register_bars[5].id,
-        // })),
+        Array.from({ length: 2 }).map(() => ({
+          date: new Date(),
+          amount: Math.floor(Math.random() * 1000) + 1,
+          type: "register_ticket",
+          RegisterTicketId: register_tickets[2].id,
+        })),
+        Array.from({ length: 2 }).map(() => ({
+          date: new Date(),
+          amount: Math.floor(Math.random() * 1000) + 1,
+          type: "register_bar",
+          RegisterBarId: register_bars[2].id,
+        })),
+        Array.from({ length: 3 }).map(() => ({
+          date: new Date(),
+          amount: Math.floor(Math.random() * 1000) + 1,
+          type: "register_ticket",
+          RegisterTicketId: register_tickets[3].id,
+        })),
+        Array.from({ length: 3 }).map(() => ({
+          date: new Date(),
+          amount: Math.floor(Math.random() * 1000) + 1,
+          type: "register_bar",
+          RegisterBarId: register_bars[3].id,
+        })),
+        Array.from({ length: 2 }).map(() => ({
+          date: new Date(),
+          amount: Math.floor(Math.random() * 1000) + 1,
+          type: "register_ticket",
+          RegisterTicketId: register_tickets[4].id,
+        })),
+        Array.from({ length: 2 }).map(() => ({
+          date: new Date(),
+          amount: Math.floor(Math.random() * 1000) + 1,
+          type: "register_bar",
+          RegisterBarId: register_bars[4].id,
+        })),
+        Array.from({ length: 3 }).map(() => ({
+          date: new Date(),
+          amount: Math.floor(Math.random() * 1000) + 1,
+          type: "register_ticket",
+          RegisterTicketId: register_tickets[5].id,
+        })),
+        Array.from({ length: 3 }).map(() => ({
+          date: new Date(),
+          amount: Math.floor(Math.random() * 1000) + 1,
+          type: "register_bar",
+          RegisterBarId: register_bars[5].id,
+        })),
       ].flat()
     );
     await TreasuryNightRetirementFinish.bulkCreate(
@@ -907,78 +955,78 @@ export async function createBulkDev() {
           amount: Math.floor(Math.random() * 1000) + 1,
           RegisterBarId: register_bars[1].id,
         })),
-        // Array.from({ length: 2 }).map(() => ({
-        //   date: new Date(),
-        //   expenses: Math.floor(Math.random() * 1000) + 1,
-        //   type: "register_ticket",
-        //   postnet: Math.floor(Math.random() * 1000) + 1,
-        //   transfers: Math.floor(Math.random() * 1000) + 1,
-        //   amount: Math.floor(Math.random() * 1000) + 1,
-        //   RegisterTicketId: register_tickets[2].id,
-        // })),
-        // Array.from({ length: 2 }).map(() => ({
-        //   date: new Date(),
-        //   expenses: Math.floor(Math.random() * 1000) + 1,
-        //   postnet: Math.floor(Math.random() * 1000) + 1,
-        //   transfers: Math.floor(Math.random() * 1000) + 1,
-        //   amount: Math.floor(Math.random() * 1000) + 1,
-        //   type: "register_bar",
-        //   RegisterBarId: register_bars[2].id,
-        // })),
-        // Array.from({ length: 3 }).map(() => ({
-        //   date: new Date(),
-        //   expenses: Math.floor(Math.random() * 1000) + 1,
-        //   postnet: Math.floor(Math.random() * 1000) + 1,
-        //   transfers: Math.floor(Math.random() * 1000) + 1,
-        //   type: "register_ticket",
-        //   amount: Math.floor(Math.random() * 1000) + 1,
-        //   RegisterTicketId: register_tickets[3].id,
-        // })),
-        // Array.from({ length: 3 }).map(() => ({
-        //   date: new Date(),
-        //   expenses: Math.floor(Math.random() * 1000) + 1,
-        //   postnet: Math.floor(Math.random() * 1000) + 1,
-        //   transfers: Math.floor(Math.random() * 1000) + 1,
-        //   type: "register_bar",
-        //   amount: Math.floor(Math.random() * 1000) + 1,
-        //   RegisterBarId: register_bars[3].id,
-        // })),
-        // Array.from({ length: 2 }).map(() => ({
-        //   date: new Date(),
-        //   expenses: Math.floor(Math.random() * 1000) + 1,
-        //   type: "register_ticket",
-        //   postnet: Math.floor(Math.random() * 1000) + 1,
-        //   transfers: Math.floor(Math.random() * 1000) + 1,
-        //   amount: Math.floor(Math.random() * 1000) + 1,
-        //   RegisterTicketId: register_tickets[4].id,
-        // })),
-        // Array.from({ length: 2 }).map(() => ({
-        //   date: new Date(),
-        //   expenses: Math.floor(Math.random() * 1000) + 1,
-        //   postnet: Math.floor(Math.random() * 1000) + 1,
-        //   transfers: Math.floor(Math.random() * 1000) + 1,
-        //   amount: Math.floor(Math.random() * 1000) + 1,
-        //   type: "register_bar",
-        //   RegisterBarId: register_bars[4].id,
-        // })),
-        // Array.from({ length: 3 }).map(() => ({
-        //   date: new Date(),
-        //   expenses: Math.floor(Math.random() * 1000) + 1,
-        //   postnet: Math.floor(Math.random() * 1000) + 1,
-        //   transfers: Math.floor(Math.random() * 1000) + 1,
-        //   type: "register_ticket",
-        //   amount: Math.floor(Math.random() * 1000) + 1,
-        //   RegisterTicketId: register_tickets[5].id,
-        // })),
-        // Array.from({ length: 3 }).map(() => ({
-        //   date: new Date(),
-        //   expenses: Math.floor(Math.random() * 1000) + 1,
-        //   postnet: Math.floor(Math.random() * 1000) + 1,
-        //   transfers: Math.floor(Math.random() * 1000) + 1,
-        //   type: "register_bar",
-        //   amount: Math.floor(Math.random() * 1000) + 1,
-        //   RegisterBarId: register_bars[5].id,
-        // })),
+        Array.from({ length: 1 }).map(() => ({
+          date: new Date(),
+          expenses: Math.floor(Math.random() * 1000) + 1,
+          type: "register_ticket",
+          postnet: Math.floor(Math.random() * 1000) + 1,
+          transfers: Math.floor(Math.random() * 1000) + 1,
+          amount: Math.floor(Math.random() * 1000) + 1,
+          RegisterTicketId: register_tickets[2].id,
+        })),
+        Array.from({ length: 1 }).map(() => ({
+          date: new Date(),
+          expenses: Math.floor(Math.random() * 1000) + 1,
+          postnet: Math.floor(Math.random() * 1000) + 1,
+          transfers: Math.floor(Math.random() * 1000) + 1,
+          amount: Math.floor(Math.random() * 1000) + 1,
+          type: "register_bar",
+          RegisterBarId: register_bars[2].id,
+        })),
+        Array.from({ length: 1 }).map(() => ({
+          date: new Date(),
+          expenses: Math.floor(Math.random() * 1000) + 1,
+          postnet: Math.floor(Math.random() * 1000) + 1,
+          transfers: Math.floor(Math.random() * 1000) + 1,
+          type: "register_ticket",
+          amount: Math.floor(Math.random() * 1000) + 1,
+          RegisterTicketId: register_tickets[3].id,
+        })),
+        Array.from({ length: 1 }).map(() => ({
+          date: new Date(),
+          expenses: Math.floor(Math.random() * 1000) + 1,
+          postnet: Math.floor(Math.random() * 1000) + 1,
+          transfers: Math.floor(Math.random() * 1000) + 1,
+          type: "register_bar",
+          amount: Math.floor(Math.random() * 1000) + 1,
+          RegisterBarId: register_bars[3].id,
+        })),
+        Array.from({ length: 1 }).map(() => ({
+          date: new Date(),
+          expenses: Math.floor(Math.random() * 1000) + 1,
+          type: "register_ticket",
+          postnet: Math.floor(Math.random() * 1000) + 1,
+          transfers: Math.floor(Math.random() * 1000) + 1,
+          amount: Math.floor(Math.random() * 1000) + 1,
+          RegisterTicketId: register_tickets[4].id,
+        })),
+        Array.from({ length: 1 }).map(() => ({
+          date: new Date(),
+          expenses: Math.floor(Math.random() * 1000) + 1,
+          postnet: Math.floor(Math.random() * 1000) + 1,
+          transfers: Math.floor(Math.random() * 1000) + 1,
+          amount: Math.floor(Math.random() * 1000) + 1,
+          type: "register_bar",
+          RegisterBarId: register_bars[4].id,
+        })),
+        Array.from({ length: 1 }).map(() => ({
+          date: new Date(),
+          expenses: Math.floor(Math.random() * 1000) + 1,
+          postnet: Math.floor(Math.random() * 1000) + 1,
+          transfers: Math.floor(Math.random() * 1000) + 1,
+          type: "register_ticket",
+          amount: Math.floor(Math.random() * 1000) + 1,
+          RegisterTicketId: register_tickets[5].id,
+        })),
+        Array.from({ length: 1 }).map(() => ({
+          date: new Date(),
+          expenses: Math.floor(Math.random() * 1000) + 1,
+          postnet: Math.floor(Math.random() * 1000) + 1,
+          transfers: Math.floor(Math.random() * 1000) + 1,
+          type: "register_bar",
+          amount: Math.floor(Math.random() * 1000) + 1,
+          RegisterBarId: register_bars[5].id,
+        })),
       ].flat()
     );
     const auth = await Auth.create({

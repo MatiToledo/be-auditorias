@@ -37,4 +37,6 @@ export interface QueriesGetAll {
   CompanyId?: string;
   GroupId?: string;
   BranchId?: string;
+  startDate?: string;
+  endDate?: string;
 }

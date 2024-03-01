@@ -56,8 +56,14 @@ export class RegisterBarBackOfficeService
           case "q":
             where[Op.and].push({
               [Op.or]: [
-                { fullName: { [Op.iLike]: `%${queries.q}%` } },
-                { "$Auth.email$": { [Op.iLike]: `%${queries.q}%` } },
+                { name: { [Op.iLike]: `%${queries.q}%` } },
+                { "$Branch.name$": { [Op.iLike]: `%${queries.q}%` } },
+                { "$Branch.Group.name$": { [Op.iLike]: `%${queries.q}%` } },
+                {
+                  "$Branch.Group.Company.name$": {
+                    [Op.iLike]: `%${queries.q}%`,
+                  },
+                },
               ],
             });
             break;
