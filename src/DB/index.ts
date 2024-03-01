@@ -15,7 +15,10 @@ const sequelizeOptions: Options = {
     lock_timeout: 150000,
     iddle_in_transaction_session_timeout: 50000,
     useUTC: true,
-    ssl: false,
+    ssl: {
+      require: true,
+      rejectUnauthorized: false,
+    },
   },
   timezone: "UTC",
   pool: {

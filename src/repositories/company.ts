@@ -1,6 +1,6 @@
 import { Transaction } from "sequelize";
-import { ICompanyRepository } from "../interfaces/company";
 import { Company } from "../models";
+import { ICompanyRepository } from "../interfaces/company";
 
 export class CompanyRepository implements ICompanyRepository {
   async create(

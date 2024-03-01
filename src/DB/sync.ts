@@ -21,7 +21,7 @@ import { encryptPassword } from "../libs/encrypt_password";
 
 sequelize.sync({ force: true }).then((res) => {
   console.log("Database synced", res);
-  createBulkDev();
+  // createBulkDev();
 });
 
 export async function createBulkDev() {
