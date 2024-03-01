@@ -11,7 +11,11 @@ export class TreasuryNightRetirementBackOfficeController {
       const result = await this.TreasuryNightRetirementBackOfficeService.getAll(
         req.query
       );
-      res.status(200).json(responseHandler(true, "BRANCHES_FOUND", result));
+      res
+        .status(200)
+        .json(
+          responseHandler(true, "TREASURY_NIGHT_RETIREMENTS_FOUND", result)
+        );
     } catch (error) {
       console.error(error);
       res.status(400).json(responseHandler(false, error.message));

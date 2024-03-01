@@ -1,24 +1,26 @@
 import { Transaction, WhereOptions } from "sequelize";
-import { Group, RegisterTicket, TreasuryNightRetirement } from "../../models";
+import { Group, RegisterTicket, TreasuryNightExpense } from "../../models";
 import { UUID } from "crypto";
 
-export interface ITreasuryNightRetirementBackOfficeService {
+export interface ITreasuryNightExpenseBackOfficeService {
   getAll(
     queries: QueriesGetAll
-  ): Promise<{ rows: AllTreasuryNightRetirement[]; count: number }>;
+  ): Promise<{ rows: AllTreasuryNightExpense[]; count: number }>;
 }
 
-export interface ITreasuryNightRetirementBackOfficeRepository {
+export interface ITreasuryNightExpenseBackOfficeRepository {
   getAll(
     where: WhereOptions,
     pagination: { offset: number; limit: number }
-  ): Promise<{ rows: TreasuryNightRetirement[]; count: number }>;
+  ): Promise<{ rows: TreasuryNightExpense[]; count: number }>;
 }
-export interface AllTreasuryNightRetirement {
+export interface AllTreasuryNightExpense {
   id: UUID;
-  type: string;
   date: string;
-  amount: number;
+  description: string;
+  quantity: number;
+  unit_price: number;
+  total: number;
   register_ticket: string | null;
   register_bar: string | null;
 }
@@ -30,6 +32,7 @@ export interface QueriesGetAll {
   CompanyId?: string;
   GroupId?: string;
   BranchId?: string;
+  ConceptId?: string;
   startDate?: string;
   endDate?: string;
 }

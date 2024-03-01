@@ -5,6 +5,7 @@ import { Branch } from "./branch";
 
 export class TreasuryNightExpense extends Model {
   declare id: CreationOptional<UUID>;
+  declare date: Date;
   declare description: string;
   declare quantity: number;
   declare unit_price: number;

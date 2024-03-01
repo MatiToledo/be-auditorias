@@ -1,23 +1,23 @@
 import { Sequelize, WhereOptions } from "sequelize";
-import { ITreasuryNightRetirementBackOfficeRepository } from "../../interfaces/back_office/treasury_night_retirement";
+import { ITreasuryNightRetirementFinishBackOfficeRepository } from "../../interfaces/back_office/treasury_night_retirement_finish";
 import {
   Branch,
   Company,
   Group,
   RegisterBar,
   RegisterTicket,
+  TreasuryNightRetirementFinish,
 } from "../../models";
-import { TreasuryNightRetirement } from "./../../models/treasury_night_retirement";
 
-export class TreasuryNightRetirementBackOfficeRepository
-  implements ITreasuryNightRetirementBackOfficeRepository
+export class TreasuryNightRetirementFinishBackOfficeRepository
+  implements ITreasuryNightRetirementFinishBackOfficeRepository
 {
   async getAll(
     where: WhereOptions,
     pagination: { offset: number; limit: number }
-  ): Promise<{ rows: TreasuryNightRetirement[]; count: number }> {
+  ): Promise<{ rows: TreasuryNightRetirementFinish[]; count: number }> {
     try {
-      return await TreasuryNightRetirement.findAndCountAll({
+      return await TreasuryNightRetirementFinish.findAndCountAll({
         where,
         distinct: true,
         include: [
@@ -46,6 +46,9 @@ export class TreasuryNightRetirementBackOfficeRepository
           "id",
           "type",
           "date",
+          "expenses",
+          "postnet",
+          "transfers",
           "amount",
           [Sequelize.literal('"RegisterTicket"."name"'), "register_ticket"],
           [Sequelize.literal('"RegisterBar"."name"'), "register_bar"],
@@ -55,7 +58,7 @@ export class TreasuryNightRetirementBackOfficeRepository
       });
     } catch (error) {
       console.error(error);
-      throw new Error(`REGISTER_BARS_CLOSURES_NOT_FOUND`);
+      throw new Error(`TREASURY_NIGHT_RETIREMENTS_FINISH_NOT_FOUND`);
     }
   }
 }

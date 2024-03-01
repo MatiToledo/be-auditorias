@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { Schema, object, string } from "yup";
 
-export class TreasuryNightRetirementBackOfficeValidate {
+export class TreasuryNightRetirementFinishBackOfficeValidate {
   static async getAll(req: Request, res: Response, next: NextFunction) {
     const schema: Schema = object({
       query: object({

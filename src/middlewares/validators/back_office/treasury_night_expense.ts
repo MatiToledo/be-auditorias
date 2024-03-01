@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { Schema, object, string } from "yup";
 
-export class TreasuryNightRetirementBackOfficeValidate {
+export class TreasuryNightExpenseBackOfficeValidate {
   static async getAll(req: Request, res: Response, next: NextFunction) {
     const schema: Schema = object({
       query: object({
@@ -11,6 +11,7 @@ export class TreasuryNightRetirementBackOfficeValidate {
         CompanyId: string().uuid().optional(),
         GroupId: string().uuid().optional(),
         BranchId: string().uuid().optional(),
+        ConceptId: string().uuid().optional(),
         startDate: string().required(),
         endDate: string().required(),
       })
