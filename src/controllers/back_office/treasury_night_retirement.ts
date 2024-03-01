@@ -1,14 +1,14 @@
 import { Response } from "express";
 import { responseHandler } from "../../libs/response_handler";
 import { AuthenticatedRequest } from "../../middlewares";
-import { RegisterTicketBackOfficeService } from "../../services/back_office/register_ticket";
+import { TreasuryNightRetirementBackOfficeService } from "../../services/back_office/treasury_night_retirement";
 
-export class RegisterTicketBackOfficeController {
-  private registerTicketBackOfficeService =
-    new RegisterTicketBackOfficeService();
+export class TreasuryNightRetirementBackOfficeController {
+  private TreasuryNightRetirementBackOfficeService =
+    new TreasuryNightRetirementBackOfficeService();
   getAll = async (req: AuthenticatedRequest, res: Response) => {
     try {
-      const result = await this.registerTicketBackOfficeService.getAll(
+      const result = await this.TreasuryNightRetirementBackOfficeService.getAll(
         req.query
       );
       res.status(200).json(responseHandler(true, "BRANCHES_FOUND", result));
