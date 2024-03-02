@@ -11,6 +11,7 @@ import {
   RegisterBarClosure,
   RegisterTicket,
   RegisterTicketClosure,
+  TreasuryCentral,
   TreasuryNightExpense,
   TreasuryNightRetirement,
   TreasuryNightRetirementFinish,
@@ -1027,6 +1028,32 @@ export async function createBulkDev() {
           amount: Math.floor(Math.random() * 1000) + 1,
           RegisterBarId: register_bars[5].id,
         })),
+      ].flat()
+    );
+    await TreasuryCentral.bulkCreate(
+      [
+        Array.from({ length: 5 }).map(() => {
+          return {
+            date: new Date(),
+            type: "expense",
+            payment_method: "bank",
+            description: "descripcion",
+            amount: Math.floor(Math.random() * 1000) + 1,
+            BranchId: branchs[1].id,
+            ConceptId: concepts[100].id,
+          };
+        }),
+        Array.from({ length: 5 }).map(() => {
+          return {
+            date: new Date(),
+            type: "revenue",
+            payment_method: "cash",
+            description: "descripcion",
+            amount: Math.floor(Math.random() * 1000) + 1,
+            BranchId: branchs[1].id,
+            ConceptId: concepts[100].id,
+          };
+        }),
       ].flat()
     );
     const auth = await Auth.create({

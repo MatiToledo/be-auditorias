@@ -29,7 +29,6 @@ export class TreasuryCentralService implements ITreasuryCentralService {
       BranchId,
       queries
     );
-    console.log("movements: ", movements);
     let balance = 0;
     const movementsWithBalance: TreasuryCentralMovements[] = movements.map(
       (movement) => {
