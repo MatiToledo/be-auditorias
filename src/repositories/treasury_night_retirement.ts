@@ -14,8 +14,6 @@ export class TreasuryNightRetirementRepository
     data: Partial<TreasuryNightRetirement>
   ): Promise<TreasuryNightRetirement> {
     try {
-      console.log("data: ", data);
-      console.log("type: ", typeof data.amount);
       return await TreasuryNightRetirement.create(data);
     } catch (error) {
       console.error(error);

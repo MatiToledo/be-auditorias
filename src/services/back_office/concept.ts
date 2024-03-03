@@ -6,6 +6,7 @@ import {
   QueriesGetAll,
 } from "../../interfaces/back_office/concept";
 import { ConceptBackOfficeRepository } from "../../repositories/back_office/concept";
+import { Concept } from "../../models";
 
 export class ConceptBackOfficeService implements IConceptBackOfficeService {
   /////////////////////////////////////////////////////////////////////////////////////////////
@@ -21,7 +22,9 @@ export class ConceptBackOfficeService implements IConceptBackOfficeService {
       await this.conceptBackOfficeRepository.getAll(where, pagination);
     return register_bars_closures as any;
   }
-
+  async create(body: Partial<Concept>): Promise<Concept> {
+    return await this.conceptBackOfficeRepository.create(body);
+  }
   private buildQueriesFilters(queries: QueriesGetAll) {
     const where = {
       [Op.and]: [],
@@ -38,7 +41,6 @@ export class ConceptBackOfficeService implements IConceptBackOfficeService {
             });
             break;
           case "level":
-            console.log("queries.level: ", parseInt(queries.level));
             where[Op.and].push({
               level: parseInt(queries.level),
             });

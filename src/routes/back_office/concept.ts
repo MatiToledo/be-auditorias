@@ -5,7 +5,12 @@ import { ConceptBackOfficeValidate } from "../../middlewares/validators/back_off
 
 const router = express.Router();
 const conceptBackOfficeController = new ConceptBackOfficeController();
-
+router.post(
+  "/",
+  authAdminMiddleware,
+  ConceptBackOfficeValidate.create,
+  conceptBackOfficeController.create
+);
 router.get(
   "/all",
   authAdminMiddleware,

@@ -28,4 +28,15 @@ export class UserBackOfficeController {
       res.status(400).json(responseHandler(false, error.message));
     }
   };
+  getAllAdmins = async (req: AuthenticatedRequest, res: Response) => {
+    try {
+      const result = await this.userBackOfficeService.getAllAdmins(
+        req.query as QueriesGetAll
+      );
+      res.status(200).json(responseHandler(true, "ADMINS_FOUND", result));
+    } catch (error) {
+      console.error(error);
+      res.status(400).json(responseHandler(false, error.message));
+    }
+  };
 }

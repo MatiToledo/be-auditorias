@@ -5,6 +5,14 @@ import { Concept } from "../../models";
 export class ConceptBackOfficeRepository
   implements IConceptBackOfficeRepository
 {
+  async create(data: Partial<Concept>): Promise<Concept> {
+    try {
+      return await Concept.create(data);
+    } catch (error) {
+      console.error(error);
+      throw new Error(`CONCEPT_NOT_CREATED`);
+    }
+  }
   async getAll(
     where: WhereOptions,
     pagination: { offset: number; limit: number }

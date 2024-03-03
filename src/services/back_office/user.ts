@@ -1,5 +1,6 @@
 import { Op, Sequelize, Transaction, WhereOptions } from "sequelize";
 import {
+  AllAdmins,
   AllUser,
   IUserBackOfficeService,
   QueriesGetAll,
@@ -33,6 +34,26 @@ export class UserBackOfficeService implements IUserBackOfficeService {
         branch: user.Branch.name,
         group: user.Branch.Group.name,
         company: user.Branch.Group.Company.name,
+      })),
+    };
+  }
+
+  async getAllAdmins(
+    queries: QueriesGetAll
+  ): Promise<{ rows: AllAdmins[]; count: number }> {
+    const where = this.buildQueriesFilters(queries);
+    const pagination = buildPagination(queries);
+    const admins = await this.userBackOfficeRepository.getAllAdmins(
+      where,
+      pagination
+    );
+    return {
+      count: admins.count,
+      rows: admins.rows.map((user) => ({
+        id: user.id,
+        fullName: user.fullName,
+        email: user.AuthBO.email,
+        role: user.role,
       })),
     };
   }
