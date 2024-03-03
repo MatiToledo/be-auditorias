@@ -5,21 +5,7 @@ export class CompanyBackOfficeValidate {
   static async create(req: Request, res: Response, next: NextFunction) {
     const schema: Schema = object({
       body: object({
-        Company: object({
-          name: string().required(),
-        }).required(),
-        Groups: array(
-          object({
-            name: string().required(),
-            Branches: array(
-              object({
-                name: string().required(),
-                RegisterBars: array(object({ name: string().required() })),
-                RegisterTickets: array(object({ name: string().required() })),
-              })
-            ).required(),
-          }).required()
-        ).required(),
+        name: string().required(),
       })
         .noUnknown(true)
         .strict(true),

@@ -5,7 +5,8 @@ import { AuthBackOfficeController } from "../../controllers/back_office/auth";
 const router = express.Router();
 const authBOController = new AuthBackOfficeController();
 
-router.post("/", AuthBOValidate.create, authBOController.create);
+router.post("/admin", AuthBOValidate.createAdmin, authBOController.createAdmin);
+router.post("/user", AuthBOValidate.createUser, authBOController.createUser);
 router.post("/token", AuthBOValidate.logIn, authBOController.logIn);
 
 export default router;
