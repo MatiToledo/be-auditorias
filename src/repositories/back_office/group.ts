@@ -17,6 +17,15 @@ export class GroupBackOfficeRepository implements IGroupBackOfficeRepository {
     }
   }
 
+  async create(data: Partial<Group>): Promise<Group> {
+    try {
+      return await Group.create(data);
+    } catch (error) {
+      console.error(error);
+      throw new Error(`GROUP_NOT_CREATED`);
+    }
+  }
+
   async getAll(
     where: WhereOptions,
     pagination: { offset: number; limit: number }
