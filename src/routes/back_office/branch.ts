@@ -6,6 +6,13 @@ import { BranchBackOfficeValidate } from "../../middlewares/validators/back_offi
 const router = express.Router();
 const branchBackOfficeController = new BranchBackOfficeController();
 
+router.post(
+  "/",
+  authAdminMiddleware,
+  BranchBackOfficeValidate.create,
+  branchBackOfficeController.create
+);
+
 router.get(
   "/all/:GroupId",
   authAdminMiddleware,

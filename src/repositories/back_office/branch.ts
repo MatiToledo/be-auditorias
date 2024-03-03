@@ -24,6 +24,15 @@ export class BranchBackOfficeRepository implements IBranchBackOfficeRepository {
     }
   }
 
+  async create(data: Partial<Branch>): Promise<Branch> {
+    try {
+      return await Branch.create(data);
+    } catch (error) {
+      console.error(error);
+      throw new Error(`BRANCH_NOT_CREATED`);
+    }
+  }
+
   async getAll(
     where: WhereOptions,
     pagination: { offset: number; limit: number }
