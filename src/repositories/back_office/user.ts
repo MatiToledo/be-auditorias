@@ -1,9 +1,8 @@
 import { UUID } from "crypto";
-import { Op, Sequelize, Transaction, WhereOptions } from "sequelize";
+import { Sequelize, Transaction, WhereOptions } from "sequelize";
 import { IUserBackOfficeRepository } from "../../interfaces/back_office/user";
 import { Auth, AuthBO, Branch, Company, Group, User } from "../../models";
 import { UserBO } from "../../models/back_office/user";
-import sequelize from "sequelize";
 
 export class UserBackOfficeRepository implements IUserBackOfficeRepository {
   async create(
@@ -58,7 +57,6 @@ export class UserBackOfficeRepository implements IUserBackOfficeRepository {
     pagination: { offset: number; limit: number }
   ): Promise<{ rows: User[]; count: number }> {
     try {
-      console.log("where: ", where[Op.and][0]);
       return await User.findAndCountAll({
         where,
         include: [
@@ -81,6 +79,22 @@ export class UserBackOfficeRepository implements IUserBackOfficeRepository {
     } catch (error) {
       console.error(error);
       throw new Error(`USERS_NOT_FOUND`);
+    }
+  }
+  async getAllAdmins(
+    where: WhereOptions,
+    pagination: { offset: number; limit: number }
+  ): Promise<{ rows: UserBO[]; count: number }> {
+    try {
+      return await UserBO.findAndCountAll({
+        where,
+        include: [{ model: AuthBO, attributes: ["id", "email"] }],
+        limit: pagination.limit,
+        offset: pagination.offset,
+      });
+    } catch (error) {
+      console.error(error);
+      throw new Error(`ADMINS_NOT_FOUND`);
     }
   }
 }

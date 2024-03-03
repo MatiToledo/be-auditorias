@@ -6,10 +6,13 @@ import {
 } from "../../interfaces/back_office/company";
 import { buildPagination } from "../../libs/buildPagination";
 import { CompanyBackOfficeRepository } from "../../repositories/back_office/company";
+import { Company } from "../../models";
 
 export class CompanyBackOfficeService implements ICompanyBackOfficeService {
   private companyBackOfficeRepository = new CompanyBackOfficeRepository();
-
+  async create(body: Partial<Company>): Promise<Company> {
+    return await this.companyBackOfficeRepository.create(body);
+  }
   async getAll(
     queries: QueriesGetAll
   ): Promise<{ rows: AllCompany[]; count: number }> {

@@ -8,8 +8,6 @@ export class TreasuryNightRetirementFinishController {
 
   create = async (req: AuthenticatedRequest, res: Response) => {
     try {
-      console.log(new Date());
-
       const result = await this.treasuryNightRetirementFinishService.create(
         req.body
       );

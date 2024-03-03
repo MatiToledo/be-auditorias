@@ -5,7 +5,12 @@ import { RegisterBarBackOfficeValidate } from "../../middlewares/validators/back
 
 const router = express.Router();
 const registerBarBackOfficeController = new RegisterBarBackOfficeController();
-
+router.post(
+  "/",
+  authAdminMiddleware,
+  RegisterBarBackOfficeValidate.create,
+  registerBarBackOfficeController.create
+);
 router.get(
   "/all",
   authAdminMiddleware,

@@ -5,7 +5,6 @@ import RegisterBarClosureRouter from "./register_bar_closure";
 import RegisterBarRouter from "./register_bar";
 import RegisterTicketRouter from "./register_ticket";
 import RegisterTicketClosureRouter from "./register_ticket_closure";
-import CompanyRouter from "./company";
 import TreasuryNightRetirementRouter from "./treasury_night_retirement";
 import TreasuryNightExpenseRouter from "./treasury_night_expense";
 import TreasuryNightRetirementFinishRouter from "./treasury_night_retirement_finish";
@@ -20,7 +19,6 @@ router.use("/register_bar_closure", RegisterBarClosureRouter);
 router.use("/register_bar", RegisterBarRouter);
 router.use("/register_ticket", RegisterTicketRouter);
 router.use("/register_ticket_closure", RegisterTicketClosureRouter);
-router.use("/company", CompanyRouter);
 router.use("/treasury_night_retirement", TreasuryNightRetirementRouter);
 router.use(
   "/treasury_night_retirement_finish",

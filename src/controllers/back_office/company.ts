@@ -19,10 +19,8 @@ export class CompanyBackOfficeController {
 
   create = async (req: AuthenticatedRequest, res: Response) => {
     try {
-      await sequelize.transaction(async (transaction: Transaction) => {
-        // await this.companyBackOfficeService.g(req.body, transaction);
-      });
-      res.status(200).json(responseHandler(true, "COMPANY_CREATED"));
+      const result = await this.companyBackOfficeService.create(req.body);
+      res.status(200).json(responseHandler(true, "COMPANY_CREATED", result));
     } catch (error) {
       console.error(error);
       res.status(400).json(responseHandler(false, error.message));

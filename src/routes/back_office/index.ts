@@ -8,6 +8,11 @@ import RegisterBarRouter from "./register_bar";
 import RegisterBarClosureRouter from "./register_bar_closure";
 import RegisterTicketClosureRouter from "./register_ticket_closure";
 import RegisterTicketRouter from "./register_ticket";
+import TreasuryNightRetirementRouter from "./treasury_night_retirement";
+import TreasuryNightRetirementFinishRouter from "./treasury_night_retirement_finish";
+import TreasuryNightExpenseRouter from "./treasury_night_expense";
+import TreasuryCentralRouter from "./treasury_central";
+import ConceptRouter from "./concept";
 
 const router = express.Router();
 
@@ -20,5 +25,13 @@ router.use("/register_bar", RegisterBarRouter);
 router.use("/register_bar_closure", RegisterBarClosureRouter);
 router.use("/register_ticket_closure", RegisterTicketClosureRouter);
 router.use("/register_ticket", RegisterTicketRouter);
+router.use("/treasury_night_retirement", TreasuryNightRetirementRouter);
+router.use(
+  "/treasury_night_retirement_finish",
+  TreasuryNightRetirementFinishRouter
+);
+router.use("/treasury_night_expense", TreasuryNightExpenseRouter);
+router.use("/treasury_central", TreasuryCentralRouter);
+router.use("/concept", ConceptRouter);
 
 export default router;

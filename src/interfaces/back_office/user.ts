@@ -24,6 +24,11 @@ export interface AllUser {
   group: string;
   company: string;
 }
+export interface AllAdmins {
+  id: UUID;
+  fullName: string;
+  email: string;
+}
 
 export interface QueriesGetAll {
   q?: string;

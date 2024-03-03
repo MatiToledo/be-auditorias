@@ -7,8 +7,6 @@ export class TreasuryNightRetirementController {
 
   create = async (req: AuthenticatedRequest, res: Response) => {
     try {
-      console.log(new Date());
-
       const result = await this.treasuryNightRetirementService.create(req.body);
       res
         .status(200)

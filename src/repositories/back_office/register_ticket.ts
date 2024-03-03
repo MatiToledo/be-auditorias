@@ -18,7 +18,14 @@ export class RegisterTicketBackOfficeRepository
       throw new Error(`REGISTER_TICKETS_NOT_CREATED`);
     }
   }
-
+  async create(data: Partial<RegisterTicket>): Promise<RegisterTicket> {
+    try {
+      return await RegisterTicket.create(data);
+    } catch (error) {
+      console.error(error);
+      throw new Error(`REGISTER_TICKET_NOT_CREATED`);
+    }
+  }
   async getAll(
     where: WhereOptions,
     pagination: { offset: number; limit: number }

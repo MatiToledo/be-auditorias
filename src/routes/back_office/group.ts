@@ -19,4 +19,11 @@ router.get(
   groupBackOfficeController.getAll
 );
 
+router.post(
+  "/",
+  authAdminMiddleware,
+  GroupBackOfficeValidate.create,
+  groupBackOfficeController.create
+);
+
 export default router;

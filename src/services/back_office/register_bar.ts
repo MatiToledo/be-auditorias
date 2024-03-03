@@ -23,7 +23,9 @@ export class RegisterBarBackOfficeService
       transaction
     );
   }
-
+  async create(body: Partial<RegisterBar>): Promise<RegisterBar> {
+    return await this.registerBarBackOfficeRepository.create(body);
+  }
   async getAll(queries: QueriesGetAll): Promise<{
     rows: AllRegisterBar[];
     count: number;

@@ -5,7 +5,6 @@ import { AuthValidate } from "./../middlewares/validators/auth";
 const router = express.Router();
 const authController = new AuthController();
 
-router.post("/", AuthValidate.create, authController.create);
 router.post("/token", AuthValidate.logIn, authController.logIn);
 
 export default router;

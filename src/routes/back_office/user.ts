@@ -13,5 +13,11 @@ router.get(
   UserBackOfficeValidate.getAll,
   userBackOfficeController.getAll
 );
+router.get(
+  "/admin/all",
+  authAdminMiddleware,
+  UserBackOfficeValidate.getAll,
+  userBackOfficeController.getAllAdmins
+);
 
 export default router;

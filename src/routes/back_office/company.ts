@@ -11,6 +11,7 @@ router.post(
   CompanyBackOfficeValidate.create,
   companyBackOfficeController.create
 );
+
 router.get("/all", authAdminMiddleware, companyBackOfficeController.getAll);
 
 export default router;

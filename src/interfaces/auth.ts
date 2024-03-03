@@ -1,7 +1,7 @@
 import { Transaction } from "sequelize";
 import { Auth, User } from "../models";
 export interface IAuthService {
-  create(data: BodyCreateAuth, transaction: Transaction): Promise<void>;
+  createUser(data: BodyCreateAuth, transaction: Transaction): Promise<void>;
 }
 
 export interface IAuthRepository {

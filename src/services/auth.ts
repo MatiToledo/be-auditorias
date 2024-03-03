@@ -9,7 +9,10 @@ import { UserRepository } from "../repositories/user";
 export class AuthService implements IAuthService {
   private authRepository = new AuthRepository();
   private userRepository = new UserRepository();
-  async create(body: BodyCreateAuth, transaction: Transaction): Promise<void> {
+  async createUser(
+    body: BodyCreateAuth,
+    transaction: Transaction
+  ): Promise<void> {
     await this.authRepository.findIfExistByEmail(body.Auth.email);
     const encryptedPassword = encryptPassword(body.Auth.password);
     const auth = await this.authRepository.create(

@@ -22,17 +22,12 @@ export class CompanyBackOfficeRepository
     }
   }
 
-  async create(
-    data: Partial<Company>,
-    transaction: Transaction
-  ): Promise<Company> {
+  async create(data: Partial<Company>): Promise<Company> {
     try {
-      return await Company.create(data, {
-        transaction,
-      });
+      return await Company.create(data);
     } catch (error) {
       console.error(error);
-      throw new Error(`REGISTER_BAR_NOT_CREATED`);
+      throw new Error(`COMPANY_NOT_CREATED`);
     }
   }
 }
