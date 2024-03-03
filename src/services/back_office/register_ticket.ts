@@ -25,7 +25,9 @@ export class RegisterTicketBackOfficeService
       transaction
     );
   }
-
+  async create(body: Partial<RegisterTicket>): Promise<RegisterTicket> {
+    return await this.registerTicketBackOfficeRepository.create(body);
+  }
   async getAll(queries: QueriesGetAll): Promise<{
     rows: AllRegisterTicket[];
     count: number;

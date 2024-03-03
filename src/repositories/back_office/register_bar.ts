@@ -18,7 +18,14 @@ export class RegisterBarBackOfficeRepository
       throw new Error(`REGISTER_BARS_NOT_CREATED`);
     }
   }
-
+  async create(data: Partial<RegisterBar>): Promise<RegisterBar> {
+    try {
+      return await RegisterBar.create(data);
+    } catch (error) {
+      console.error(error);
+      throw new Error(`REGISTER_BAR_NOT_CREATED`);
+    }
+  }
   async getAll(
     where: WhereOptions,
     pagination: { offset: number; limit: number }

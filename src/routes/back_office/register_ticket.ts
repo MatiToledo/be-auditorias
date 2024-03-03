@@ -6,7 +6,12 @@ import { RegisterTicketBackOfficeValidate } from "../../middlewares/validators/b
 const router = express.Router();
 const registerTicketBackOfficeController =
   new RegisterTicketBackOfficeController();
-
+router.post(
+  "/",
+  authAdminMiddleware,
+  RegisterTicketBackOfficeValidate.create,
+  registerTicketBackOfficeController.create
+);
 router.get(
   "/all",
   authAdminMiddleware,
