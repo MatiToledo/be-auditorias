@@ -2,11 +2,16 @@ import { UUID } from "crypto";
 import { IRegisterBarClosureService } from "../interfaces/register_bar_closure";
 import { RegisterBarClosure, RegisterTicketClosure } from "../models";
 import { RegisterBarClosureRepository } from "../repositories/register_bar_closure";
+import { CloudinaryUpload } from "../libs/cloudinary";
 
 export class RegisterBarClosureService implements IRegisterBarClosureService {
   private registerBarClosureRepository = new RegisterBarClosureRepository();
   async create(body: Partial<RegisterBarClosure>): Promise<RegisterBarClosure> {
-    return await this.registerBarClosureRepository.create(body);
+    const photoURL = await CloudinaryUpload(body.photo);
+    return await this.registerBarClosureRepository.create({
+      ...body,
+      photo: photoURL,
+    });
   }
 
   /////////////////////////////////////////////////////////////////////////////////////////////

@@ -21,12 +21,28 @@ export class TreasuryNightRetirementFinishBackOfficeService
     // const where = { [Op.and]: [] };
     const where = this.buildQueriesFilters(queries);
     const pagination = buildPagination(queries);
-    const register_bars_closures =
+    const retirements_finish =
       await this.treasuryNightRetirementFinishBackOfficeRepository.getAll(
         where,
         pagination
       );
-    return register_bars_closures as any;
+    return {
+      count: retirements_finish.count,
+      rows: retirements_finish.rows.map((retirement_finish) => {
+        return {
+          id: retirement_finish.id,
+          type: retirement_finish.type,
+          date: retirement_finish.date as any,
+          expenses: retirement_finish.expenses,
+          postnet: retirement_finish.postnet,
+          transfers: retirement_finish.transfers,
+          amount: retirement_finish.amount,
+          register: retirement_finish.dataValues.register_bar
+            ? retirement_finish.dataValues.register_bar
+            : retirement_finish.dataValues.register_ticket,
+        };
+      }),
+    };
   }
 
   private buildQueriesFilters(queries: QueriesGetAll) {

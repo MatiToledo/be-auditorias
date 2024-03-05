@@ -16,12 +16,13 @@ export interface ITreasuryNightRetirementFinishBackOfficeRepository {
 }
 export interface AllTreasuryNightRetirementFinish {
   id: UUID;
-  type: number;
+  type: string;
   date: number;
-  expenses: string;
+  expenses: number;
   postnet: number;
   transfers: number;
-  amount: string;
+  amount: number;
+  register: string;
 }
 
 export interface QueriesGetAll {

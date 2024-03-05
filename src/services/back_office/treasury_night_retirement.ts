@@ -21,12 +21,26 @@ export class TreasuryNightRetirementBackOfficeService
     // const where = { [Op.and]: [] };
     const where = this.buildQueriesFilters(queries);
     const pagination = buildPagination(queries);
-    const register_bars_closures =
+    const retirements =
       await this.treasuryNightRetirementBackOfficeRepository.getAll(
         where,
         pagination
       );
-    return register_bars_closures as any;
+
+    return {
+      count: retirements.count,
+      rows: retirements.rows.map((retirement) => {
+        return {
+          id: retirement.id,
+          type: retirement.type,
+          date: retirement.date as any,
+          amount: retirement.amount,
+          register: retirement.dataValues.register_bar
+            ? retirement.dataValues.register_bar
+            : retirement.dataValues.register_ticket,
+        };
+      }),
+    };
   }
 
   private buildQueriesFilters(queries: QueriesGetAll) {

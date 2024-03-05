@@ -12,6 +12,8 @@ export class TreasuryNightRetirement extends Model {
   declare id: CreationOptional<UUID>;
   declare type: TreasuryNightRetirementTypeEnum;
   declare date: Date;
+  declare register_bar: string;
+  declare register_ticket: string;
   declare RegisterBarId: UUID;
   declare RegisterTicketId: UUID;
   declare amount: number;

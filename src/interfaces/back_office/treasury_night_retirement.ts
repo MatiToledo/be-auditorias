@@ -19,8 +19,7 @@ export interface AllTreasuryNightRetirement {
   type: string;
   date: string;
   amount: number;
-  register_ticket: string | null;
-  register_bar: string | null;
+  register: string;
 }
 
 export interface QueriesGetAll {

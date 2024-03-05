@@ -5,6 +5,7 @@ import { generateToken } from "../libs/jwt";
 import { Auth } from "../models";
 import { AuthRepository } from "../repositories/auth";
 import { UserRepository } from "../repositories/user";
+import { CloudinaryUpload } from "../libs/cloudinary";
 
 export class AuthService implements IAuthService {
   private authRepository = new AuthRepository();
@@ -14,13 +15,15 @@ export class AuthService implements IAuthService {
     transaction: Transaction
   ): Promise<void> {
     await this.authRepository.findIfExistByEmail(body.Auth.email);
+
     const encryptedPassword = encryptPassword(body.Auth.password);
     const auth = await this.authRepository.create(
       { ...body.Auth, password: encryptedPassword },
       transaction
     );
+    const photoURL = await CloudinaryUpload(body.User.photo);
     await this.userRepository.create(
-      { AuthId: auth.id, ...body.User },
+      { AuthId: auth.id, ...body.User, photo: photoURL },
       transaction
     );
   }
