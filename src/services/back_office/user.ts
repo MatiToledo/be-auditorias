@@ -4,16 +4,63 @@ import {
   AllUser,
   IUserBackOfficeService,
   QueriesGetAll,
+  UpdateAdminBody,
+  UpdateUserBody,
 } from "../../interfaces/back_office/user";
 import { buildPagination } from "../../libs/buildPagination";
 import { UserBackOfficeRepository } from "../../repositories/back_office/user";
 import { UserBO } from "../../models";
 import { UUID } from "crypto";
+import { AuthBackOfficeRepository } from "../../repositories/back_office/auth";
+import { encryptPassword } from "../../libs/encrypt_password";
+import { UserRepository } from "../../repositories/user";
+import { AuthRepository } from "../../repositories/auth";
 
 export class UserBackOfficeService implements IUserBackOfficeService {
   private userBackOfficeRepository = new UserBackOfficeRepository();
+  private userRepository = new UserRepository();
+  private authRepository = new AuthRepository();
+  private authBackOfficeRepository = new AuthBackOfficeRepository();
   async getMe(id: UUID): Promise<UserBO> {
     return await this.userBackOfficeRepository.findById(id);
+  }
+  async update(
+    id: UUID,
+    body: UpdateUserBody,
+    transaction: Transaction
+  ): Promise<void> {
+    const userUpdated = await this.userBackOfficeRepository.update(
+      id,
+      body.User,
+      transaction
+    );
+    const user = await this.userRepository.findById(userUpdated.id);
+    if (body.Auth.password) {
+      body.Auth.password = encryptPassword(body.Auth.password);
+    }
+    await this.authRepository.update(user.Auth.id, body.Auth, transaction);
+    return;
+  }
+  async updateAdmin(
+    id: UUID,
+    body: UpdateAdminBody,
+    transaction: Transaction
+  ): Promise<void> {
+    const userUpdated = await this.userBackOfficeRepository.updateAdmin(
+      id,
+      body.User,
+      transaction
+    );
+    const user = await this.userBackOfficeRepository.findById(userUpdated.id);
+    if (body.Auth.password) {
+      body.Auth.password = encryptPassword(body.Auth.password);
+    }
+    await this.authBackOfficeRepository.update(
+      user.AuthBOId,
+      body.Auth,
+      transaction
+    );
+    return;
   }
   async getAll(
     queries: QueriesGetAll

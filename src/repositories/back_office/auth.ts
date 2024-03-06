@@ -1,6 +1,7 @@
 import { Transaction } from "sequelize";
 import { IAuthBackOfficeRepository } from "../../interfaces/back_office/auth";
 import { AuthBO } from "../../models/back_office/auth";
+import { UUID } from "crypto";
 
 export class AuthBackOfficeRepository implements IAuthBackOfficeRepository {
   async create(
@@ -14,6 +15,22 @@ export class AuthBackOfficeRepository implements IAuthBackOfficeRepository {
     } catch (error) {
       console.error(error);
       throw new Error(`AUTH_NOT_CREATED`);
+    }
+  }
+  async update(
+    id: UUID,
+    data: Partial<AuthBO>,
+    transaction: Transaction
+  ): Promise<number> {
+    try {
+      const [affectedCount] = await AuthBO.update(data, {
+        where: { id },
+        transaction,
+      });
+      return affectedCount;
+    } catch (error) {
+      console.error(error);
+      throw new Error(`AUTH_NOT_UPDATED`);
     }
   }
   async findIfExistByEmail(email: string): Promise<void> {

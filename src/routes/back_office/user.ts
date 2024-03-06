@@ -13,6 +13,18 @@ router.get(
   UserBackOfficeValidate.getAll,
   userBackOfficeController.getAll
 );
+router.put(
+  "/:id",
+  authAdminMiddleware,
+  UserBackOfficeValidate.update,
+  userBackOfficeController.update
+);
+router.put(
+  "/admin/:id",
+  authAdminMiddleware,
+  UserBackOfficeValidate.updateAdmin,
+  userBackOfficeController.updateAdmin
+);
 router.get(
   "/admin/all",
   authAdminMiddleware,

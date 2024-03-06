@@ -8,6 +8,7 @@ import { generateToken } from "../../libs/jwt";
 import { AuthBO } from "../../models/back_office/auth";
 import { AuthBackOfficeRepository } from "../../repositories/back_office/auth";
 import { UserBackOfficeService } from "./user";
+import { UUID } from "crypto";
 
 export class AuthBackOfficeService implements IAuthBackOfficeService {
   private authBackOfficeRepository = new AuthBackOfficeRepository();
@@ -35,5 +36,13 @@ export class AuthBackOfficeService implements IAuthBackOfficeService {
     const user = await this.userBackOfficeService.findByAuthId(auth.id);
     const token = generateToken({ id: user.id, role: user.role });
     return token;
+  }
+  /////////////////////////////////////////////////////////////////////////////////////////////
+  async update(
+    id: UUID,
+    body: Partial<AuthBO>,
+    transaction: Transaction
+  ): Promise<number> {
+    return await this.authBackOfficeRepository.update(id, body, transaction);
   }
 }

@@ -18,6 +18,40 @@ export class UserBackOfficeRepository implements IUserBackOfficeRepository {
       throw new Error(`USER_NOT_CREATED`);
     }
   }
+  async update(
+    id: UUID,
+    data: Partial<User>,
+    transaction: Transaction
+  ): Promise<User> {
+    try {
+      const [updatedInstitution, affectedRows] = await User.update(data, {
+        where: { id },
+        transaction,
+        returning: true,
+      });
+      return affectedRows[0];
+    } catch (error) {
+      console.error(error);
+      throw new Error(`USER_NOT_UPDATED`);
+    }
+  }
+  async updateAdmin(
+    id: UUID,
+    data: Partial<UserBO>,
+    transaction: Transaction
+  ): Promise<UserBO> {
+    try {
+      const [updatedInstitution, affectedRows] = await UserBO.update(data, {
+        where: { id },
+        transaction,
+        returning: true,
+      });
+      return affectedRows[0];
+    } catch (error) {
+      console.error(error);
+      throw new Error(`USER_NOT_UPDATED`);
+    }
+  }
 
   async findById(id: UUID): Promise<UserBO> {
     try {
@@ -33,6 +67,7 @@ export class UserBackOfficeRepository implements IUserBackOfficeRepository {
           "id",
           "fullName",
           [Sequelize.literal('"AuthBO"."email"'), "email"],
+          [Sequelize.literal('"AuthBO"."id"'), "AuthBOId"],
         ],
         raw: true,
       });

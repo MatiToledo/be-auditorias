@@ -1,6 +1,7 @@
 import { Transaction } from "sequelize";
 import { IAuthRepository } from "../interfaces/auth";
 import { Auth } from "../models";
+import { UUID } from "crypto";
 
 export class AuthRepository implements IAuthRepository {
   async create(data: Partial<Auth>, transaction: Transaction): Promise<Auth> {
@@ -11,6 +12,22 @@ export class AuthRepository implements IAuthRepository {
     } catch (error) {
       console.error(error);
       throw new Error(`AUTH_NOT_CREATED`);
+    }
+  }
+  async update(
+    id: UUID,
+    data: Partial<Auth>,
+    transaction: Transaction
+  ): Promise<number> {
+    try {
+      const [affectedCount] = await Auth.update(data, {
+        where: { id },
+        transaction,
+      });
+      return affectedCount;
+    } catch (error) {
+      console.error(error);
+      throw new Error(`AUTH_NOT_UPDATED`);
     }
   }
   async findIfExistByEmail(email: string): Promise<void> {

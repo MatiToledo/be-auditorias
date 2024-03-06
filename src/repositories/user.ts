@@ -15,6 +15,17 @@ export class UserRepository implements IUserRepository {
     }
   }
 
+  async findById(id: UUID): Promise<User> {
+    try {
+      return await User.findOne({
+        where: { id },
+        include: [{ model: Auth }],
+      });
+    } catch (error) {
+      console.error(error);
+      throw new Error(`USER_NOT_FOUND`);
+    }
+  }
   async findByAuthId(id: UUID): Promise<User> {
     try {
       return await User.findOne({
