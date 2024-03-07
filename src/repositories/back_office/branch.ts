@@ -8,6 +8,7 @@ import {
   RegisterTicket,
 } from "../../models";
 import { IBranchBackOfficeRepository } from "../../interfaces/back_office/branch";
+import { UUID } from "crypto";
 
 export class BranchBackOfficeRepository implements IBranchBackOfficeRepository {
   async bulkCreate(
@@ -21,6 +22,39 @@ export class BranchBackOfficeRepository implements IBranchBackOfficeRepository {
     } catch (error) {
       console.error(error);
       throw new Error(`BRANCHES_NOT_CREATED`);
+    }
+  }
+
+  async update(id: UUID, data: Partial<Branch>): Promise<Branch> {
+    try {
+      const [updatedInstitution, affectedRows] = await Branch.update(data, {
+        where: { id },
+        returning: true,
+      });
+      return affectedRows[0];
+    } catch (error) {
+      console.error(error);
+      throw new Error(`BRANCH_NOT_UPDATED`);
+    }
+  }
+
+  async delete(id: UUID): Promise<boolean> {
+    try {
+      const res = await Branch.destroy({
+        where: { id },
+      });
+      if (res > 0) {
+        return true;
+      } else {
+        throw new Error();
+      }
+    } catch (error) {
+      console.error(error);
+      if (error.message) {
+        throw new Error("BRANCH_NOT_DELETED");
+      } else {
+        throw new Error("BRANCH_ERROR_DELETED");
+      }
     }
   }
 

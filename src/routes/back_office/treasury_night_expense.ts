@@ -13,5 +13,15 @@ router.get(
   TreasuryNightExpenseBackOfficeValidate.getAll,
   treasuryNightExpenseBackOfficeController.getAll
 );
-
+router.put(
+  "/:id",
+  authAdminMiddleware,
+  TreasuryNightExpenseBackOfficeValidate.update,
+  treasuryNightExpenseBackOfficeController.update
+);
+router.delete(
+  "/:id",
+  authAdminMiddleware,
+  treasuryNightExpenseBackOfficeController.delete
+);
 export default router;

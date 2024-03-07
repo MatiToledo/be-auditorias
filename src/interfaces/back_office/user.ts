@@ -1,7 +1,7 @@
 import { UUID } from "crypto";
 import { Transaction } from "sequelize";
 import { UserBO } from "../../models/back_office/user";
-import { Auth, User } from "../../models";
+import { Auth, AuthBO, User } from "../../models";
 export interface IUserBackOfficeService {
   getAll(queries: QueriesGetAll): Promise<{ rows: AllUser[]; count: number }>;
   create(data: Partial<UserBO>, transaction: Transaction): Promise<UserBO>;
@@ -41,13 +41,8 @@ export interface QueriesGetAll {
 }
 
 export interface UpdateAdminBody {
-  User?: {
-    fullName?: string;
-  };
-  Auth?: {
-    password?: string;
-    email?: string;
-  };
+  User?: Partial<UserBO>;
+  Auth?: Partial<AuthBO>;
 }
 export interface UpdateUserBody {
   User?: Partial<User>;

@@ -1,4 +1,4 @@
-import { Sequelize, WhereOptions } from "sequelize";
+import { Sequelize, Transaction, WhereOptions } from "sequelize";
 import { ITreasuryNightRetirementFinishBackOfficeRepository } from "../../interfaces/back_office/treasury_night_retirement_finish";
 import {
   Branch,
@@ -8,10 +8,47 @@ import {
   RegisterTicket,
   TreasuryNightRetirementFinish,
 } from "../../models";
+import { UUID } from "crypto";
 
 export class TreasuryNightRetirementFinishBackOfficeRepository
   implements ITreasuryNightRetirementFinishBackOfficeRepository
 {
+  async update(
+    id: UUID,
+    data: Partial<TreasuryNightRetirementFinish>
+  ): Promise<TreasuryNightRetirementFinish> {
+    try {
+      const [updatedInstitution, affectedRows] =
+        await TreasuryNightRetirementFinish.update(data, {
+          where: { id },
+          returning: true,
+        });
+      return affectedRows[0];
+    } catch (error) {
+      console.error(error);
+      throw new Error(`TREASURY_NIGHT_RETIREMENT_FINISH_NOT_UPDATED`);
+    }
+  }
+
+  async delete(id: UUID): Promise<boolean> {
+    try {
+      const res = await TreasuryNightRetirementFinish.destroy({
+        where: { id },
+      });
+      if (res > 0) {
+        return true;
+      } else {
+        throw new Error();
+      }
+    } catch (error) {
+      console.error(error);
+      if (error.message) {
+        throw new Error("TREASURY_NIGHT_RETIREMENT_FINISH_NOT_DELETED");
+      } else {
+        throw new Error("TREASURY_NIGHT_RETIREMENT_FINISH_ERROR_DELETED");
+      }
+    }
+  }
   async getAll(
     where: WhereOptions,
     pagination: { offset: number; limit: number }
@@ -52,6 +89,13 @@ export class TreasuryNightRetirementFinishBackOfficeRepository
           "amount",
           [Sequelize.literal('"RegisterTicket"."name"'), "register_ticket"],
           [Sequelize.literal('"RegisterBar"."name"'), "register_bar"],
+          [Sequelize.literal('"RegisterTicket"."id"'), "RegisterTicketId"],
+          [Sequelize.literal('"RegisterBar"."id"'), "RegisterBarId"],
+          [
+            Sequelize.literal('"RegisterTicket->Branch"."id"'),
+            "TicketBranchId",
+          ],
+          [Sequelize.literal('"RegisterBar->Branch"."id"'), "BarBranchId"],
         ],
         limit: pagination.limit,
         offset: pagination.offset,

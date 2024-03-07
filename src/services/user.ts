@@ -13,6 +13,9 @@ export class UserService implements IUserService {
     await this.userRepository.create(data, transaction);
     return true;
   }
+  async delete(id: UUID): Promise<boolean> {
+    return await this.userRepository.delete(id);
+  }
   async me(id: UUID): Promise<UserMeType> {
     const user = await this.userRepository.me(id);
     return {

@@ -8,6 +8,7 @@ import {
 import { Branch } from "../../models";
 import { BranchBackOfficeRepository } from "../../repositories/back_office/branch";
 import { buildPagination } from "../../libs/buildPagination";
+import { UUID } from "crypto";
 
 export class BranchBackOfficeService implements IBranchBackOfficeService {
   private branchBackOfficeRepository = new BranchBackOfficeRepository();
@@ -20,7 +21,12 @@ export class BranchBackOfficeService implements IBranchBackOfficeService {
   async create(body: Partial<Branch>): Promise<Branch> {
     return await this.branchBackOfficeRepository.create(body);
   }
-
+  async update(id: UUID, body: Partial<Branch>): Promise<Branch> {
+    return await this.branchBackOfficeRepository.update(id, body);
+  }
+  async delete(id: UUID): Promise<boolean> {
+    return await this.branchBackOfficeRepository.delete(id);
+  }
   async getAll(
     queries: QueriesGetAll
   ): Promise<{ rows: AllBranch[]; count: number }> {

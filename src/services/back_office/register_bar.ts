@@ -1,12 +1,13 @@
+import { UUID } from "crypto";
 import { Op, Transaction, WhereOptions } from "sequelize";
 import {
   AllRegisterBar,
   IRegisterBarBackOfficeService,
   QueriesGetAll,
 } from "../../interfaces/back_office/register_bar";
+import { buildPagination } from "../../libs/buildPagination";
 import { RegisterBar } from "../../models";
 import { RegisterBarBackOfficeRepository } from "../../repositories/back_office/register_bar";
-import { buildPagination } from "../../libs/buildPagination";
 
 export class RegisterBarBackOfficeService
   implements IRegisterBarBackOfficeService
@@ -22,6 +23,12 @@ export class RegisterBarBackOfficeService
       data,
       transaction
     );
+  }
+  async update(id: UUID, body: Partial<RegisterBar>): Promise<RegisterBar> {
+    return await this.registerBarBackOfficeRepository.update(id, body);
+  }
+  async delete(id: UUID): Promise<boolean> {
+    return await this.registerBarBackOfficeRepository.delete(id);
   }
   async create(body: Partial<RegisterBar>): Promise<RegisterBar> {
     return await this.registerBarBackOfficeRepository.create(body);

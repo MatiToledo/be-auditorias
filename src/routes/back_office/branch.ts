@@ -13,6 +13,14 @@ router.post(
   branchBackOfficeController.create
 );
 
+router.put(
+  "/:id",
+  authAdminMiddleware,
+  BranchBackOfficeValidate.update,
+  branchBackOfficeController.update
+);
+router.delete("/:id", authAdminMiddleware, branchBackOfficeController.delete);
+
 router.get(
   "/all/:GroupId",
   authAdminMiddleware,

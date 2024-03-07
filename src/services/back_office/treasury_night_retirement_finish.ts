@@ -1,10 +1,12 @@
+import { UUID } from "crypto";
 import { Op, WhereOptions } from "sequelize";
 import { QueriesGetAll } from "../../interfaces/back_office/register_bar";
-import { buildPagination } from "../../libs/buildPagination";
 import {
   AllTreasuryNightRetirementFinish,
   ITreasuryNightRetirementFinishBackOfficeService,
 } from "../../interfaces/back_office/treasury_night_retirement_finish";
+import { buildPagination } from "../../libs/buildPagination";
+import { TreasuryNightRetirementFinish } from "../../models";
 import { TreasuryNightRetirementFinishBackOfficeRepository } from "../../repositories/back_office/treasury_night_retirement_finish";
 
 export class TreasuryNightRetirementFinishBackOfficeService
@@ -13,7 +15,20 @@ export class TreasuryNightRetirementFinishBackOfficeService
   /////////////////////////////////////////////////////////////////////////////////////////////
   private treasuryNightRetirementFinishBackOfficeRepository =
     new TreasuryNightRetirementFinishBackOfficeRepository();
-
+  async update(
+    id: UUID,
+    body: Partial<TreasuryNightRetirementFinish>
+  ): Promise<TreasuryNightRetirementFinish> {
+    return await this.treasuryNightRetirementFinishBackOfficeRepository.update(
+      id,
+      body
+    );
+  }
+  async delete(id: UUID): Promise<boolean> {
+    return await this.treasuryNightRetirementFinishBackOfficeRepository.delete(
+      id
+    );
+  }
   async getAll(queries: QueriesGetAll): Promise<{
     rows: AllTreasuryNightRetirementFinish[];
     count: number;
@@ -37,6 +52,11 @@ export class TreasuryNightRetirementFinishBackOfficeService
           postnet: retirement_finish.postnet,
           transfers: retirement_finish.transfers,
           amount: retirement_finish.amount,
+          RegisterBarId: retirement_finish.dataValues.RegisterBarId,
+          RegisterTicketId: retirement_finish.dataValues.RegisterTicketId,
+          BranchId: retirement_finish.dataValues.BarBranchId
+            ? retirement_finish.dataValues.BarBranchId
+            : retirement_finish.dataValues.TicketBranchId,
           register: retirement_finish.dataValues.register_bar
             ? retirement_finish.dataValues.register_bar
             : retirement_finish.dataValues.register_ticket,

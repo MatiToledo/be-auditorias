@@ -6,6 +6,8 @@ import {
 } from "../../interfaces/back_office/treasury_night_retirement";
 import { buildPagination } from "../../libs/buildPagination";
 import { TreasuryNightRetirementBackOfficeRepository } from "../../repositories/back_office/treasury_night_retirement";
+import { TreasuryNightRetirement } from "../../models";
+import { UUID } from "crypto";
 
 export class TreasuryNightRetirementBackOfficeService
   implements ITreasuryNightRetirementBackOfficeService
@@ -13,7 +15,18 @@ export class TreasuryNightRetirementBackOfficeService
   /////////////////////////////////////////////////////////////////////////////////////////////
   private treasuryNightRetirementBackOfficeRepository =
     new TreasuryNightRetirementBackOfficeRepository();
-
+  async update(
+    id: UUID,
+    body: Partial<TreasuryNightRetirement>
+  ): Promise<TreasuryNightRetirement> {
+    return await this.treasuryNightRetirementBackOfficeRepository.update(
+      id,
+      body
+    );
+  }
+  async delete(id: UUID): Promise<boolean> {
+    return await this.treasuryNightRetirementBackOfficeRepository.delete(id);
+  }
   async getAll(queries: QueriesGetAll): Promise<{
     rows: AllTreasuryNightRetirement[];
     count: number;
@@ -35,6 +48,11 @@ export class TreasuryNightRetirementBackOfficeService
           type: retirement.type,
           date: retirement.date as any,
           amount: retirement.amount,
+          RegisterBarId: retirement.dataValues.RegisterBarId,
+          RegisterTicketId: retirement.dataValues.RegisterTicketId,
+          BranchId: retirement.dataValues.BarBranchId
+            ? retirement.dataValues.BarBranchId
+            : retirement.dataValues.TicketBranchId,
           register: retirement.dataValues.register_bar
             ? retirement.dataValues.register_bar
             : retirement.dataValues.register_ticket,

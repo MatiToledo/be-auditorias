@@ -13,5 +13,15 @@ router.get(
   TreasuryCentralBackOfficeValidate.getAll,
   treasuryCentralBackOfficeController.getAll
 );
-
+router.put(
+  "/:id",
+  authAdminMiddleware,
+  TreasuryCentralBackOfficeValidate.update,
+  treasuryCentralBackOfficeController.update
+);
+router.delete(
+  "/:id",
+  authAdminMiddleware,
+  treasuryCentralBackOfficeController.delete
+);
 export default router;

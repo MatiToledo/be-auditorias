@@ -1,3 +1,4 @@
+import { UUID } from "crypto";
 import { Transaction, WhereOptions } from "sequelize";
 import { IRegisterBarBackOfficeRepository } from "../../interfaces/back_office/register_bar";
 import { Branch, Company, Group, RegisterBar } from "../../models";
@@ -16,6 +17,41 @@ export class RegisterBarBackOfficeRepository
     } catch (error) {
       console.error(error);
       throw new Error(`REGISTER_BARS_NOT_CREATED`);
+    }
+  }
+  async update(id: UUID, data: Partial<RegisterBar>): Promise<RegisterBar> {
+    try {
+      const [updatedInstitution, affectedRows] = await RegisterBar.update(
+        data,
+        {
+          where: { id },
+          returning: true,
+        }
+      );
+      return affectedRows[0];
+    } catch (error) {
+      console.error(error);
+      throw new Error(`REGISTER_BAR_NOT_UPDATED`);
+    }
+  }
+
+  async delete(id: UUID): Promise<boolean> {
+    try {
+      const res = await RegisterBar.destroy({
+        where: { id },
+      });
+      if (res > 0) {
+        return true;
+      } else {
+        throw new Error();
+      }
+    } catch (error) {
+      console.error(error);
+      if (error.message) {
+        throw new Error("REGISTER_BAR_NOT_DELETED");
+      } else {
+        throw new Error("REGISTER_BAR_ERROR_DELETED");
+      }
     }
   }
   async create(data: Partial<RegisterBar>): Promise<RegisterBar> {

@@ -18,7 +18,13 @@ router.get(
   GroupBackOfficeValidate.getAll,
   groupBackOfficeController.getAll
 );
-
+router.put(
+  "/:id",
+  authAdminMiddleware,
+  GroupBackOfficeValidate.update,
+  groupBackOfficeController.update
+);
+router.delete("/:id", authAdminMiddleware, groupBackOfficeController.delete);
 router.post(
   "/",
   authAdminMiddleware,

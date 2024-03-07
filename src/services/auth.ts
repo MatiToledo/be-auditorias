@@ -30,6 +30,7 @@ export class AuthService implements IAuthService {
 
   /////////////////////////////////////////////////////////////////////////////////////////////
   async logIn(body: Partial<Auth>): Promise<string> {
+    console.log("body: ", body);
     const encryptedPassword = encryptPassword(body.password);
     const auth = await this.authRepository.findIfExistByCredentials({
       ...body,

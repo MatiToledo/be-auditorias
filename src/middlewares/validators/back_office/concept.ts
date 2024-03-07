@@ -40,4 +40,22 @@ export class ConceptBackOfficeValidate {
       return res.status(400).json({ field: "query", message: "BAD_REQUEST" });
     }
   }
+  static async update(req: Request, res: Response, next: NextFunction) {
+    const schema: Schema = object({
+      body: object({
+        name: string().optional(),
+        type: string().optional(),
+        level: number().optional(),
+      })
+        .noUnknown(true)
+        .strict(true),
+    });
+    try {
+      const validate = await schema.validate({ body: req.body });
+      if (validate) return next();
+    } catch (error) {
+      console.error(error);
+      return res.status(400).json({ field: "body", message: "BAD_REQUEST" });
+    }
+  }
 }

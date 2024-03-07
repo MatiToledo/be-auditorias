@@ -1,10 +1,12 @@
+import { UUID } from "crypto";
 import { Op, WhereOptions } from "sequelize";
-import { buildPagination } from "../../libs/buildPagination";
 import {
   AllTreasuryNightExpense,
   ITreasuryNightExpenseBackOfficeService,
   QueriesGetAll,
 } from "../../interfaces/back_office/treasury_night_expense";
+import { buildPagination } from "../../libs/buildPagination";
+import { TreasuryNightExpense } from "../../models";
 import { TreasuryNightExpenseBackOfficeRepository } from "../../repositories/back_office/treasury_night_expense";
 
 export class TreasuryNightExpenseBackOfficeService
@@ -26,6 +28,15 @@ export class TreasuryNightExpenseBackOfficeService
         pagination
       );
     return register_bars_closures as any;
+  }
+  async update(
+    id: UUID,
+    body: Partial<TreasuryNightExpense>
+  ): Promise<TreasuryNightExpense> {
+    return await this.treasuryNightExpenseBackOfficeRepository.update(id, body);
+  }
+  async delete(id: UUID): Promise<boolean> {
+    return await this.treasuryNightExpenseBackOfficeRepository.delete(id);
   }
 
   private buildQueriesFilters(queries: QueriesGetAll) {

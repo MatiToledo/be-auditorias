@@ -7,11 +7,18 @@ import {
 import { buildPagination } from "../../libs/buildPagination";
 import { CompanyBackOfficeRepository } from "../../repositories/back_office/company";
 import { Company } from "../../models";
+import { UUID } from "crypto";
 
 export class CompanyBackOfficeService implements ICompanyBackOfficeService {
   private companyBackOfficeRepository = new CompanyBackOfficeRepository();
   async create(body: Partial<Company>): Promise<Company> {
     return await this.companyBackOfficeRepository.create(body);
+  }
+  async update(id: UUID, body: Partial<Company>): Promise<Company> {
+    return await this.companyBackOfficeRepository.update(id, body);
+  }
+  async delete(id: UUID): Promise<boolean> {
+    return await this.companyBackOfficeRepository.delete(id);
   }
   async getAll(
     queries: QueriesGetAll

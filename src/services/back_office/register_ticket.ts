@@ -1,14 +1,13 @@
+import { UUID } from "crypto";
 import { Op, Transaction, WhereOptions } from "sequelize";
-import { IRegisterBarBackOfficeService } from "../../interfaces/back_office/register_bar";
-import { RegisterBarBackOfficeRepository } from "../../repositories/back_office/register_bar";
-import { RegisterBar, RegisterTicket } from "../../models";
-import { RegisterTicketBackOfficeRepository } from "../../repositories/back_office/register_ticket";
 import {
   AllRegisterTicket,
   IRegisterTicketBackOfficeService,
   QueriesGetAll,
 } from "../../interfaces/back_office/register_ticket";
 import { buildPagination } from "../../libs/buildPagination";
+import { RegisterTicket } from "../../models";
+import { RegisterTicketBackOfficeRepository } from "../../repositories/back_office/register_ticket";
 
 export class RegisterTicketBackOfficeService
   implements IRegisterTicketBackOfficeService
@@ -24,6 +23,15 @@ export class RegisterTicketBackOfficeService
       data,
       transaction
     );
+  }
+  async update(
+    id: UUID,
+    body: Partial<RegisterTicket>
+  ): Promise<RegisterTicket> {
+    return await this.registerTicketBackOfficeRepository.update(id, body);
+  }
+  async delete(id: UUID): Promise<boolean> {
+    return await this.registerTicketBackOfficeRepository.delete(id);
   }
   async create(body: Partial<RegisterTicket>): Promise<RegisterTicket> {
     return await this.registerTicketBackOfficeRepository.create(body);

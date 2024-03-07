@@ -19,6 +19,12 @@ router.put(
   UserBackOfficeValidate.update,
   userBackOfficeController.update
 );
+router.delete("/:id", authAdminMiddleware, userBackOfficeController.delete);
+router.delete(
+  "/admin/:id",
+  authAdminMiddleware,
+  userBackOfficeController.deleteAdmin
+);
 router.put(
   "/admin/:id",
   authAdminMiddleware,

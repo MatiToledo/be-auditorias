@@ -15,6 +15,7 @@ import { AuthBackOfficeRepository } from "../../repositories/back_office/auth";
 import { encryptPassword } from "../../libs/encrypt_password";
 import { UserRepository } from "../../repositories/user";
 import { AuthRepository } from "../../repositories/auth";
+import { CloudinaryUpload } from "../../libs/cloudinary";
 
 export class UserBackOfficeService implements IUserBackOfficeService {
   private userBackOfficeRepository = new UserBackOfficeRepository();
@@ -29,6 +30,10 @@ export class UserBackOfficeService implements IUserBackOfficeService {
     body: UpdateUserBody,
     transaction: Transaction
   ): Promise<void> {
+    if (body.User.photo) {
+      const photoURL = await CloudinaryUpload(body.User.photo);
+      body.User.photo = photoURL;
+    }
     const userUpdated = await this.userBackOfficeRepository.update(
       id,
       body.User,
@@ -46,6 +51,7 @@ export class UserBackOfficeService implements IUserBackOfficeService {
     body: UpdateAdminBody,
     transaction: Transaction
   ): Promise<void> {
+    console.log("body: ", body);
     const userUpdated = await this.userBackOfficeRepository.updateAdmin(
       id,
       body.User,
@@ -61,6 +67,9 @@ export class UserBackOfficeService implements IUserBackOfficeService {
       transaction
     );
     return;
+  }
+  async delete(id: UUID): Promise<boolean> {
+    return await this.userBackOfficeRepository.delete(id);
   }
   async getAll(
     queries: QueriesGetAll
@@ -81,6 +90,9 @@ export class UserBackOfficeService implements IUserBackOfficeService {
         branch: user.Branch.name,
         group: user.Branch.Group.name,
         company: user.Branch.Group.Company.name,
+        BranchId: user.Branch.id,
+        GroupId: user.Branch.Group.id,
+        CompanyId: user.Branch.Group.Company.id,
       })),
     };
   }

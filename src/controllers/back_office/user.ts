@@ -6,9 +6,11 @@ import { UserBackOfficeService } from "../../services/back_office/user";
 import { UUID } from "crypto";
 import { Transaction } from "sequelize";
 import { sequelize } from "../../DB";
+import { UserService } from "../../services/user";
 
 export class UserBackOfficeController {
   private userBackOfficeService = new UserBackOfficeService();
+  private userService = new UserService();
   getMe = async (req: AuthenticatedRequest, res: Response) => {
     try {
       const id = req.userData.id;
@@ -37,6 +39,29 @@ export class UserBackOfficeController {
       res.status(400).json(responseHandler(false, error.message));
     }
   };
+
+  delete = async (req: AuthenticatedRequest, res: Response) => {
+    try {
+      const id = req.params.id as UUID;
+      await this.userService.delete(id);
+      res.status(200).json(responseHandler(true, "USER_DELETED"));
+    } catch (error) {
+      console.error(error);
+      res.status(400).json(responseHandler(false, error.message));
+    }
+  };
+
+  deleteAdmin = async (req: AuthenticatedRequest, res: Response) => {
+    try {
+      const id = req.params.id as UUID;
+      await this.userBackOfficeService.delete(id);
+      res.status(200).json(responseHandler(true, "USER_DELETED"));
+    } catch (error) {
+      console.error(error);
+      res.status(400).json(responseHandler(false, error.message));
+    }
+  };
+
   updateAdmin = async (req: AuthenticatedRequest, res: Response) => {
     try {
       const id = req.params.id as UUID;

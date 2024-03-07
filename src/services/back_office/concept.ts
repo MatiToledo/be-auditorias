@@ -1,17 +1,23 @@
+import { UUID } from "crypto";
 import { Op, WhereOptions } from "sequelize";
-import { buildPagination } from "../../libs/buildPagination";
 import {
   AllConcept,
   IConceptBackOfficeService,
   QueriesGetAll,
 } from "../../interfaces/back_office/concept";
-import { ConceptBackOfficeRepository } from "../../repositories/back_office/concept";
+import { buildPagination } from "../../libs/buildPagination";
 import { Concept } from "../../models";
+import { ConceptBackOfficeRepository } from "../../repositories/back_office/concept";
 
 export class ConceptBackOfficeService implements IConceptBackOfficeService {
   /////////////////////////////////////////////////////////////////////////////////////////////
   private conceptBackOfficeRepository = new ConceptBackOfficeRepository();
-
+  async update(id: UUID, body: Partial<Concept>): Promise<Concept> {
+    return await this.conceptBackOfficeRepository.update(id, body);
+  }
+  async delete(id: UUID): Promise<boolean> {
+    return await this.conceptBackOfficeRepository.delete(id);
+  }
   async getAll(queries: QueriesGetAll): Promise<{
     rows: AllConcept[];
     count: number;

@@ -1,12 +1,14 @@
+import { UUID } from "crypto";
 import { Op, WhereOptions } from "sequelize";
-import { buildPagination } from "../../libs/buildPagination";
 import {
   AllTreasuryCentral,
   ITreasuryCentralBackOfficeService,
   QueriesGetAll,
 } from "../../interfaces/back_office/treasury_central";
-import { TreasuryCentralBackOfficeRepository } from "../../repositories/back_office/treasury_central";
 import { TreasuryCentralMovements } from "../../interfaces/treasury_central";
+import { buildPagination } from "../../libs/buildPagination";
+import { TreasuryCentral } from "../../models";
+import { TreasuryCentralBackOfficeRepository } from "../../repositories/back_office/treasury_central";
 
 export class TreasuryCentralBackOfficeService
   implements ITreasuryCentralBackOfficeService
@@ -14,7 +16,15 @@ export class TreasuryCentralBackOfficeService
   /////////////////////////////////////////////////////////////////////////////////////////////
   private treasuryCentralBackOfficeRepository =
     new TreasuryCentralBackOfficeRepository();
-
+  async update(
+    id: UUID,
+    body: Partial<TreasuryCentral>
+  ): Promise<TreasuryCentral> {
+    return await this.treasuryCentralBackOfficeRepository.update(id, body);
+  }
+  async delete(id: UUID): Promise<boolean> {
+    return await this.treasuryCentralBackOfficeRepository.delete(id);
+  }
   async getAll(queries: QueriesGetAll): Promise<{
     rows: AllTreasuryCentral[];
     count: number;

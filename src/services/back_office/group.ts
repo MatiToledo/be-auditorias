@@ -7,9 +7,16 @@ import {
 import { buildPagination } from "../../libs/buildPagination";
 import { Group } from "../../models";
 import { GroupBackOfficeRepository } from "../../repositories/back_office/group";
+import { UUID } from "crypto";
 
 export class GroupBackOfficeService implements IGroupBackOfficeService {
   private groupBackOfficeRepository = new GroupBackOfficeRepository();
+  async update(id: UUID, body: Partial<Group>): Promise<Group> {
+    return await this.groupBackOfficeRepository.update(id, body);
+  }
+  async delete(id: UUID): Promise<boolean> {
+    return await this.groupBackOfficeRepository.delete(id);
+  }
   async bulkCreate(
     data: Partial<Group>[],
     transaction: Transaction

@@ -12,6 +12,14 @@ router.post(
   companyBackOfficeController.create
 );
 
+router.put(
+  "/:id",
+  authAdminMiddleware,
+  CompanyBackOfficeValidate.update,
+  companyBackOfficeController.update
+);
+router.delete("/:id", authAdminMiddleware, companyBackOfficeController.delete);
+
 router.get("/all", authAdminMiddleware, companyBackOfficeController.getAll);
 
 export default router;

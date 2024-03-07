@@ -35,12 +35,33 @@ export class UserBackOfficeRepository implements IUserBackOfficeRepository {
       throw new Error(`USER_NOT_UPDATED`);
     }
   }
+
+  async delete(id: UUID): Promise<boolean> {
+    try {
+      const res = await UserBO.destroy({
+        where: { id },
+      });
+      if (res > 0) {
+        return true;
+      } else {
+        throw new Error();
+      }
+    } catch (error) {
+      console.error(error);
+      if (error.message) {
+        throw new Error("USER_NOT_DELETED");
+      } else {
+        throw new Error("USER_ERROR_DELETED");
+      }
+    }
+  }
   async updateAdmin(
     id: UUID,
     data: Partial<UserBO>,
     transaction: Transaction
   ): Promise<UserBO> {
     try {
+      console.log("data: ", data);
       const [updatedInstitution, affectedRows] = await UserBO.update(data, {
         where: { id },
         transaction,
@@ -50,6 +71,16 @@ export class UserBackOfficeRepository implements IUserBackOfficeRepository {
     } catch (error) {
       console.error(error);
       throw new Error(`USER_NOT_UPDATED`);
+    }
+  }
+  async deleteAdmin(id: UUID): Promise<number> {
+    try {
+      return await UserBO.destroy({
+        where: { id },
+      });
+    } catch (error) {
+      console.error(error);
+      throw new Error(`USER_NOT_DELETED`);
     }
   }
 

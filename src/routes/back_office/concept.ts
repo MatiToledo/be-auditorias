@@ -11,6 +11,14 @@ router.post(
   ConceptBackOfficeValidate.create,
   conceptBackOfficeController.create
 );
+router.put(
+  "/:id",
+  authAdminMiddleware,
+  ConceptBackOfficeValidate.update,
+  conceptBackOfficeController.update
+);
+router.delete("/:id", authAdminMiddleware, conceptBackOfficeController.delete);
+
 router.get(
   "/all",
   authAdminMiddleware,

@@ -17,5 +17,15 @@ router.get(
   RegisterBarBackOfficeValidate.getAll,
   registerBarBackOfficeController.getAll
 );
-
+router.put(
+  "/:id",
+  authAdminMiddleware,
+  RegisterBarBackOfficeValidate.update,
+  registerBarBackOfficeController.update
+);
+router.delete(
+  "/:id",
+  authAdminMiddleware,
+  registerBarBackOfficeController.delete
+);
 export default router;

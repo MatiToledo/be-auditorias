@@ -13,5 +13,16 @@ router.get(
   RegisterBarClosureBackOfficeValidate.getAll,
   registerBarClosureBackOfficeController.getAll
 );
+router.put(
+  "/:id",
+  authAdminMiddleware,
+  RegisterBarClosureBackOfficeValidate.update,
+  registerBarClosureBackOfficeController.update
+);
+router.delete(
+  "/:id",
+  authAdminMiddleware,
+  registerBarClosureBackOfficeController.delete
+);
 
 export default router;

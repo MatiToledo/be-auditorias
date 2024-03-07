@@ -18,5 +18,15 @@ router.get(
   RegisterTicketBackOfficeValidate.getAll,
   registerTicketBackOfficeController.getAll
 );
-
+router.put(
+  "/:id",
+  authAdminMiddleware,
+  RegisterTicketBackOfficeValidate.update,
+  registerTicketBackOfficeController.update
+);
+router.delete(
+  "/:id",
+  authAdminMiddleware,
+  registerTicketBackOfficeController.delete
+);
 export default router;

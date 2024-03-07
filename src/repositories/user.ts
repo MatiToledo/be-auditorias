@@ -36,6 +36,25 @@ export class UserRepository implements IUserRepository {
       throw new Error(`USER_NOT_FOUND`);
     }
   }
+  async delete(id: UUID): Promise<boolean> {
+    try {
+      const res = await User.destroy({
+        where: { id },
+      });
+      if (res > 0) {
+        return true;
+      } else {
+        throw new Error();
+      }
+    } catch (error) {
+      console.error(error);
+      if (error.message) {
+        throw new Error("USER_NOT_DELETED");
+      } else {
+        throw new Error("USER_ERROR_DELETED");
+      }
+    }
+  }
 
   async me(id: UUID): Promise<User> {
     try {

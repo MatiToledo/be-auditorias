@@ -1,17 +1,14 @@
-import { Op, Transaction, WhereOptions } from "sequelize";
-import {
-  AllRegisterBar,
-  IRegisterBarBackOfficeService,
-  QueriesGetAll,
-} from "../../interfaces/back_office/register_bar";
-import { RegisterBar } from "../../models";
-import { RegisterBarBackOfficeRepository } from "../../repositories/back_office/register_bar";
-import { buildPagination } from "../../libs/buildPagination";
+import { UUID } from "crypto";
+import { Op, WhereOptions } from "sequelize";
+import { QueriesGetAll } from "../../interfaces/back_office/register_bar";
 import {
   AllRegisterBarClosure,
   IRegisterBarClosureBackOfficeService,
 } from "../../interfaces/back_office/register_bar_closure";
+import { buildPagination } from "../../libs/buildPagination";
+import { RegisterBarClosure } from "../../models";
 import { RegisterBarClosureBackOfficeRepository } from "../../repositories/back_office/register_bar_closure";
+import { CloudinaryUpload } from "../../libs/cloudinary";
 
 export class RegisterBarClosureBackOfficeService
   implements IRegisterBarClosureBackOfficeService
@@ -20,6 +17,19 @@ export class RegisterBarClosureBackOfficeService
   private registerBarClosureBackOfficeRepository =
     new RegisterBarClosureBackOfficeRepository();
 
+  async update(
+    id: UUID,
+    body: Partial<RegisterBarClosure>
+  ): Promise<RegisterBarClosure> {
+    if (body.photo) {
+      const photoURL = await CloudinaryUpload(body.photo);
+      body.photo = photoURL;
+    }
+    return await this.registerBarClosureBackOfficeRepository.update(id, body);
+  }
+  async delete(id: UUID): Promise<boolean> {
+    return await this.registerBarClosureBackOfficeRepository.delete(id);
+  }
   async getAll(queries: QueriesGetAll): Promise<{
     rows: AllRegisterBarClosure[];
     count: number;

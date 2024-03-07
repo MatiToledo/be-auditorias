@@ -1,3 +1,4 @@
+import { UUID } from "crypto";
 import { Op, WhereOptions } from "sequelize";
 import { QueriesGetAll } from "../../interfaces/back_office/register_bar";
 import {
@@ -5,7 +6,9 @@ import {
   IRegisterTicketClosureBackOfficeService,
 } from "../../interfaces/back_office/register_ticket_closure";
 import { buildPagination } from "../../libs/buildPagination";
+import { RegisterTicketClosure } from "../../models";
 import { RegisterTicketClosureBackOfficeRepository } from "../../repositories/back_office/register_ticket_closure";
+import { CloudinaryUpload } from "../../libs/cloudinary";
 
 export class RegisterTicketClosureBackOfficeService
   implements IRegisterTicketClosureBackOfficeService
@@ -13,7 +16,22 @@ export class RegisterTicketClosureBackOfficeService
   /////////////////////////////////////////////////////////////////////////////////////////////
   private registerTicketClosureBackOfficeRepository =
     new RegisterTicketClosureBackOfficeRepository();
-
+  async update(
+    id: UUID,
+    body: Partial<RegisterTicketClosure>
+  ): Promise<RegisterTicketClosure> {
+    if (body.photo) {
+      const photoURL = await CloudinaryUpload(body.photo);
+      body.photo = photoURL;
+    }
+    return await this.registerTicketClosureBackOfficeRepository.update(
+      id,
+      body
+    );
+  }
+  async delete(id: UUID): Promise<boolean> {
+    return await this.registerTicketClosureBackOfficeRepository.delete(id);
+  }
   async getAll(queries: QueriesGetAll): Promise<{
     rows: AllRegisterTicketClosure[];
     count: number;

@@ -7,10 +7,48 @@ import {
   RegisterTicket,
   RegisterTicketClosure,
 } from "../../models";
+import { Transaction } from "sequelize";
+import { UUID } from "crypto";
 
 export class RegisterTicketClosureBackOfficeRepository
   implements IRegisterTicketClosureBackOfficeRepository
 {
+  async update(
+    id: UUID,
+    data: Partial<RegisterTicketClosure>
+  ): Promise<RegisterTicketClosure> {
+    try {
+      const [updatedInstitution, affectedRows] =
+        await RegisterTicketClosure.update(data, {
+          where: { id },
+          returning: true,
+        });
+      return affectedRows[0];
+    } catch (error) {
+      console.error(error);
+      throw new Error(`REGISTER_TICKET_CLOSURE_NOT_UPDATED`);
+    }
+  }
+
+  async delete(id: UUID): Promise<boolean> {
+    try {
+      const res = await RegisterTicketClosure.destroy({
+        where: { id },
+      });
+      if (res > 0) {
+        return true;
+      } else {
+        throw new Error();
+      }
+    } catch (error) {
+      console.error(error);
+      if (error.message) {
+        throw new Error("REGISTER_TICKET_CLOSURE_NOT_DELETED");
+      } else {
+        throw new Error("REGISTER_TICKET_CLOSURE_ERROR_DELETED");
+      }
+    }
+  }
   async getAll(
     where: WhereOptions,
     pagination: { offset: number; limit: number }
@@ -48,9 +86,12 @@ export class RegisterTicketClosureBackOfficeRepository
           "observations",
           "photo",
           [Sequelize.literal('"RegisterTicket"."name"'), "register_ticket"],
+          [Sequelize.literal('"RegisterTicket"."id"'), "RegisterTicketId"],
+          [Sequelize.literal('"RegisterTicket->Branch"."id"'), "BranchId"],
         ],
         limit: pagination.limit,
         offset: pagination.offset,
+        order: [["createdAt", "ASC"]],
       });
     } catch (error) {
       console.error(error);

@@ -1,3 +1,4 @@
+import { UUID } from "crypto";
 import { Transaction, WhereOptions } from "sequelize";
 import { IGroupBackOfficeRepository } from "../../interfaces/back_office/group";
 import { Branch, Company, Group } from "../../models";
@@ -14,6 +15,38 @@ export class GroupBackOfficeRepository implements IGroupBackOfficeRepository {
     } catch (error) {
       console.error(error);
       throw new Error(`GROUPS_NOT_CREATED`);
+    }
+  }
+  async update(id: UUID, data: Partial<Group>): Promise<Group> {
+    try {
+      const [updatedInstitution, affectedRows] = await Group.update(data, {
+        where: { id },
+        returning: true,
+      });
+      return affectedRows[0];
+    } catch (error) {
+      console.error(error);
+      throw new Error(`GROUP_NOT_UPDATED`);
+    }
+  }
+
+  async delete(id: UUID): Promise<boolean> {
+    try {
+      const res = await Group.destroy({
+        where: { id },
+      });
+      if (res > 0) {
+        return true;
+      } else {
+        throw new Error();
+      }
+    } catch (error) {
+      console.error(error);
+      if (error.message) {
+        throw new Error("GROUP_NOT_DELETED");
+      } else {
+        throw new Error("GROUP_ERROR_DELETED");
+      }
     }
   }
 

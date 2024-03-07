@@ -4,6 +4,7 @@ import { sequelize } from "../../DB";
 import { responseHandler } from "../../libs/response_handler";
 import { AuthenticatedRequest } from "../../middlewares";
 import { CompanyBackOfficeService } from "../../services/back_office/company";
+import { UUID } from "crypto";
 
 export class CompanyBackOfficeController {
   private companyBackOfficeService = new CompanyBackOfficeService();
@@ -21,6 +22,27 @@ export class CompanyBackOfficeController {
     try {
       const result = await this.companyBackOfficeService.create(req.body);
       res.status(200).json(responseHandler(true, "COMPANY_CREATED", result));
+    } catch (error) {
+      console.error(error);
+      res.status(400).json(responseHandler(false, error.message));
+    }
+  };
+  update = async (req: AuthenticatedRequest, res: Response) => {
+    try {
+      const id = req.params.id as UUID;
+      const result = await this.companyBackOfficeService.update(id, req.body);
+      res.status(200).json(responseHandler(true, "COMPANY_UPDATED", result));
+    } catch (error) {
+      console.error(error);
+      res.status(400).json(responseHandler(false, error.message));
+    }
+  };
+
+  delete = async (req: AuthenticatedRequest, res: Response) => {
+    try {
+      const id = req.params.id as UUID;
+      await this.companyBackOfficeService.delete(id);
+      res.status(200).json(responseHandler(true, "COMPANY_DELETED"));
     } catch (error) {
       console.error(error);
       res.status(400).json(responseHandler(false, error.message));
