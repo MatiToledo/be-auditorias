@@ -1,6 +1,6 @@
+import { UUID } from "crypto";
 import { Transaction, WhereOptions } from "sequelize";
 import { Company, RegisterBar, RegisterTicket } from "../../models";
-import { UUID } from "crypto";
 export interface ICompanyBackOfficeService {
   getAll(
     queries: QueriesGetAll

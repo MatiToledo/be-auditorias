@@ -1,10 +1,10 @@
 import { UUID } from "crypto";
+import { Op, Sequelize } from "sequelize";
 import {
   ITreasuryCentralRepository,
   TreasuryCentralQuery,
 } from "../interfaces/treasury_central";
 import { Concept, TreasuryCentral } from "../models";
-import { Op, Sequelize } from "sequelize";
 
 export class TreasuryCentralRepository implements ITreasuryCentralRepository {
   async create(data: Partial<TreasuryCentral>): Promise<TreasuryCentral> {
@@ -57,6 +57,7 @@ export class TreasuryCentralRepository implements ITreasuryCentralRepository {
           "description",
           "amount",
           [Sequelize.literal('"Concept"."name"'), "concept"],
+          [Sequelize.literal('"Concept"."id"'), "ConceptId"],
         ],
         include: [{ model: Concept, attributes: [] }],
         order: [["createdAt", "ASC"]],

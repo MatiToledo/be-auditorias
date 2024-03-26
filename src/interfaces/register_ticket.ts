@@ -1,6 +1,5 @@
-import { Transaction } from "sequelize";
-import { RegisterTicket } from "../models";
 import { UUID } from "crypto";
+import { RegisterTicket } from "../models";
 
 export interface IRegisterTicketService {
   findByBranchId(BranchId: UUID): Promise<RegisterTicket[]>;

@@ -1,3 +1,4 @@
+import { UUID } from "crypto";
 import { Op, WhereOptions } from "sequelize";
 import {
   AllCompany,
@@ -5,9 +6,8 @@ import {
   QueriesGetAll,
 } from "../../interfaces/back_office/company";
 import { buildPagination } from "../../libs/buildPagination";
-import { CompanyBackOfficeRepository } from "../../repositories/back_office/company";
 import { Company } from "../../models";
-import { UUID } from "crypto";
+import { CompanyBackOfficeRepository } from "../../repositories/back_office/company";
 
 export class CompanyBackOfficeService implements ICompanyBackOfficeService {
   private companyBackOfficeRepository = new CompanyBackOfficeRepository();

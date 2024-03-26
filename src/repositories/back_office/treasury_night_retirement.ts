@@ -1,4 +1,5 @@
-import { Sequelize, Transaction, WhereOptions } from "sequelize";
+import { UUID } from "crypto";
+import { Sequelize, WhereOptions } from "sequelize";
 import { ITreasuryNightRetirementBackOfficeRepository } from "../../interfaces/back_office/treasury_night_retirement";
 import {
   Branch,
@@ -8,7 +9,6 @@ import {
   RegisterTicket,
 } from "../../models";
 import { TreasuryNightRetirement } from "./../../models/treasury_night_retirement";
-import { UUID } from "crypto";
 
 export class TreasuryNightRetirementBackOfficeRepository
   implements ITreasuryNightRetirementBackOfficeRepository

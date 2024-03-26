@@ -1,5 +1,6 @@
+import { UUID } from "crypto";
 import { Transaction, WhereOptions } from "sequelize";
-import { IBranchRepository } from "../../interfaces/branch";
+import { IBranchBackOfficeRepository } from "../../interfaces/back_office/branch";
 import {
   Branch,
   Company,
@@ -7,8 +8,6 @@ import {
   RegisterBar,
   RegisterTicket,
 } from "../../models";
-import { IBranchBackOfficeRepository } from "../../interfaces/back_office/branch";
-import { UUID } from "crypto";
 
 export class BranchBackOfficeRepository implements IBranchBackOfficeRepository {
   async bulkCreate(

@@ -1,10 +1,10 @@
-import { Concept } from "./concepts";
 import { Auth } from "./auth";
 import { AuthBO } from "./back_office/auth";
 import { UserBO } from "./back_office/user";
 import { Branch } from "./branch";
 import { CashRegister } from "./cash_register";
 import { Company } from "./company";
+import { Concept } from "./concepts";
 import { Group } from "./group";
 import { RegisterBar } from "./register_bar";
 import { RegisterBarClosure } from "./register_bar_closure";
@@ -83,19 +83,19 @@ CashRegister.belongsTo(Branch);
 
 export {
   Auth,
-  User,
   AuthBO,
-  UserBO,
   Branch,
   Company,
+  Concept,
   Group,
-  RegisterBarClosure,
-  RegisterTicketClosure,
   RegisterBar,
+  RegisterBarClosure,
   RegisterTicket,
+  RegisterTicketClosure,
   TreasuryCentral,
   TreasuryNightExpense,
-  Concept,
   TreasuryNightRetirement,
   TreasuryNightRetirementFinish,
+  User,
+  UserBO,
 };

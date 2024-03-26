@@ -1,3 +1,4 @@
+import { UUID } from "crypto";
 import { Transaction } from "sequelize";
 import {
   BodyCreate,
@@ -8,7 +9,6 @@ import { generateToken } from "../../libs/jwt";
 import { AuthBO } from "../../models/back_office/auth";
 import { AuthBackOfficeRepository } from "../../repositories/back_office/auth";
 import { UserBackOfficeService } from "./user";
-import { UUID } from "crypto";
 
 export class AuthBackOfficeService implements IAuthBackOfficeService {
   private authBackOfficeRepository = new AuthBackOfficeRepository();

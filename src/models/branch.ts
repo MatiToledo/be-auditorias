@@ -1,10 +1,9 @@
-import { Company } from "./company";
-import { RegisterTicket } from "./register_ticket";
-import { RegisterBar } from "./register_bar";
 import { UUID } from "crypto";
 import { CreationOptional, DataTypes, Model } from "sequelize";
 import { sequelize } from "../DB";
 import { Group } from "./group";
+import { RegisterBar } from "./register_bar";
+import { RegisterTicket } from "./register_ticket";
 
 export class Branch extends Model {
   declare id: CreationOptional<UUID>;

@@ -1,8 +1,8 @@
-import { Request, Response } from "express";
-import { responseHandler } from "../libs/response_handler";
-import { RegisterTicketClosureService } from "../services/register_ticket_closure";
 import { UUID } from "crypto";
+import { Response } from "express";
+import { responseHandler } from "../libs/response_handler";
 import { AuthenticatedRequest } from "../middlewares";
+import { RegisterTicketClosureService } from "../services/register_ticket_closure";
 export class RegisterTicketClosureController {
   private registerTicketClosureService = new RegisterTicketClosureService();
 

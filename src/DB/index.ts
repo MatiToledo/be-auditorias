@@ -1,6 +1,6 @@
 import "dotenv/config";
-require("pg").defaults.parseInt8 = true;
 import { Options, Sequelize } from "sequelize";
+require("pg").defaults.parseInt8 = true;
 
 const sequelizeOptions: Options = {
   dialect: "postgres",
@@ -15,11 +15,10 @@ const sequelizeOptions: Options = {
     lock_timeout: 150000,
     iddle_in_transaction_session_timeout: 50000,
     useUTC: true,
-    // ssl: {
-    //   require: true,
-    //   rejectUnauthorized: false,
-    // },
-    ssl: false
+    ssl: {
+      require: true,
+      rejectUnauthorized: false,
+    },
   },
   timezone: "UTC",
   pool: {

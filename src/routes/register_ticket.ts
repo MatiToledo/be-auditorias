@@ -5,10 +5,6 @@ import { authMiddleware } from "../middlewares";
 const router = express.Router();
 const registerTicketController = new RegisterTicketController();
 
-router.get(
-  "/:BranchId",
-  authMiddleware,
-  registerTicketController.findByBranchId
-);
+router.get("/:BranchId", registerTicketController.findByBranchId);
 
 export default router;

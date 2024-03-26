@@ -6,9 +6,9 @@ import {
   IRegisterTicketClosureBackOfficeService,
 } from "../../interfaces/back_office/register_ticket_closure";
 import { buildPagination } from "../../libs/buildPagination";
+import { CloudinaryUpload } from "../../libs/cloudinary";
 import { RegisterTicketClosure } from "../../models";
 import { RegisterTicketClosureBackOfficeRepository } from "../../repositories/back_office/register_ticket_closure";
-import { CloudinaryUpload } from "../../libs/cloudinary";
 
 export class RegisterTicketClosureBackOfficeService
   implements IRegisterTicketClosureBackOfficeService

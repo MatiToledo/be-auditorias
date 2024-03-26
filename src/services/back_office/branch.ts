@@ -1,14 +1,13 @@
-import { RegisterBar } from "./../../models/register_bar";
+import { UUID } from "crypto";
 import { Op, Transaction, WhereOptions } from "sequelize";
 import {
   AllBranch,
   IBranchBackOfficeService,
   QueriesGetAll,
 } from "../../interfaces/back_office/branch";
+import { buildPagination } from "../../libs/buildPagination";
 import { Branch } from "../../models";
 import { BranchBackOfficeRepository } from "../../repositories/back_office/branch";
-import { buildPagination } from "../../libs/buildPagination";
-import { UUID } from "crypto";
 
 export class BranchBackOfficeService implements IBranchBackOfficeService {
   private branchBackOfficeRepository = new BranchBackOfficeRepository();

@@ -1,6 +1,6 @@
 import { UUID } from "crypto";
 import { WhereOptions } from "sequelize";
-import { RegisterTicket, TreasuryNightRetirementFinish } from "../../models";
+import { TreasuryNightRetirementFinish } from "../../models";
 
 export interface ITreasuryNightRetirementFinishBackOfficeService {
   getAll(

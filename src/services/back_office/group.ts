@@ -1,3 +1,4 @@
+import { UUID } from "crypto";
 import { Op, Transaction, WhereOptions } from "sequelize";
 import {
   AllGroup,
@@ -7,7 +8,6 @@ import {
 import { buildPagination } from "../../libs/buildPagination";
 import { Group } from "../../models";
 import { GroupBackOfficeRepository } from "../../repositories/back_office/group";
-import { UUID } from "crypto";
 
 export class GroupBackOfficeService implements IGroupBackOfficeService {
   private groupBackOfficeRepository = new GroupBackOfficeRepository();

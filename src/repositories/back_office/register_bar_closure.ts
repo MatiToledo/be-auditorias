@@ -1,5 +1,5 @@
 import { UUID } from "crypto";
-import { Sequelize, Transaction, WhereOptions } from "sequelize";
+import { Sequelize, WhereOptions } from "sequelize";
 import { IRegisterBarClosureBackOfficeRepository } from "../../interfaces/back_office/register_bar_closure";
 import {
   Branch,

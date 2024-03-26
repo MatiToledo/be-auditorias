@@ -1,7 +1,7 @@
+import { UUID } from "crypto";
 import { Transaction, WhereOptions } from "sequelize";
 import { IRegisterTicketBackOfficeRepository } from "../../interfaces/back_office/register_ticket";
 import { Branch, Company, Group, RegisterTicket } from "../../models";
-import { UUID } from "crypto";
 
 export class RegisterTicketBackOfficeRepository
   implements IRegisterTicketBackOfficeRepository

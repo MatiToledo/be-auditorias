@@ -1,7 +1,7 @@
+import { UUID } from "crypto";
 import { Request, Response } from "express";
 import { responseHandler } from "../libs/response_handler";
 import { RegisterBarService } from "../services/register_bar";
-import { UUID } from "crypto";
 export class RegisterBarController {
   private registerBarService = new RegisterBarService();
 

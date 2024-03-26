@@ -1,8 +1,8 @@
 import { UUID } from "crypto";
 import { IRegisterBarClosureService } from "../interfaces/register_bar_closure";
-import { RegisterBarClosure, RegisterTicketClosure } from "../models";
-import { RegisterBarClosureRepository } from "../repositories/register_bar_closure";
 import { CloudinaryUpload } from "../libs/cloudinary";
+import { RegisterBarClosure } from "../models";
+import { RegisterBarClosureRepository } from "../repositories/register_bar_closure";
 
 export class RegisterBarClosureService implements IRegisterBarClosureService {
   private registerBarClosureRepository = new RegisterBarClosureRepository();

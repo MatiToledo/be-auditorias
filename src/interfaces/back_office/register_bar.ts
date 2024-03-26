@@ -1,6 +1,6 @@
-import { Transaction, WhereOptions } from "sequelize";
-import { Group, RegisterBar } from "../../models";
 import { UUID } from "crypto";
+import { Transaction, WhereOptions } from "sequelize";
+import { RegisterBar } from "../../models";
 
 export interface IRegisterBarBackOfficeService {
   bulkCreate(

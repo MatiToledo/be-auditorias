@@ -1,4 +1,4 @@
-import { TreasuryNightExpense, TreasuryNightRetirement } from "../models";
+import { TreasuryNightExpense } from "../models";
 
 export interface ITreasuryNightExpenseService {
   create(body: Partial<TreasuryNightExpense>): Promise<TreasuryNightExpense>;

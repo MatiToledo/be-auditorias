@@ -1,3 +1,4 @@
+import { UUID } from "crypto";
 import { Op, WhereOptions } from "sequelize";
 import { QueriesGetAll } from "../../interfaces/back_office/register_bar";
 import {
@@ -5,9 +6,8 @@ import {
   ITreasuryNightRetirementBackOfficeService,
 } from "../../interfaces/back_office/treasury_night_retirement";
 import { buildPagination } from "../../libs/buildPagination";
-import { TreasuryNightRetirementBackOfficeRepository } from "../../repositories/back_office/treasury_night_retirement";
 import { TreasuryNightRetirement } from "../../models";
-import { UUID } from "crypto";
+import { TreasuryNightRetirementBackOfficeRepository } from "../../repositories/back_office/treasury_night_retirement";
 
 export class TreasuryNightRetirementBackOfficeService
   implements ITreasuryNightRetirementBackOfficeService

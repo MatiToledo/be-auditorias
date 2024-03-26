@@ -1,7 +1,6 @@
-import { Transaction } from "sequelize";
-import { RegisterTicket, RegisterTicketClosure, User } from "../models";
-import { IRegisterTicketClosureRepository } from "../interfaces/register_ticket_closure";
 import { UUID } from "crypto";
+import { IRegisterTicketClosureRepository } from "../interfaces/register_ticket_closure";
+import { RegisterTicket, RegisterTicketClosure } from "../models";
 
 export class RegisterTicketClosureRepository
   implements IRegisterTicketClosureRepository

@@ -44,7 +44,7 @@ export class RegisterBarClosureBackOfficeValidate {
             })
           )
           .optional(),
-        photo: string().optional(),
+        photo: string().optional().nullable(),
         RegisterBarId: string().uuid().optional(),
       })
         .noUnknown(true)

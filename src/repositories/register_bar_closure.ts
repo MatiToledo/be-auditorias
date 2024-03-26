@@ -1,7 +1,6 @@
-import { Transaction } from "sequelize";
-import { IRegisterBarClosureRepository } from "../interfaces/register_bar_closure";
-import { RegisterBar, RegisterBarClosure, User } from "../models";
 import { UUID } from "crypto";
+import { IRegisterBarClosureRepository } from "../interfaces/register_bar_closure";
+import { RegisterBar, RegisterBarClosure } from "../models";
 
 export class RegisterBarClosureRepository
   implements IRegisterBarClosureRepository

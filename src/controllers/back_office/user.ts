@@ -1,11 +1,11 @@
+import { UUID } from "crypto";
 import { Response } from "express";
+import { Transaction } from "sequelize";
+import { sequelize } from "../../DB";
 import { QueriesGetAll } from "../../interfaces/back_office/user";
 import { responseHandler } from "../../libs/response_handler";
 import { AuthenticatedRequest } from "../../middlewares";
 import { UserBackOfficeService } from "../../services/back_office/user";
-import { UUID } from "crypto";
-import { Transaction } from "sequelize";
-import { sequelize } from "../../DB";
 import { UserService } from "../../services/user";
 
 export class UserBackOfficeController {

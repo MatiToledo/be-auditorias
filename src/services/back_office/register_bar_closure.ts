@@ -6,9 +6,9 @@ import {
   IRegisterBarClosureBackOfficeService,
 } from "../../interfaces/back_office/register_bar_closure";
 import { buildPagination } from "../../libs/buildPagination";
+import { CloudinaryUpload } from "../../libs/cloudinary";
 import { RegisterBarClosure } from "../../models";
 import { RegisterBarClosureBackOfficeRepository } from "../../repositories/back_office/register_bar_closure";
-import { CloudinaryUpload } from "../../libs/cloudinary";
 
 export class RegisterBarClosureBackOfficeService
   implements IRegisterBarClosureBackOfficeService

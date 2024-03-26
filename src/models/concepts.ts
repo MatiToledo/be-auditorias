@@ -1,8 +1,6 @@
 import { UUID } from "crypto";
 import { CreationOptional, DataTypes, Model } from "sequelize";
 import { sequelize } from "../DB";
-import { Company } from "./company";
-import { Branch } from "./branch";
 
 export class Concept extends Model {
   declare id: CreationOptional<UUID>;

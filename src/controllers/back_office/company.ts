@@ -1,10 +1,8 @@
+import { UUID } from "crypto";
 import { Response } from "express";
-import { Transaction } from "sequelize";
-import { sequelize } from "../../DB";
 import { responseHandler } from "../../libs/response_handler";
 import { AuthenticatedRequest } from "../../middlewares";
 import { CompanyBackOfficeService } from "../../services/back_office/company";
-import { UUID } from "crypto";
 
 export class CompanyBackOfficeController {
   private companyBackOfficeService = new CompanyBackOfficeService();

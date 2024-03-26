@@ -1,6 +1,6 @@
-import { Transaction, WhereOptions } from "sequelize";
-import { Branch, Company } from "../../models";
 import { UUID } from "crypto";
+import { Transaction, WhereOptions } from "sequelize";
+import { Branch } from "../../models";
 export interface IBranchBackOfficeService {
   bulkCreate(
     data: Partial<Branch>[],

@@ -1,7 +1,7 @@
+import { UUID } from "crypto";
 import { Transaction } from "sequelize";
 import { IAuthBackOfficeRepository } from "../../interfaces/back_office/auth";
 import { AuthBO } from "../../models/back_office/auth";
-import { UUID } from "crypto";
 
 export class AuthBackOfficeRepository implements IAuthBackOfficeRepository {
   async create(

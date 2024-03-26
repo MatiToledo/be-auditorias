@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { Schema, array, date, number, object, string } from "yup";
+import { Schema, object, string } from "yup";
 
 export class ConceptValidate {
   static async getAll(req: Request, res: Response, next: NextFunction) {

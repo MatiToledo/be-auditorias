@@ -45,7 +45,7 @@ export class AuthBOValidate {
         User: object({
           fullName: string().required(),
           phone: number().required(),
-          photo: string().optional(),
+          photo: string().optional().nullable(),
           dni: number().required(),
           role: mixed<UserRoleEnum>()
             .oneOf([

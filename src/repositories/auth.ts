@@ -1,7 +1,7 @@
+import { UUID } from "crypto";
 import { Transaction } from "sequelize";
 import { IAuthRepository } from "../interfaces/auth";
 import { Auth } from "../models";
-import { UUID } from "crypto";
 
 export class AuthRepository implements IAuthRepository {
   async create(data: Partial<Auth>, transaction: Transaction): Promise<Auth> {

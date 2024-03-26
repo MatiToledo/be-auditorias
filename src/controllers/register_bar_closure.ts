@@ -1,8 +1,8 @@
+import { UUID } from "crypto";
 import { Request, Response } from "express";
 import { responseHandler } from "../libs/response_handler";
-import { RegisterBarClosureService } from "../services/register_bar_closure";
-import { UUID } from "crypto";
 import { AuthenticatedRequest } from "../middlewares";
+import { RegisterBarClosureService } from "../services/register_bar_closure";
 export class RegisterBarClosureController {
   private registerBarClosureService = new RegisterBarClosureService();
 

@@ -1,4 +1,5 @@
-import { Op, Sequelize, Transaction, WhereOptions } from "sequelize";
+import { UUID } from "crypto";
+import { Op, Transaction, WhereOptions } from "sequelize";
 import {
   AllAdmins,
   AllUser,
@@ -8,14 +9,13 @@ import {
   UpdateUserBody,
 } from "../../interfaces/back_office/user";
 import { buildPagination } from "../../libs/buildPagination";
-import { UserBackOfficeRepository } from "../../repositories/back_office/user";
-import { UserBO } from "../../models";
-import { UUID } from "crypto";
-import { AuthBackOfficeRepository } from "../../repositories/back_office/auth";
-import { encryptPassword } from "../../libs/encrypt_password";
-import { UserRepository } from "../../repositories/user";
-import { AuthRepository } from "../../repositories/auth";
 import { CloudinaryUpload } from "../../libs/cloudinary";
+import { encryptPassword } from "../../libs/encrypt_password";
+import { UserBO } from "../../models";
+import { AuthRepository } from "../../repositories/auth";
+import { AuthBackOfficeRepository } from "../../repositories/back_office/auth";
+import { UserBackOfficeRepository } from "../../repositories/back_office/user";
+import { UserRepository } from "../../repositories/user";
 
 export class UserBackOfficeService implements IUserBackOfficeService {
   private userBackOfficeRepository = new UserBackOfficeRepository();
@@ -51,7 +51,6 @@ export class UserBackOfficeService implements IUserBackOfficeService {
     body: UpdateAdminBody,
     transaction: Transaction
   ): Promise<void> {
-    console.log("body: ", body);
     const userUpdated = await this.userBackOfficeRepository.updateAdmin(
       id,
       body.User,

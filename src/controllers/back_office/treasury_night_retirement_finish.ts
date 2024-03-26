@@ -1,10 +1,8 @@
+import { UUID } from "crypto";
 import { Response } from "express";
 import { responseHandler } from "../../libs/response_handler";
 import { AuthenticatedRequest } from "../../middlewares";
 import { TreasuryNightRetirementFinishBackOfficeService } from "../../services/back_office/treasury_night_retirement_finish";
-import { sequelize } from "../../DB";
-import { UUID } from "crypto";
-import { Transaction } from "sequelize";
 
 export class TreasuryNightRetirementFinishBackOfficeController {
   private treasuryNightRetirementFinishBackOfficeService =

@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { Schema, mixed, object, string, number } from "yup";
+import { Schema, mixed, number, object, string } from "yup";
 import { UserRoleEnum } from "../../models/user";
 
 export class AuthValidate {
@@ -13,7 +13,7 @@ export class AuthValidate {
         User: object({
           fullName: string().required(),
           phone: number().required(),
-          photo: string().optional(),
+          photo: string().optional().nullable(),
           dni: number().required(),
           role: mixed<UserRoleEnum>()
             .oneOf([

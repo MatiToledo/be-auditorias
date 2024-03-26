@@ -1,9 +1,8 @@
-import { Request, Response } from "express";
-import { responseHandler } from "../libs/response_handler";
-import { RegisterBarService } from "../services/register_bar";
 import { UUID } from "crypto";
-import { RegisterTicketService } from "../services/register_ticket";
+import { Response } from "express";
+import { responseHandler } from "../libs/response_handler";
 import { AuthenticatedRequest } from "../middlewares";
+import { RegisterTicketService } from "../services/register_ticket";
 export class RegisterTicketController {
   private registerTicketService = new RegisterTicketService();
 

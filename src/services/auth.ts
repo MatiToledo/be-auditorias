@@ -1,11 +1,11 @@
 import { Transaction } from "sequelize";
 import { BodyCreateAuth, IAuthService } from "../interfaces/auth";
+import { CloudinaryUpload } from "../libs/cloudinary";
 import { encryptPassword } from "../libs/encrypt_password";
 import { generateToken } from "../libs/jwt";
 import { Auth } from "../models";
 import { AuthRepository } from "../repositories/auth";
 import { UserRepository } from "../repositories/user";
-import { CloudinaryUpload } from "../libs/cloudinary";
 
 export class AuthService implements IAuthService {
   private authRepository = new AuthRepository();
@@ -30,7 +30,6 @@ export class AuthService implements IAuthService {
 
   /////////////////////////////////////////////////////////////////////////////////////////////
   async logIn(body: Partial<Auth>): Promise<string> {
-    console.log("body: ", body);
     const encryptedPassword = encryptPassword(body.password);
     const auth = await this.authRepository.findIfExistByCredentials({
       ...body,

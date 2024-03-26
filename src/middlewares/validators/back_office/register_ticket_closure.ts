@@ -41,7 +41,7 @@ export class RegisterTicketClosureBackOfficeValidate {
         persons_cant_branch: number().optional(),
         persons_cant_bar: number().optional(),
         observations: string().optional(),
-        photo: string().optional(),
+        photo: string().optional().nullable(),
         RegisterTicketId: string().uuid().optional(),
       })
         .noUnknown(true)

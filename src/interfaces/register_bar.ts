@@ -1,6 +1,5 @@
-import { Transaction } from "sequelize";
-import { RegisterBar } from "../models/register_bar";
 import { UUID } from "crypto";
+import { RegisterBar } from "../models/register_bar";
 
 export interface IRegisterBarService {
   findByBranchId(BranchId: UUID): Promise<RegisterBar[]>;

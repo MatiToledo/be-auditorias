@@ -61,7 +61,6 @@ export class UserBackOfficeRepository implements IUserBackOfficeRepository {
     transaction: Transaction
   ): Promise<UserBO> {
     try {
-      console.log("data: ", data);
       const [updatedInstitution, affectedRows] = await UserBO.update(data, {
         where: { id },
         transaction,

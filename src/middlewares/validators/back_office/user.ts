@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response, query } from "express";
+import { NextFunction, Request, Response } from "express";
 import { Schema, number, object, string } from "yup";
 
 export class UserBackOfficeValidate {
@@ -53,7 +53,7 @@ export class UserBackOfficeValidate {
           role: string().optional(),
           dni: number().optional(),
           phone: number().optional(),
-          photo: string().optional(),
+          photo: string().optional().nullable(),
           BranchId: string().uuid().optional(),
         }),
         Auth: object({

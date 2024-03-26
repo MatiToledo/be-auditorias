@@ -6,7 +6,6 @@ import {
 } from "../interfaces/treasury_central";
 import { TreasuryCentral } from "../models";
 import { TreasuryCentralRepository } from "../repositories/treasury_central";
-import { TreasuryCentralTypeEnum } from "../models/treasury_central";
 
 export class TreasuryCentralService implements ITreasuryCentralService {
   private treasuryCentralRepository = new TreasuryCentralRepository();

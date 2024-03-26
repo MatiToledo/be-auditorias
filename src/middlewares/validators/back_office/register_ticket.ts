@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { Schema, array, object, string } from "yup";
+import { Schema, object, string } from "yup";
 
 export class RegisterTicketBackOfficeValidate {
   static async create(req: Request, res: Response, next: NextFunction) {

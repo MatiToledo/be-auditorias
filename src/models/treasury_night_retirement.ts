@@ -1,7 +1,6 @@
 import { UUID } from "crypto";
 import { CreationOptional, DataTypes, Model } from "sequelize";
 import { sequelize } from "../DB";
-import { Branch } from "./branch";
 
 export enum TreasuryNightRetirementTypeEnum {
   TICKET = "register_ticket",

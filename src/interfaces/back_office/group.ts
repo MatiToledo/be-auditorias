@@ -1,6 +1,6 @@
+import { UUID } from "crypto";
 import { Transaction, WhereOptions } from "sequelize";
 import { Group } from "../../models";
-import { UUID } from "crypto";
 
 export interface IGroupBackOfficeService {
   bulkCreate(

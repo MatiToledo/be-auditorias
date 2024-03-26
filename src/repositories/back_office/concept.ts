@@ -1,5 +1,5 @@
 import { UUID } from "crypto";
-import { Transaction, WhereOptions } from "sequelize";
+import { WhereOptions } from "sequelize";
 import { IConceptBackOfficeRepository } from "../../interfaces/back_office/concept";
 import { Concept } from "../../models";
 

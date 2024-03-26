@@ -29,6 +29,7 @@ export class TreasuryCentralValidate {
     const schema: Schema = object({
       body: object({
         id: string().uuid().required(),
+        ConceptId: string().uuid().required(),
         date: string().required(),
         type: string().required(),
         payment_method: string().required(),

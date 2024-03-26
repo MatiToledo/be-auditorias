@@ -1,8 +1,8 @@
-import "dotenv/config";
 import { v2 as cloudinary } from "cloudinary";
+import "dotenv/config";
+import * as fs from "fs";
 import sharp from "sharp";
 import { promisify } from "util";
-import * as fs from "fs";
 
 cloudinary.config({
   cloud_name: "dhneingic",

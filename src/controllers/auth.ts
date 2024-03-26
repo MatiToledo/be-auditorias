@@ -1,6 +1,4 @@
 import { Request, Response } from "express";
-import { Transaction } from "sequelize";
-import { sequelize } from "../DB";
 import { responseHandler } from "../libs/response_handler";
 import { AuthService } from "../services/auth";
 export class AuthController {

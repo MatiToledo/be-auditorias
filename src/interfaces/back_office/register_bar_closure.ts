@@ -1,6 +1,6 @@
-import { Transaction, WhereOptions } from "sequelize";
-import { Group, RegisterBar, RegisterBarClosure } from "../../models";
 import { UUID } from "crypto";
+import { WhereOptions } from "sequelize";
+import { RegisterBar, RegisterBarClosure } from "../../models";
 
 export interface IRegisterBarClosureBackOfficeService {
   getAll(

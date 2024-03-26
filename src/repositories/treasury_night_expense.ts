@@ -1,6 +1,6 @@
 import { UUID } from "crypto";
 import { ITreasuryNightExpenseRepository } from "../interfaces/treasury_night_expense";
-import { Branch, TreasuryNightExpense } from "../models";
+import { TreasuryNightExpense } from "../models";
 
 export class TreasuryNightExpenseRepository
   implements ITreasuryNightExpenseRepository

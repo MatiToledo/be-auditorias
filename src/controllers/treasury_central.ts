@@ -1,8 +1,8 @@
+import { UUID } from "crypto";
 import { Response } from "express";
 import { responseHandler } from "../libs/response_handler";
 import { AuthenticatedRequest } from "../middlewares";
 import { TreasuryCentralService } from "../services/treasury_central";
-import { UUID } from "crypto";
 export class TreasuryCentralController {
   private treasuryCentralService = new TreasuryCentralService();
 

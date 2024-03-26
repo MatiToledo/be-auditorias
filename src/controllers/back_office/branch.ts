@@ -1,11 +1,9 @@
+import { UUID } from "crypto";
 import { Response } from "express";
+
 import { responseHandler } from "../../libs/response_handler";
 import { AuthenticatedRequest } from "../../middlewares";
-import { GroupBackOfficeService } from "../../services/back_office/group";
 import { BranchBackOfficeService } from "../../services/back_office/branch";
-import { UUID } from "crypto";
-import { Transaction } from "sequelize";
-import { sequelize } from "../../DB";
 
 export class BranchBackOfficeController {
   private branchBackOfficeService = new BranchBackOfficeService();

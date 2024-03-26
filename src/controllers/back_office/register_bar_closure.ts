@@ -1,13 +1,8 @@
+import { UUID } from "crypto";
 import { Response } from "express";
 import { responseHandler } from "../../libs/response_handler";
 import { AuthenticatedRequest } from "../../middlewares";
-import { GroupBackOfficeService } from "../../services/back_office/group";
-import { BranchBackOfficeService } from "../../services/back_office/branch";
-import { RegisterBarBackOfficeService } from "../../services/back_office/register_bar";
 import { RegisterBarClosureBackOfficeService } from "../../services/back_office/register_bar_closure";
-import { sequelize } from "../../DB";
-import { UUID } from "crypto";
-import { Transaction } from "sequelize";
 
 export class RegisterBarClosureBackOfficeController {
   private registerBarClosureBackOfficeService =

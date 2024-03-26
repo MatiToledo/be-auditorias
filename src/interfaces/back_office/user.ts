@@ -1,7 +1,7 @@
 import { UUID } from "crypto";
 import { Transaction } from "sequelize";
-import { UserBO } from "../../models/back_office/user";
 import { Auth, AuthBO, User } from "../../models";
+import { UserBO } from "../../models/back_office/user";
 export interface IUserBackOfficeService {
   getAll(queries: QueriesGetAll): Promise<{ rows: AllUser[]; count: number }>;
   create(data: Partial<UserBO>, transaction: Transaction): Promise<UserBO>;

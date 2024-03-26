@@ -1,9 +1,9 @@
 import { NextFunction, Request, Response } from "express";
-import { responseHandler } from "../libs/response_handler";
+import parseToken from "parse-bearer-token";
 import { decodeToken } from "../libs/jwt";
+import { responseHandler } from "../libs/response_handler";
 import { User } from "../models";
 import { UserBO } from "../models/back_office/user";
-import parseToken from "parse-bearer-token";
 
 export interface AuthenticatedRequest extends Request {
   userData: Partial<User> | Partial<UserBO>;

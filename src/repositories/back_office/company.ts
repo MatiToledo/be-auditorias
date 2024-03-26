@@ -1,7 +1,7 @@
-import { Transaction, WhereOptions } from "sequelize";
+import { UUID } from "crypto";
+import { WhereOptions } from "sequelize";
 import { ICompanyBackOfficeRepository } from "../../interfaces/back_office/company";
 import { Branch, Company, Group } from "../../models";
-import { UUID } from "crypto";
 
 export class CompanyBackOfficeRepository
   implements ICompanyBackOfficeRepository

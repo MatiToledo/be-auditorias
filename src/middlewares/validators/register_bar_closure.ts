@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { Schema, array, date, number, object, string } from "yup";
+import { Schema, array, number, object, string } from "yup";
 
 export class RegisterBarClosureValidate {
   static async create(req: Request, res: Response, next: NextFunction) {
