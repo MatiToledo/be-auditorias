@@ -10,6 +10,8 @@ export class RegisterBarClosureValidate {
         retirement_finish: number().required(),
         postnet_total: number().required(),
         transfers_total: number().required(),
+        transfers_total_system: number().required(),
+        cash_total_system: number().required(),
         expenses_total: number().required(),
         expenses_observations: string().required(),
         observations: string().required(),

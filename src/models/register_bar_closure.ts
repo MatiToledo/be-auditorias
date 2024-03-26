@@ -12,6 +12,8 @@ export class RegisterBarClosure extends Model {
   declare expenses_observations: string;
   declare postnet_total: number;
   declare transfers_total: number;
+  declare transfers_total_system: number;
+  declare cash_total_system: number;
   declare consumptions: string;
   declare observations: string;
   declare photo: string;
@@ -54,6 +56,16 @@ RegisterBarClosure.init(
     },
     transfers_total: {
       type: DataTypes.BIGINT,
+      allowNull: false,
+    },
+    cash_total_system: {
+      type: DataTypes.BIGINT,
+      defaultValue: 0,
+      allowNull: false,
+    },
+    transfers_total_system: {
+      type: DataTypes.BIGINT,
+      defaultValue: 0,
       allowNull: false,
     },
     consumptions: {

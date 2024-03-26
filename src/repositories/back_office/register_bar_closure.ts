@@ -79,6 +79,8 @@ export class RegisterBarClosureBackOfficeRepository
           "transfers_total",
           "consumptions",
           "observations",
+          "transfers_total_system",
+          "cash_total_system",
           "photo",
           [Sequelize.literal('"RegisterBar"."name"'), "register_bar"],
           [Sequelize.literal('"RegisterBar"."id"'), "RegisterBarId"],

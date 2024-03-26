@@ -35,6 +35,8 @@ export class RegisterBarClosureBackOfficeValidate {
         transfers_total: number().optional(),
         expenses_total: number().optional(),
         expenses_observations: string().optional(),
+        transfers_total_system: number().required(),
+        cash_total_system: number().required(),
         observations: string().optional(),
         consumptions: array()
           .of(
