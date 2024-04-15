@@ -38,6 +38,7 @@ export interface QueriesGetAll {
   CompanyId?: string;
   GroupId?: string;
   BranchId?: string;
+  role?: string;
 }
 
 export interface UpdateAdminBody {

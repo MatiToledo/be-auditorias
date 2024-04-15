@@ -146,6 +146,11 @@ export class UserBackOfficeService implements IUserBackOfficeService {
               "$Branch.id$": { [Op.eq]: queries.BranchId },
             });
             break;
+          case "role":
+            where[Op.and].push({
+              role: { [Op.eq]: queries.role },
+            });
+            break;
           default:
             break;
         }

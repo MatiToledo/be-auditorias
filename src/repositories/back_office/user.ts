@@ -96,6 +96,8 @@ export class UserBackOfficeRepository implements IUserBackOfficeRepository {
         attributes: [
           "id",
           "fullName",
+          "role",
+          "CompanyId",
           [Sequelize.literal('"AuthBO"."email"'), "email"],
           [Sequelize.literal('"AuthBO"."id"'), "AuthBOId"],
         ],

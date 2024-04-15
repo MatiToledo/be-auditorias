@@ -11,6 +11,7 @@ export class UserBackOfficeValidate {
         CompanyId: string().optional(),
         GroupId: string().optional(),
         BranchId: string().optional(),
+        role: string().optional(),
       })
         .noUnknown(true)
         .strict(true),

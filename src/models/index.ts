@@ -34,12 +34,12 @@ UserBO.belongsTo(AuthBO);
 Branch.hasMany(UserBO, {
   foreignKey: {
     allowNull: true,
-    name: "BranchId",
+    name: "CompanyId",
   },
   constraints: false,
 });
-UserBO.belongsTo(Branch, {
-  foreignKey: "BranchId",
+UserBO.belongsTo(Company, {
+  foreignKey: "CompanyId",
 });
 
 Branch.hasMany(RegisterBar);
