@@ -7,7 +7,6 @@ export class RegisterTicketClosureValidate {
       body: object({
         date: string().required(),
         retirement_total: number().required(),
-        retirement_finish: number().required(),
         expenses_total: number().required(),
         expenses_observations: string().required(),
         postnet_total: number().required(),

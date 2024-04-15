@@ -7,7 +7,6 @@ export class RegisterBarClosureValidate {
       body: object({
         date: string().required(),
         retirement_total: number().required(),
-        retirement_finish: number().required(),
         postnet_total: number().required(),
         transfers_total: number().required(),
         transfers_total_system: number().required(),

@@ -7,7 +7,6 @@ export class RegisterBarClosure extends Model {
   declare id: CreationOptional<UUID>;
   declare date: Date;
   declare retirement_total: number;
-  declare retirement_finish: number;
   declare expenses_total: number;
   declare expenses_observations: string;
   declare postnet_total: number;
@@ -38,10 +37,7 @@ RegisterBarClosure.init(
       type: DataTypes.BIGINT,
       allowNull: false,
     },
-    retirement_finish: {
-      type: DataTypes.BIGINT,
-      allowNull: false,
-    },
+
     expenses_total: {
       type: DataTypes.BIGINT,
       allowNull: false,
@@ -77,7 +73,7 @@ RegisterBarClosure.init(
       allowNull: false,
     },
     photo: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false,
     },
   },

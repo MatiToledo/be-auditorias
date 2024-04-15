@@ -73,7 +73,6 @@ export class RegisterTicketClosureBackOfficeRepository
           "id",
           "date",
           "retirement_total",
-          "retirement_finish",
           "expenses_total",
           "expenses_observations",
           "postnet_total",
