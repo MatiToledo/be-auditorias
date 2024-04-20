@@ -60,7 +60,7 @@ export class TreasuryCentralRepository implements ITreasuryCentralRepository {
           [Sequelize.literal('"Concept"."id"'), "ConceptId"],
         ],
         include: [{ model: Concept, attributes: [] }],
-        order: [["createdAt", "ASC"]],
+        order: [["createdAt", "DESC"]],
       });
     } catch (error) {
       console.error(error);

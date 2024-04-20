@@ -155,7 +155,10 @@ export class UserBackOfficeRepository implements IUserBackOfficeRepository {
     try {
       return await UserBO.findAndCountAll({
         where,
-        include: [{ model: AuthBO, attributes: ["id", "email"] }],
+        include: [
+          { model: AuthBO, attributes: ["id", "email"] },
+          { model: Company, attributes: ["id", "name"] },
+        ],
         limit: pagination.limit,
         offset: pagination.offset,
       });

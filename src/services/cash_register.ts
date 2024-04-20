@@ -132,27 +132,73 @@ export class CashRegisterService implements ICashRegisterService {
       );
 
     return {
-      principal: {
+      principal: this.reshapeData({
         columnLabels: principalColumnLabels,
         rowLabels: principalRowLabels,
         data: principalData,
-      },
-      registers: {
+      }),
+      registers: this.reshapeData({
         columnLabels: registerColumnsLabels,
         rowLabels: registerRowsLabel,
         data: registerData,
-      },
-      expenses: {
+      }),
+      expenses: this.reshapeData({
         columnLabels: expenseColumnLabels,
         rowLabels: expenseRowLabels,
         data: expenseData,
-      },
-      totalCash: {
+      }),
+      totalCash: this.reshapeData({
         columnLabels: totalCashColumnLabels,
         rowLabels: totalCashRowLabels,
         data: totalCashData,
-      },
+      }),
     };
+    // return {
+    //   principal: {
+    //     columnLabels: principalColumnLabels,
+    //     rowLabels: principalRowLabels,
+    //     data: principalData,
+    //   },
+    //   registers: {
+    //     columnLabels: registerColumnsLabels,
+    //     rowLabels: registerRowsLabel,
+    //     data: registerData,
+    //   },
+    //   expenses: {
+    //     columnLabels: expenseColumnLabels,
+    //     rowLabels: expenseRowLabels,
+    //     data: expenseData,
+    //   },
+    //   totalCash: {
+    //     columnLabels: totalCashColumnLabels,
+    //     rowLabels: totalCashRowLabels,
+    //     data: totalCashData,
+    //   },
+    // };
+  }
+
+  private reshapeData(inputObject) {
+    const columnLabels = inputObject.columnLabels;
+    const rowLabels = inputObject.rowLabels;
+    const data = inputObject.data;
+
+    // Crear la estructura de columnas con un elemento vacío al principio
+    const columns = [{ key: "", label: "" }];
+    columnLabels.forEach((label, index) => {
+      columns.push({ key: (index + 1).toString(), label: label });
+    });
+
+    // Crear la estructura de filas con los datos
+    const rows = [];
+    rowLabels.forEach((rowLabel, rowIndex) => {
+      const rowData = { "": rowLabel }; // Iniciar el objeto de fila con el label de la fila
+      data[rowIndex].forEach((cellData, columnIndex) => {
+        rowData[(columnIndex + 1).toString()] = cellData.value; // Asignar el valor al índice de columna correspondiente
+      });
+      rows.push(rowData);
+    });
+
+    return { columns, rows };
   }
 
   private async createTotalCashTable(
@@ -379,7 +425,6 @@ export class CashRegisterService implements ICashRegisterService {
     // Iteramos sobre cada columna
     for (let i = 0; i < lastRow.length; i++) {
       let columnSum = 0;
-
       // Sumamos los valores de las celdas correspondientes en ambas filas
       const lastCellValue = parseInt(lastRow[i].value) || 0;
       const secondLastCellValue = parseInt(secondLastRow[i].value) || 0;
@@ -467,7 +512,6 @@ export class CashRegisterService implements ICashRegisterService {
     // Iteramos sobre cada columna
     for (let i = 0; i < lastRow.length; i++) {
       let columnSum = 0;
-
       // Sumamos los valores de las celdas correspondientes en ambas filas
       const lastCellValue = parseInt(lastRow[i].value) || 0;
       const secondLastCellValue = parseInt(secondLastRow[i].value) || 0;
@@ -658,7 +702,6 @@ export class CashRegisterService implements ICashRegisterService {
   private createSumRow(tableData: any[][], rowLabels: string[]) {
     rowLabels.push("Suma Retiros");
     const sumRow = [];
-
     for (let i = 0; i < tableData[0].length; i++) {
       let columnSum = 0;
 

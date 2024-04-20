@@ -112,6 +112,8 @@ export class UserBackOfficeService implements IUserBackOfficeService {
         fullName: user.fullName,
         email: user.AuthBO.email,
         role: user.role,
+        CompanyId: user.CompanyId,
+        company: user.Company?.name,
       })),
     };
   }

@@ -99,6 +99,7 @@ export class TreasuryNightRetirementFinishBackOfficeRepository
         ],
         limit: pagination.limit,
         offset: pagination.offset,
+        order: [["createdAt", "DESC"]],
       });
     } catch (error) {
       console.error(error);

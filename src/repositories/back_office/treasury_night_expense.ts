@@ -92,7 +92,7 @@ export class TreasuryNightExpenseBackOfficeRepository
         ],
         limit: pagination.limit,
         offset: pagination.offset,
-        order: [["createdAt", "ASC"]],
+        order: [["createdAt", "DESC"]],
       });
     } catch (error) {
       console.error(error);

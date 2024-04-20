@@ -2,6 +2,7 @@ import { UUID } from "crypto";
 import { CreationOptional, DataTypes, Model } from "sequelize";
 import { sequelize } from "../../DB";
 import { AuthBO } from "./auth";
+import { Company } from "../company";
 
 export enum UserBORoleEnum {
   ADMIN = "admin",
@@ -15,7 +16,8 @@ export class UserBO extends Model {
   declare role: UserBORoleEnum;
   declare AuthBOId: UUID;
   declare AuthBO: AuthBO;
-  declare BranchId: UUID;
+  declare CompanyId: UUID;
+  declare Company: Company;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
