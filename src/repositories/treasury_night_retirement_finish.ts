@@ -49,7 +49,7 @@ export class TreasuryNightRetirementFinishRepository
       return result;
     } catch (error) {
       console.error(error);
-      throw new Error(`TREASURY_NIGHT_RETIREMENT_FINISH_NOT_FOUND`);
+      throw new Error(`TREASURY_NIGHT_RETIREMENTS_FINISH_NOT_FOUND`);
     }
   }
 }

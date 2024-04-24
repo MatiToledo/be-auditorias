@@ -1,6 +1,6 @@
 import { UUID } from "crypto";
 import { ITreasuryNightExpenseRepository } from "../interfaces/treasury_night_expense";
-import { TreasuryNightExpense } from "../models";
+import { Branch, Concept, TreasuryNightExpense } from "../models";
 
 export class TreasuryNightExpenseRepository
   implements ITreasuryNightExpenseRepository
@@ -27,6 +27,7 @@ export class TreasuryNightExpenseRepository
           date: conditions.date,
           BranchId: conditions.BranchId,
         },
+        include: [{ model: Concept, attributes: ["id", "name"] }],
       });
       return result;
     } catch (error) {

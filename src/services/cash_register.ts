@@ -137,6 +137,7 @@ export class CashRegisterService implements ICashRegisterService {
         rowLabels: principalRowLabels,
         data: principalData,
       }),
+      expensesDetails: this.createExpensesDetailsTableData(expenses),
       registers: this.reshapeData({
         columnLabels: registerColumnsLabels,
         rowLabels: registerRowsLabel,
@@ -176,7 +177,33 @@ export class CashRegisterService implements ICashRegisterService {
     //   },
     // };
   }
+  private createExpensesDetailsTableData(expenses: TreasuryNightExpense[]) {
+    const columns = [
+      {
+        key: "concept",
+        label: "Concepto",
+      },
+      {
+        key: "description",
+        label: "Descripción",
+      },
+      {
+        key: "quantity",
+        label: "Cantidad",
+      },
+      { key: "unit_price", label: "Precio Unitario" },
+      { key: "total", label: "Total" },
+    ];
+    const rows = expenses.map((expense) => ({
+      concept: expense.Concept.name,
+      description: expense.description,
+      quantity: expense.quantity,
+      unit_price: expense.unit_price,
+      total: expense.total,
+    }));
 
+    return { columns, rows };
+  }
   private reshapeData(inputObject) {
     const columnLabels = inputObject.columnLabels;
     const rowLabels = inputObject.rowLabels;

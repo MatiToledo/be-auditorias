@@ -20,7 +20,7 @@ import {
 } from "../models";
 import { encryptPassword } from "../libs/encrypt_password";
 
-sequelize.sync({ alter: true }).then((res) => {
+sequelize.sync({ force: true }).then((res) => {
   console.log("Database synced", res);
   // createBulkDev();
 });
@@ -1058,7 +1058,7 @@ export async function createBulkDev() {
     );
     const auth = await Auth.create({
       email: "cajero@gmail.com",
-      password: encryptPassword("123"),
+      password: encryptPassword("123123123"),
     });
     await User.create({
       fullName: "Cajero General",
@@ -1070,7 +1070,7 @@ export async function createBulkDev() {
     });
     const authtn = await Auth.create({
       email: "tn@gmail.com",
-      password: encryptPassword("123"),
+      password: encryptPassword("123123123"),
     });
     await User.create({
       fullName: "Tesorero Nocturno",
@@ -1082,7 +1082,7 @@ export async function createBulkDev() {
     });
     const autht = await Auth.create({
       email: "tesorero@gmail.com",
-      password: encryptPassword("123"),
+      password: encryptPassword("123123123"),
     });
     await User.create({
       fullName: "Tesorero General",
@@ -1094,7 +1094,7 @@ export async function createBulkDev() {
     });
     const authBO = await AuthBO.create({
       email: "mati@gmail.com",
-      password: encryptPassword("123"),
+      password: encryptPassword("123123123"),
     });
     await UserBO.create({
       fullName: "Matias Toledo",

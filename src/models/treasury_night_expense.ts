@@ -2,6 +2,7 @@ import { UUID } from "crypto";
 import { CreationOptional, DataTypes, Model } from "sequelize";
 import { sequelize } from "../DB";
 import { Branch } from "./branch";
+import { Concept } from "./concepts";
 
 export class TreasuryNightExpense extends Model {
   declare id: CreationOptional<UUID>;
@@ -10,6 +11,7 @@ export class TreasuryNightExpense extends Model {
   declare quantity: number;
   declare unit_price: number;
   declare total: number;
+  declare Concept: Concept;
   declare BranchId: UUID;
   declare Branch: Branch;
   public readonly createdAt!: Date;

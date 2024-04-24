@@ -12,7 +12,7 @@ export class RegisterTicketClosureRepository
       return await RegisterTicketClosure.create(data);
     } catch (error) {
       console.error(error);
-      throw new Error(`REGISTER_BAR_NOT_CREATED`);
+      throw new Error(`REGISTER_TICKET_CLOSURE_NOT_CREATED`);
     }
   }
 

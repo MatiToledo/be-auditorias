@@ -13,7 +13,7 @@ export class CompanyRepository implements ICompanyRepository {
       });
     } catch (error) {
       console.error(error);
-      throw new Error(`REGISTER_BAR_NOT_CREATED`);
+      throw new Error(`COMPANY_NOT_CREATED`);
     }
   }
 }

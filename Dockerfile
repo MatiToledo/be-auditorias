@@ -6,6 +6,8 @@ COPY package.json .
 COPY yarn.lock .
 RUN yarn global add tsc typescript ts-node && \
     yarn config set network-timeout 300000
+RUN npm install --include=optional sharp
+RUN yarn add sharp --ignore-engines
 RUN yarn install
 COPY . .
 RUN yarn build && rm -fr src

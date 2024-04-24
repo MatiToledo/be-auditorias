@@ -13,7 +13,7 @@ export class RegisterTicketRepository implements IRegisterTicketRepository {
       });
     } catch (error) {
       console.error(error);
-      throw new Error(`REGISTER_BARS_NOT_FOUND`);
+      throw new Error(`REGISTER_TICKETS_NOT_FOUND`);
     }
   }
 }
