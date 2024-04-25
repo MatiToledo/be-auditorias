@@ -96,6 +96,12 @@ export class TreasuryNightRetirementFinishBackOfficeRepository
             "TicketBranchId",
           ],
           [Sequelize.literal('"RegisterBar->Branch"."id"'), "BarBranchId"],
+          [
+            Sequelize.literal(
+              'CASE WHEN "TreasuryNightRetirementFinish"."createdAt" <> "TreasuryNightRetirementFinish"."updatedAt" THEN true ELSE false END'
+            ),
+            "isEdited",
+          ],
         ],
         limit: pagination.limit,
         offset: pagination.offset,

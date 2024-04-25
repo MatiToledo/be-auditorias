@@ -49,8 +49,9 @@ export class TreasuryNightExpenseBackOfficeService
           case "q":
             where[Op.and].push({
               [Op.or]: [
-                { "$RegisterTicket.name$": { [Op.iLike]: `%${queries.q}%` } },
-                { "$RegisterBar.name$": { [Op.iLike]: `%${queries.q}%` } },
+                { "$Branch.name$": { [Op.iLike]: `%${queries.q}%` } },
+                { "$Concept.name$": { [Op.iLike]: `%${queries.q}%` } },
+                { description: { [Op.iLike]: `%${queries.q}%` } },
               ],
             });
             break;

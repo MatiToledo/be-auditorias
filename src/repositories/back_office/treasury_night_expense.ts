@@ -89,6 +89,12 @@ export class TreasuryNightExpenseBackOfficeRepository
           [Sequelize.literal('"Branch"."id"'), "BranchId"],
           [Sequelize.literal('"Branch->Group"."id"'), "GroupId"],
           [Sequelize.literal('"Branch->Group->Company"."id"'), "CompanyId"],
+          [
+            Sequelize.literal(
+              'CASE WHEN "TreasuryNightExpense"."createdAt" <> "TreasuryNightExpense"."updatedAt" THEN true ELSE false END'
+            ),
+            "isEdited",
+          ],
         ],
         limit: pagination.limit,
         offset: pagination.offset,

@@ -84,6 +84,12 @@ export class RegisterBarClosureBackOfficeRepository
           [Sequelize.literal('"RegisterBar"."name"'), "register_bar"],
           [Sequelize.literal('"RegisterBar"."id"'), "RegisterBarId"],
           [Sequelize.literal('"RegisterBar->Branch"."id"'), "BranchId"],
+          [
+            Sequelize.literal(
+              'CASE WHEN "RegisterBarClosure"."createdAt" <> "RegisterBarClosure"."updatedAt" THEN true ELSE false END'
+            ),
+            "isEdited",
+          ],
         ],
         limit: pagination.limit,
         offset: pagination.offset,

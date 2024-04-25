@@ -20,6 +20,7 @@ export interface AllTreasuryNightRetirement {
   date: string;
   amount: number;
   register: string;
+  isEdited: boolean;
 }
 
 export interface QueriesGetAll {

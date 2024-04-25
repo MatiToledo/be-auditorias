@@ -87,6 +87,12 @@ export class RegisterTicketClosureBackOfficeRepository
           [Sequelize.literal('"RegisterTicket"."name"'), "register_ticket"],
           [Sequelize.literal('"RegisterTicket"."id"'), "RegisterTicketId"],
           [Sequelize.literal('"RegisterTicket->Branch"."id"'), "BranchId"],
+          [
+            Sequelize.literal(
+              'CASE WHEN "RegisterTicketClosure"."createdAt" <> "RegisterTicketClosure"."updatedAt" THEN true ELSE false END'
+            ),
+            "isEdited",
+          ],
         ],
         limit: pagination.limit,
         offset: pagination.offset,

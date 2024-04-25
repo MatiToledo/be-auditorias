@@ -16,6 +16,7 @@ export class TreasuryNightRetirement extends Model {
   declare RegisterBarId: UUID;
   declare RegisterTicketId: UUID;
   declare amount: number;
+  declare isEdited: boolean;
 
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;

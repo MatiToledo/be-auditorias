@@ -60,6 +60,7 @@ export class TreasuryNightRetirementFinishBackOfficeService
           register: retirement_finish.dataValues.register_bar
             ? retirement_finish.dataValues.register_bar
             : retirement_finish.dataValues.register_ticket,
+          isEdited: retirement_finish.dataValues.isEdited,
         };
       }),
     };

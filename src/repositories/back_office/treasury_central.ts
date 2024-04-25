@@ -85,6 +85,12 @@ export class TreasuryCentralBackOfficeRepository
           [Sequelize.literal('"Branch"."id"'), "BranchId"],
           [Sequelize.literal('"Branch->Group"."id"'), "GroupId"],
           [Sequelize.literal('"Branch->Group->Company"."id"'), "CompanyId"],
+          [
+            Sequelize.literal(
+              'CASE WHEN "TreasuryCentral"."createdAt" <> "TreasuryCentral"."updatedAt" THEN true ELSE false END'
+            ),
+            "isEdited",
+          ],
         ],
         limit: pagination.limit,
         offset: pagination.offset,
