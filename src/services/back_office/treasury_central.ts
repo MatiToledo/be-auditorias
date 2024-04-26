@@ -36,18 +36,51 @@ export class TreasuryCentralBackOfficeService
       pagination
     );
 
-    let balance = 0;
+    let balanceCash = 0;
+    let balanceBank = 0;
+    let balanceTransfer = 0;
+    function pushBalanceValue(balance, type, amount) {
+      if (type === "revenue") {
+        balance += amount;
+      } else if (type === "expense") {
+        balance -= amount;
+      }
+      return balance;
+    }
     const movementsWithBalance: TreasuryCentralMovements[] = movements.rows.map(
       (movement) => {
-        if (movement.type === "revenue") {
-          balance += movement.amount;
-        } else if (movement.type === "expense") {
-          balance -= movement.amount;
+        switch (movement.payment_method) {
+          case "cash":
+            balanceCash = pushBalanceValue(
+              balanceCash,
+              movement.type,
+              movement.amount
+            );
+            break;
+          case "bank":
+            balanceBank = pushBalanceValue(
+              balanceBank,
+              movement.type,
+              movement.amount
+            );
+            break;
+          case "transfer":
+            balanceTransfer = pushBalanceValue(
+              balanceTransfer,
+              movement.type,
+              movement.amount
+            );
+            break;
+
+          default:
+            break;
         }
 
         return {
           ...movement.dataValues,
-          balance: balance,
+          balanceCash,
+          balanceBank,
+          balanceTransfer,
         };
       }
     );
