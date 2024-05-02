@@ -16,6 +16,7 @@ export class CompanyBackOfficeRepository
         include: [{ model: Group, include: [{ model: Branch }] }],
         limit: pagination.limit,
         offset: pagination.offset,
+        order: [["createdAt", "DESC"]],
       });
     } catch (error) {
       console.error(error);

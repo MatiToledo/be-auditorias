@@ -85,6 +85,7 @@ export class RegisterBarBackOfficeRepository
         distinct: true,
         limit: pagination.limit,
         offset: pagination.offset,
+        order: [["createdAt", "DESC"]],
       });
     } catch (error) {
       console.error(error);

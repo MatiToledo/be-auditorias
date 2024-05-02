@@ -79,6 +79,9 @@ export class TreasuryNightRetirementFinishBackOfficeRepository
             attributes: [],
           },
         ],
+        limit: pagination.limit,
+        offset: pagination.offset,
+        order: [["createdAt", "DESC"]],
         attributes: [
           "id",
           "type",
@@ -103,9 +106,6 @@ export class TreasuryNightRetirementFinishBackOfficeRepository
             "isEdited",
           ],
         ],
-        limit: pagination.limit,
-        offset: pagination.offset,
-        order: [["createdAt", "DESC"]],
       });
     } catch (error) {
       console.error(error);

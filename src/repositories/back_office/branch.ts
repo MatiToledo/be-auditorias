@@ -85,6 +85,7 @@ export class BranchBackOfficeRepository implements IBranchBackOfficeRepository {
         distinct: true,
         offset: pagination.offset,
         limit: pagination.limit,
+        order: [["createdAt", "DESC"]],
       });
     } catch (error) {
       console.error(error);

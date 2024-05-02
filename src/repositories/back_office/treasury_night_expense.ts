@@ -73,7 +73,9 @@ export class TreasuryNightExpenseBackOfficeRepository
             attributes: [],
           },
         ],
-
+        limit: pagination.limit,
+        offset: pagination.offset,
+        order: [["createdAt", "DESC"]],
         attributes: [
           "id",
           "date",
@@ -96,9 +98,6 @@ export class TreasuryNightExpenseBackOfficeRepository
             "isEdited",
           ],
         ],
-        limit: pagination.limit,
-        offset: pagination.offset,
-        order: [["createdAt", "DESC"]],
       });
     } catch (error) {
       console.error(error);

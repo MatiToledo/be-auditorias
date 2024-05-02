@@ -69,7 +69,9 @@ export class TreasuryCentralBackOfficeRepository
             attributes: [],
           },
         ],
-
+        limit: pagination.limit,
+        offset: pagination.offset,
+        order: [["createdAt", "DESC"]],
         attributes: [
           "id",
           "date",
@@ -92,9 +94,6 @@ export class TreasuryCentralBackOfficeRepository
             "isEdited",
           ],
         ],
-        limit: pagination.limit,
-        offset: pagination.offset,
-        order: [["createdAt", "DESC"]],
       });
     } catch (error) {
       console.error(error);
