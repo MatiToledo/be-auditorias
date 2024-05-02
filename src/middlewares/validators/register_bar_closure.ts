@@ -12,8 +12,8 @@ export class RegisterBarClosureValidate {
         transfers_total_system: number().required(),
         cash_total_system: number().required(),
         expenses_total: number().required(),
-        expenses_observations: string().required(),
-        observations: string().required(),
+        expenses_observations: string().optional(),
+        observations: string().optional(),
         consumptions: array()
           .of(
             object({

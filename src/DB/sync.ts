@@ -20,7 +20,7 @@ import {
 } from "../models";
 import { encryptPassword } from "../libs/encrypt_password";
 
-sequelize.sync({ force: true }).then((res) => {
+sequelize.sync({ alter: true }).then((res) => {
   console.log("Database synced", res);
   // createBulkDev();
 });

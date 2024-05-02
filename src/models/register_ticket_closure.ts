@@ -45,7 +45,7 @@ RegisterTicketClosure.init(
     },
     expenses_observations: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     postnet_total: {
       type: DataTypes.BIGINT,
@@ -77,7 +77,7 @@ RegisterTicketClosure.init(
     },
     observations: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     photo: {
       type: DataTypes.TEXT,

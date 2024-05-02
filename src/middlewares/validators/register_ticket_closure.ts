@@ -8,7 +8,7 @@ export class RegisterTicketClosureValidate {
         date: string().required(),
         retirement_total: number().required(),
         expenses_total: number().required(),
-        expenses_observations: string().required(),
+        expenses_observations: string().optional(),
         postnet_total: number().required(),
         transfers_total: number().required(),
         sold_total: number().required(),
@@ -16,7 +16,7 @@ export class RegisterTicketClosureValidate {
         ticket_price: number().required(),
         persons_cant_branch: number().required(),
         persons_cant_bar: number().required(),
-        observations: string().required(),
+        observations: string().optional(),
         photo: string().required(),
         RegisterTicketId: string().uuid().required(),
       })
