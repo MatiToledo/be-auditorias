@@ -15,6 +15,7 @@ export class TreasuryCentral extends Model {
   declare amount: number;
   declare BranchId: UUID;
   declare Branch: Branch;
+  declare total_amount: number;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
