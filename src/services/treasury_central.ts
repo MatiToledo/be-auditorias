@@ -5,7 +5,6 @@ import {
   TreasuryCentralQuery,
 } from "../interfaces/treasury_central";
 import { TreasuryCentralRepository } from "../repositories/treasury_central";
-import { Sequelize } from "sequelize";
 import { TreasuryCentral } from "../models";
 
 export class TreasuryCentralService implements ITreasuryCentralService {
