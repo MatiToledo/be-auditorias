@@ -277,6 +277,16 @@ export class CashRegisterService implements ICashRegisterService {
     const columnsLabels = ["Efectivo", "Postnet + Transferencias"];
     const { columnLabels: rowsLabel, columnLabelsWithId: rowsLabelWithId } =
       this.getColumnsLabels(register_bars, register_tickets);
+    if (
+      treasury_night_retirements.length === 0 &&
+      treasury_night_retirements_finish.length === 0
+    ) {
+      return {
+        registerRowsLabel: rowsLabel,
+        registerColumnsLabels: columnsLabels,
+        registerData: [],
+      };
+    }
     const data = this.createRowsRegistersTable(
       treasury_night_retirements,
       treasury_night_retirements_finish,
@@ -377,6 +387,14 @@ export class CashRegisterService implements ICashRegisterService {
       columnLabelsWithId,
       rowLabels
     );
+
+    if (data.length === 0) {
+      return {
+        principalColumnLabels: columnLabels,
+        principalRowLabels: rowLabels,
+        principalData: data,
+      };
+    }
     this.createSumRow(data, rowLabels);
 
     this.createTreasuryNightRetirementFinishRow(

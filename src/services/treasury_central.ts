@@ -29,7 +29,6 @@ export class TreasuryCentralService implements ITreasuryCentralService {
       queries
     );
     const movementsWithBalance = await this.calculateBalances(movements);
-    console.log("movementsWithBalance: ", movementsWithBalance);
 
     return movementsWithBalance;
   }
@@ -47,7 +46,6 @@ export class TreasuryCentralService implements ITreasuryCentralService {
       let branchMovementsWithBalance = [];
 
       for (const branch of allBranches) {
-        console.log("branch: ", branch);
         let balanceCash = 0;
         let balanceBank = 0;
         let balanceTransfer = 0;
@@ -101,11 +99,6 @@ export class TreasuryCentralService implements ITreasuryCentralService {
       return treasury_centrals.map((treasury_central) => {
         const movementWithHistoryBalance = branchMovementsWithBalance.find(
           (movement) => movement.id === treasury_central.id
-        );
-        console.log("movementWithHistoryBalance: ", movementWithHistoryBalance);
-        console.log(
-          "treasury_central.dataValues: ",
-          treasury_central.dataValues
         );
         return {
           ...treasury_central.dataValues,
