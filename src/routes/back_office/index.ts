@@ -13,6 +13,7 @@ import TreasuryNightRetirementFinishRouter from "./treasury_night_retirement_fin
 import TreasuryNightExpenseRouter from "./treasury_night_expense";
 import TreasuryCentralRouter from "./treasury_central";
 import ConceptRouter from "./concept";
+import CashRegisterRouter from "./cash_register";
 
 const router = express.Router();
 
@@ -33,5 +34,6 @@ router.use(
 router.use("/treasury_night_expense", TreasuryNightExpenseRouter);
 router.use("/treasury_central", TreasuryCentralRouter);
 router.use("/concept", ConceptRouter);
+router.use("/cash_register", CashRegisterRouter);
 
 export default router;

@@ -69,6 +69,10 @@ CashRegister.init(
       type: DataTypes.BIGINT,
       allowNull: false,
     },
+    comment: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
   },
   { sequelize, modelName: "CashRegister" }
 );

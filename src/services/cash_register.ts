@@ -56,7 +56,14 @@ export class CashRegisterService implements ICashRegisterService {
       retirements_total +
       retirements_finish_total +
       retirements_finish_expenses_total;
-    const amount_theoretical = cash_total + expenses_total;
+    // TODO
+    // Cambio total efectivo y cambio gastos
+    // Sacar signo pesos cantidades
+    // Agregar detalles gastos agrupados
+    // Sacar obligarioriedad cant obs en egreso
+    // Doble click en autocomplete
+  
+    const amount_theoretical = cash_total - expenses_total;
     const difference = amount_theoretical - body.amount_actual;
 
     return await this.cashRegisterRepository.create({
