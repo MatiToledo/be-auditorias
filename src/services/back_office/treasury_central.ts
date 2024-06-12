@@ -9,6 +9,7 @@ import { TreasuryCentralMovements } from "../../interfaces/treasury_central";
 import { buildPagination } from "../../libs/buildPagination";
 import { TreasuryCentral } from "../../models";
 import { TreasuryCentralBackOfficeRepository } from "../../repositories/back_office/treasury_central";
+import { TreasuryCentralService } from "../treasury_central";
 
 export class TreasuryCentralBackOfficeService
   implements ITreasuryCentralBackOfficeService
@@ -16,6 +17,7 @@ export class TreasuryCentralBackOfficeService
   /////////////////////////////////////////////////////////////////////////////////////////////
   private treasuryCentralBackOfficeRepository =
     new TreasuryCentralBackOfficeRepository();
+  private treasuryCentralService = new TreasuryCentralService();
   async update(
     id: UUID,
     body: Partial<TreasuryCentral>
@@ -35,59 +37,11 @@ export class TreasuryCentralBackOfficeService
       where,
       pagination
     );
-
-    let balanceCash = 0;
-    let balanceBank = 0;
-    let balanceTransfer = 0;
-    function pushBalanceValue(balance, type, amount) {
-      if (type === "revenue") {
-        balance += amount;
-      } else if (type === "expense") {
-        balance -= amount;
-      }
-      return balance;
-    }
-    const movementsWithBalance: TreasuryCentralMovements[] = movements.rows.map(
-      (movement) => {
-        switch (movement.payment_method) {
-          case "cash":
-            balanceCash = pushBalanceValue(
-              balanceCash,
-              movement.type,
-              movement.amount
-            );
-            break;
-          case "bank":
-            balanceBank = pushBalanceValue(
-              balanceBank,
-              movement.type,
-              movement.amount
-            );
-            break;
-          case "transfer":
-            balanceTransfer = pushBalanceValue(
-              balanceTransfer,
-              movement.type,
-              movement.amount
-            );
-            break;
-
-          default:
-            break;
-        }
-
-        return {
-          ...movement.dataValues,
-          balanceCash,
-          balanceBank,
-          balanceTransfer,
-        };
-      }
-    );
-
+    const movementsWithBalance =
+      await this.treasuryCentralService.calculateBalances(movements.rows);
     return {
-      count: movements.count,
       rows: movementsWithBalance,
+      count: movements.count,
     };
   }
 

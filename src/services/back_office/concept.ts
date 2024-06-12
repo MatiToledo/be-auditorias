@@ -24,9 +24,19 @@ export class ConceptBackOfficeService implements IConceptBackOfficeService {
   }> {
     const where = this.buildQueriesFilters(queries);
     const pagination = buildPagination(queries);
-    const register_bars_closures =
-      await this.conceptBackOfficeRepository.getAll(where, pagination);
-    return register_bars_closures as any;
+    const concepts = await this.conceptBackOfficeRepository.getAll(
+      where,
+      pagination
+    );
+
+    for (const concept of concepts.rows) {
+      const conceptType = await this.conceptBackOfficeRepository.findOne(
+        concept.type,
+        concept.level + 1
+      );
+      concept.setDataValue("typeId", conceptType?.id || null);
+    }
+    return concepts as any;
   }
   async create(body: Partial<Concept>): Promise<Concept> {
     return await this.conceptBackOfficeRepository.create(body);

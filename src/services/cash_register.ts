@@ -42,7 +42,14 @@ export class CashRegisterService implements ICashRegisterService {
       });
 
     const retirements_total = this.getTotalAmountRetirements(retirements);
-
+    const postnet_total = this.getTotalRetirementsFinishByType(
+      retirements_finish,
+      "postnet"
+    );
+    const transfers_total = this.getTotalRetirementsFinishByType(
+      retirements_finish,
+      "transfers"
+    );
     const retirements_finish_total =
       this.getTotalAmountRetirementsFinish(retirements_finish);
 
@@ -56,11 +63,18 @@ export class CashRegisterService implements ICashRegisterService {
       retirements_total +
       retirements_finish_total +
       retirements_finish_expenses_total;
-    const amount_theoretical = cash_total + expenses_total;
+    // TODO
+    // Agregar detalles gastos agrupados
+    // Cambio total efectivo y cambio gastos
+    // Sacar obligarioriedad cant obs en egreso
+
+    const amount_theoretical = cash_total - expenses_total;
     const difference = amount_theoretical - body.amount_actual;
 
     return await this.cashRegisterRepository.create({
       ...body,
+      postnet_total,
+      transfers_total,
       amount_theoretical,
       retirements_total,
       retirements_finish_total,
@@ -154,28 +168,6 @@ export class CashRegisterService implements ICashRegisterService {
         data: totalCashData,
       }),
     };
-    // return {
-    //   principal: {
-    //     columnLabels: principalColumnLabels,
-    //     rowLabels: principalRowLabels,
-    //     data: principalData,
-    //   },
-    //   registers: {
-    //     columnLabels: registerColumnsLabels,
-    //     rowLabels: registerRowsLabel,
-    //     data: registerData,
-    //   },
-    //   expenses: {
-    //     columnLabels: expenseColumnLabels,
-    //     rowLabels: expenseRowLabels,
-    //     data: expenseData,
-    //   },
-    //   totalCash: {
-    //     columnLabels: totalCashColumnLabels,
-    //     rowLabels: totalCashRowLabels,
-    //     data: totalCashData,
-    //   },
-    // };
   }
   private createExpensesDetailsTableData(expenses: TreasuryNightExpense[]) {
     const columns = [
@@ -208,7 +200,6 @@ export class CashRegisterService implements ICashRegisterService {
     const columnLabels = inputObject.columnLabels;
     const rowLabels = inputObject.rowLabels;
     const data = inputObject.data;
-
     // Crear la estructura de columnas con un elemento vacío al principio
     const columns = [{ key: "", label: "" }];
     columnLabels.forEach((label, index) => {
@@ -218,11 +209,13 @@ export class CashRegisterService implements ICashRegisterService {
     // Crear la estructura de filas con los datos
     const rows = [];
     rowLabels.forEach((rowLabel, rowIndex) => {
-      const rowData = { "": rowLabel }; // Iniciar el objeto de fila con el label de la fila
-      data[rowIndex].forEach((cellData, columnIndex) => {
-        rowData[(columnIndex + 1).toString()] = cellData.value; // Asignar el valor al índice de columna correspondiente
-      });
-      rows.push(rowData);
+      const rowData = { "": rowLabel };
+      if (data[rowIndex]) {
+        data[rowIndex].forEach((cellData, columnIndex) => {
+          rowData[(columnIndex + 1).toString()] = cellData.value; // Asignar el valor al índice de columna correspondiente
+        });
+        rows.push(rowData);
+      } // Iniciar el objeto de fila con el label de la fila
     });
 
     return { columns, rows };
@@ -256,7 +249,7 @@ export class CashRegisterService implements ICashRegisterService {
           {
             value: (
               retirements_total +
-              retirements_finish_total +
+              retirements_finish_total -
               treasury_expenses_total
             ).toString(),
           },
@@ -298,6 +291,16 @@ export class CashRegisterService implements ICashRegisterService {
     const columnsLabels = ["Efectivo", "Postnet + Transferencias"];
     const { columnLabels: rowsLabel, columnLabelsWithId: rowsLabelWithId } =
       this.getColumnsLabels(register_bars, register_tickets);
+    if (
+      treasury_night_retirements.length === 0 &&
+      treasury_night_retirements_finish.length === 0
+    ) {
+      return {
+        registerRowsLabel: rowsLabel,
+        registerColumnsLabels: columnsLabels,
+        registerData: [],
+      };
+    }
     const data = this.createRowsRegistersTable(
       treasury_night_retirements,
       treasury_night_retirements_finish,
@@ -398,6 +401,14 @@ export class CashRegisterService implements ICashRegisterService {
       columnLabelsWithId,
       rowLabels
     );
+
+    if (data.length === 0) {
+      return {
+        principalColumnLabels: columnLabels,
+        principalRowLabels: rowLabels,
+        principalData: data,
+      };
+    }
     this.createSumRow(data, rowLabels);
 
     this.createTreasuryNightRetirementFinishRow(
@@ -535,6 +546,7 @@ export class CashRegisterService implements ICashRegisterService {
     if (lastRow.length !== secondLastRow.length) {
       throw new Error("Las dos últimas filas deben tener la misma longitud");
     }
+    if (!thirtyLastRow) return;
 
     // Iteramos sobre cada columna
     for (let i = 0; i < lastRow.length; i++) {
@@ -729,6 +741,7 @@ export class CashRegisterService implements ICashRegisterService {
   private createSumRow(tableData: any[][], rowLabels: string[]) {
     rowLabels.push("Suma Retiros");
     const sumRow = [];
+    if (tableData.length === 0) return;
     for (let i = 0; i < tableData[0].length; i++) {
       let columnSum = 0;
 
@@ -749,6 +762,16 @@ export class CashRegisterService implements ICashRegisterService {
     let total = 0;
     for (const retirement of retirements) {
       total += retirement.amount;
+    }
+    return total;
+  }
+  private getTotalRetirementsFinishByType(
+    retirements: TreasuryNightRetirementFinish[],
+    type: "postnet" | "transfers"
+  ) {
+    let total = 0;
+    for (const retirement of retirements) {
+      total += retirement[type];
     }
     return total;
   }

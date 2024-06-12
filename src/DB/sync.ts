@@ -130,22 +130,25 @@ export async function createBulkDev() {
     for (const register_bar of register_bars) {
       await RegisterBarClosure.bulkCreate(
         [
-          Array.from({ length: 4 }).map(() => ({
+          Array.from({ length: Math.floor(Math.random() * 5) + 1 }).map(() => ({
             date: new Date(),
             retirement_total: Math.floor(Math.random() * 1000) + 1,
             retirement_finish: Math.floor(Math.random() * 1000) + 1,
             expenses_total: Math.floor(Math.random() * 1000) + 1,
             expenses_observations: "expenses observations",
             postnet_total: Math.floor(Math.random() * 1000) + 1,
+            cash_total_system: Math.floor(Math.random() * 1000) + 1,
+            transfers_total_system: Math.floor(Math.random() * 1000) + 1,
             transfers_total: Math.floor(Math.random() * 1000) + 1,
             consumptions: [
               {
-                description: "descriptions",
+                description: "consumicion 1",
                 quantity: 2,
               },
             ],
-            observations: "observations",
-            photo: "photo",
+            observations: "observaciones",
+            photo:
+              "https://res.cloudinary.com/dhneingic/image/upload/v1714898826/rbbh5oud6ins9rdmx1sz.jpg",
             RegisterBarId: register_bar.dataValues.id,
           })),
         ].flat()
@@ -204,7 +207,7 @@ export async function createBulkDev() {
     for (const register_ticket of register_tickets) {
       await RegisterTicketClosure.bulkCreate(
         [
-          Array.from({ length: 4 }).map(() => ({
+          Array.from({ length: Math.floor(Math.random() * 5) + 1 }).map(() => ({
             date: new Date(),
             retirement_total: Math.floor(Math.random() * 1000) + 1,
             retirement_finish: Math.floor(Math.random() * 1000) + 1,
@@ -218,7 +221,8 @@ export async function createBulkDev() {
             persons_cant_branch: Math.floor(Math.random() * 1000) + 1,
             persons_cant_bar: Math.floor(Math.random() * 1000) + 1,
             observations: "observations",
-            photo: "photo",
+            photo:
+              "https://res.cloudinary.com/dhneingic/image/upload/v1714898826/rbbh5oud6ins9rdmx1sz.jpg",
             RegisterTicketId: register_ticket.dataValues.id,
           })),
         ].flat()
@@ -750,14 +754,14 @@ export async function createBulkDev() {
     ]);
     await TreasuryNightExpense.bulkCreate(
       [
-        Array.from({ length: 5 }).map(() => {
+        Array.from({ length: Math.floor(Math.random() * 5) + 1 }).map(() => {
           const quantity = Math.floor(Math.random() * 10) + 1;
           const unit_price = Math.floor(Math.random() * 100) + 1;
           const total = quantity * unit_price;
 
           return {
             date: new Date(),
-            ConceptId: concepts[100].id,
+            ConceptId: concepts[Math.floor(Math.random() * 80) + 1].id,
             description: "test",
             quantity: quantity,
             unit_price: unit_price,
@@ -765,14 +769,14 @@ export async function createBulkDev() {
             BranchId: branchs[0].id,
           };
         }),
-        Array.from({ length: 5 }).map(() => {
+        Array.from({ length: Math.floor(Math.random() * 5) + 1 }).map(() => {
           const quantity = Math.floor(Math.random() * 10) + 1;
           const unit_price = Math.floor(Math.random() * 100) + 1;
           const total = quantity * unit_price;
 
           return {
             date: new Date(),
-            ConceptId: concepts[100].id,
+            ConceptId: concepts[Math.floor(Math.random() * 80) + 1].id,
             description: "test",
             quantity: quantity,
             unit_price: unit_price,
@@ -780,14 +784,14 @@ export async function createBulkDev() {
             BranchId: branchs[1].id,
           };
         }),
-        Array.from({ length: 5 }).map(() => {
+        Array.from({ length: Math.floor(Math.random() * 5) + 1 }).map(() => {
           const quantity = Math.floor(Math.random() * 10) + 1;
           const unit_price = Math.floor(Math.random() * 100) + 1;
           const total = quantity * unit_price;
 
           return {
             date: new Date(),
-            conceptId: concepts[100].id,
+            conceptId: concepts[Math.floor(Math.random() * 80) + 1].id,
             description: "test",
             quantity: quantity,
             unit_price: unit_price,
@@ -795,14 +799,14 @@ export async function createBulkDev() {
             BranchId: branchs[2].id,
           };
         }),
-        Array.from({ length: 5 }).map(() => {
+        Array.from({ length: Math.floor(Math.random() * 5) + 1 }).map(() => {
           const quantity = Math.floor(Math.random() * 10) + 1;
           const unit_price = Math.floor(Math.random() * 100) + 1;
           const total = quantity * unit_price;
 
           return {
             date: new Date(),
-            conceptId: concepts[100].id,
+            conceptId: concepts[Math.floor(Math.random() * 80) + 1].id,
             description: "test",
             quantity: quantity,
             unit_price: unit_price,
@@ -810,14 +814,14 @@ export async function createBulkDev() {
             BranchId: branchs[3].id,
           };
         }),
-        Array.from({ length: 5 }).map(() => {
+        Array.from({ length: Math.floor(Math.random() * 5) + 1 }).map(() => {
           const quantity = Math.floor(Math.random() * 10) + 1;
           const unit_price = Math.floor(Math.random() * 100) + 1;
           const total = quantity * unit_price;
 
           return {
             date: new Date(),
-            conceptId: concepts[100].id,
+            conceptId: concepts[Math.floor(Math.random() * 80) + 1].id,
             description: "test",
             quantity: quantity,
             unit_price: unit_price,
@@ -825,14 +829,14 @@ export async function createBulkDev() {
             BranchId: branchs[4].id,
           };
         }),
-        Array.from({ length: 5 }).map(() => {
+        Array.from({ length: Math.floor(Math.random() * 5) + 1 }).map(() => {
           const quantity = Math.floor(Math.random() * 10) + 1;
           const unit_price = Math.floor(Math.random() * 100) + 1;
           const total = quantity * unit_price;
 
           return {
             date: new Date(),
-            conceptId: concepts[100].id,
+            conceptId: concepts[Math.floor(Math.random() * 80) + 1].id,
             description: "test",
             quantity: quantity,
             unit_price: unit_price,
@@ -844,73 +848,73 @@ export async function createBulkDev() {
     );
     await TreasuryNightRetirement.bulkCreate(
       [
-        Array.from({ length: 2 }).map(() => ({
+        Array.from({ length: Math.floor(Math.random() * 5) + 1 }).map(() => ({
           date: new Date(),
           amount: Math.floor(Math.random() * 1000) + 1,
           type: "register_ticket",
           RegisterTicketId: register_tickets[0].id,
         })),
-        Array.from({ length: 2 }).map(() => ({
+        Array.from({ length: Math.floor(Math.random() * 5) + 1 }).map(() => ({
           date: new Date(),
           amount: Math.floor(Math.random() * 1000) + 1,
           type: "register_bar",
           RegisterBarId: register_bars[0].id,
         })),
-        Array.from({ length: 3 }).map(() => ({
+        Array.from({ length: Math.floor(Math.random() * 5) + 1 }).map(() => ({
           date: new Date(),
           amount: Math.floor(Math.random() * 1000) + 1,
           type: "register_ticket",
           RegisterTicketId: register_tickets[1].id,
         })),
-        Array.from({ length: 3 }).map(() => ({
+        Array.from({ length: Math.floor(Math.random() * 5) + 1 }).map(() => ({
           date: new Date(),
           amount: Math.floor(Math.random() * 1000) + 1,
           type: "register_bar",
           RegisterBarId: register_bars[1].id,
         })),
-        Array.from({ length: 2 }).map(() => ({
+        Array.from({ length: Math.floor(Math.random() * 5) + 1 }).map(() => ({
           date: new Date(),
           amount: Math.floor(Math.random() * 1000) + 1,
           type: "register_ticket",
           RegisterTicketId: register_tickets[2].id,
         })),
-        Array.from({ length: 2 }).map(() => ({
+        Array.from({ length: Math.floor(Math.random() * 5) + 1 }).map(() => ({
           date: new Date(),
           amount: Math.floor(Math.random() * 1000) + 1,
           type: "register_bar",
           RegisterBarId: register_bars[2].id,
         })),
-        Array.from({ length: 3 }).map(() => ({
+        Array.from({ length: Math.floor(Math.random() * 5) + 1 }).map(() => ({
           date: new Date(),
           amount: Math.floor(Math.random() * 1000) + 1,
           type: "register_ticket",
           RegisterTicketId: register_tickets[3].id,
         })),
-        Array.from({ length: 3 }).map(() => ({
+        Array.from({ length: Math.floor(Math.random() * 5) + 1 }).map(() => ({
           date: new Date(),
           amount: Math.floor(Math.random() * 1000) + 1,
           type: "register_bar",
           RegisterBarId: register_bars[3].id,
         })),
-        Array.from({ length: 2 }).map(() => ({
+        Array.from({ length: Math.floor(Math.random() * 5) + 1 }).map(() => ({
           date: new Date(),
           amount: Math.floor(Math.random() * 1000) + 1,
           type: "register_ticket",
           RegisterTicketId: register_tickets[4].id,
         })),
-        Array.from({ length: 2 }).map(() => ({
+        Array.from({ length: Math.floor(Math.random() * 5) + 1 }).map(() => ({
           date: new Date(),
           amount: Math.floor(Math.random() * 1000) + 1,
           type: "register_bar",
           RegisterBarId: register_bars[4].id,
         })),
-        Array.from({ length: 3 }).map(() => ({
+        Array.from({ length: Math.floor(Math.random() * 5) + 1 }).map(() => ({
           date: new Date(),
           amount: Math.floor(Math.random() * 1000) + 1,
           type: "register_ticket",
           RegisterTicketId: register_tickets[5].id,
         })),
-        Array.from({ length: 3 }).map(() => ({
+        Array.from({ length: Math.floor(Math.random() * 5) + 1 }).map(() => ({
           date: new Date(),
           amount: Math.floor(Math.random() * 1000) + 1,
           type: "register_bar",
@@ -920,7 +924,7 @@ export async function createBulkDev() {
     );
     await TreasuryNightRetirementFinish.bulkCreate(
       [
-        Array.from({ length: 1 }).map(() => ({
+        Array.from({ length: Math.floor(Math.random() * 5) + 1 }).map(() => ({
           date: new Date(),
           expenses: Math.floor(Math.random() * 1000) + 1,
           type: "register_ticket",
@@ -929,7 +933,7 @@ export async function createBulkDev() {
           amount: Math.floor(Math.random() * 1000) + 1,
           RegisterTicketId: register_tickets[0].id,
         })),
-        Array.from({ length: 1 }).map(() => ({
+        Array.from({ length: Math.floor(Math.random() * 5) + 1 }).map(() => ({
           date: new Date(),
           expenses: Math.floor(Math.random() * 1000) + 1,
           postnet: Math.floor(Math.random() * 1000) + 1,
@@ -938,7 +942,7 @@ export async function createBulkDev() {
           type: "register_bar",
           RegisterBarId: register_bars[0].id,
         })),
-        Array.from({ length: 1 }).map(() => ({
+        Array.from({ length: Math.floor(Math.random() * 5) + 1 }).map(() => ({
           date: new Date(),
           expenses: Math.floor(Math.random() * 1000) + 1,
           postnet: Math.floor(Math.random() * 1000) + 1,
@@ -947,7 +951,7 @@ export async function createBulkDev() {
           amount: Math.floor(Math.random() * 1000) + 1,
           RegisterTicketId: register_tickets[1].id,
         })),
-        Array.from({ length: 1 }).map(() => ({
+        Array.from({ length: Math.floor(Math.random() * 5) + 1 }).map(() => ({
           date: new Date(),
           expenses: Math.floor(Math.random() * 1000) + 1,
           postnet: Math.floor(Math.random() * 1000) + 1,
@@ -956,7 +960,7 @@ export async function createBulkDev() {
           amount: Math.floor(Math.random() * 1000) + 1,
           RegisterBarId: register_bars[1].id,
         })),
-        Array.from({ length: 1 }).map(() => ({
+        Array.from({ length: Math.floor(Math.random() * 5) + 1 }).map(() => ({
           date: new Date(),
           expenses: Math.floor(Math.random() * 1000) + 1,
           type: "register_ticket",
@@ -965,7 +969,7 @@ export async function createBulkDev() {
           amount: Math.floor(Math.random() * 1000) + 1,
           RegisterTicketId: register_tickets[2].id,
         })),
-        Array.from({ length: 1 }).map(() => ({
+        Array.from({ length: Math.floor(Math.random() * 5) + 1 }).map(() => ({
           date: new Date(),
           expenses: Math.floor(Math.random() * 1000) + 1,
           postnet: Math.floor(Math.random() * 1000) + 1,
@@ -974,7 +978,7 @@ export async function createBulkDev() {
           type: "register_bar",
           RegisterBarId: register_bars[2].id,
         })),
-        Array.from({ length: 1 }).map(() => ({
+        Array.from({ length: Math.floor(Math.random() * 5) + 1 }).map(() => ({
           date: new Date(),
           expenses: Math.floor(Math.random() * 1000) + 1,
           postnet: Math.floor(Math.random() * 1000) + 1,
@@ -983,7 +987,7 @@ export async function createBulkDev() {
           amount: Math.floor(Math.random() * 1000) + 1,
           RegisterTicketId: register_tickets[3].id,
         })),
-        Array.from({ length: 1 }).map(() => ({
+        Array.from({ length: Math.floor(Math.random() * 5) + 1 }).map(() => ({
           date: new Date(),
           expenses: Math.floor(Math.random() * 1000) + 1,
           postnet: Math.floor(Math.random() * 1000) + 1,
@@ -992,7 +996,7 @@ export async function createBulkDev() {
           amount: Math.floor(Math.random() * 1000) + 1,
           RegisterBarId: register_bars[3].id,
         })),
-        Array.from({ length: 1 }).map(() => ({
+        Array.from({ length: Math.floor(Math.random() * 5) + 1 }).map(() => ({
           date: new Date(),
           expenses: Math.floor(Math.random() * 1000) + 1,
           type: "register_ticket",
@@ -1001,7 +1005,7 @@ export async function createBulkDev() {
           amount: Math.floor(Math.random() * 1000) + 1,
           RegisterTicketId: register_tickets[4].id,
         })),
-        Array.from({ length: 1 }).map(() => ({
+        Array.from({ length: Math.floor(Math.random() * 5) + 1 }).map(() => ({
           date: new Date(),
           expenses: Math.floor(Math.random() * 1000) + 1,
           postnet: Math.floor(Math.random() * 1000) + 1,
@@ -1010,7 +1014,7 @@ export async function createBulkDev() {
           type: "register_bar",
           RegisterBarId: register_bars[4].id,
         })),
-        Array.from({ length: 1 }).map(() => ({
+        Array.from({ length: Math.floor(Math.random() * 5) + 1 }).map(() => ({
           date: new Date(),
           expenses: Math.floor(Math.random() * 1000) + 1,
           postnet: Math.floor(Math.random() * 1000) + 1,
@@ -1019,7 +1023,7 @@ export async function createBulkDev() {
           amount: Math.floor(Math.random() * 1000) + 1,
           RegisterTicketId: register_tickets[5].id,
         })),
-        Array.from({ length: 1 }).map(() => ({
+        Array.from({ length: Math.floor(Math.random() * 5) + 1 }).map(() => ({
           date: new Date(),
           expenses: Math.floor(Math.random() * 1000) + 1,
           postnet: Math.floor(Math.random() * 1000) + 1,
@@ -1032,7 +1036,7 @@ export async function createBulkDev() {
     );
     await TreasuryCentral.bulkCreate(
       [
-        Array.from({ length: 5 }).map(() => {
+        Array.from({ length: Math.floor(Math.random() * 5) + 1 }).map(() => {
           return {
             date: new Date(),
             type: "expense",
@@ -1040,10 +1044,21 @@ export async function createBulkDev() {
             description: "descripcion",
             amount: Math.floor(Math.random() * 1000) + 1,
             BranchId: branchs[1].id,
-            ConceptId: concepts[100].id,
+            ConceptId: concepts[Math.floor(Math.random() * 80) + 1].id,
           };
         }),
-        Array.from({ length: 5 }).map(() => {
+        Array.from({ length: Math.floor(Math.random() * 5) + 1 }).map(() => {
+          return {
+            date: new Date(),
+            type: "revenue",
+            payment_method: "bank",
+            description: "descripcion",
+            amount: Math.floor(Math.random() * 1000) + 1,
+            BranchId: branchs[1].id,
+            ConceptId: concepts[Math.floor(Math.random() * 80) + 1].id,
+          };
+        }),
+        Array.from({ length: Math.floor(Math.random() * 5) + 1 }).map(() => {
           return {
             date: new Date(),
             type: "revenue",
@@ -1051,7 +1066,40 @@ export async function createBulkDev() {
             description: "descripcion",
             amount: Math.floor(Math.random() * 1000) + 1,
             BranchId: branchs[1].id,
-            ConceptId: concepts[100].id,
+            ConceptId: concepts[Math.floor(Math.random() * 80) + 1].id,
+          };
+        }),
+        Array.from({ length: Math.floor(Math.random() * 5) + 1 }).map(() => {
+          return {
+            date: new Date(),
+            type: "expense",
+            payment_method: "cash",
+            description: "descripcion",
+            amount: Math.floor(Math.random() * 1000) + 1,
+            BranchId: branchs[1].id,
+            ConceptId: concepts[Math.floor(Math.random() * 80) + 1].id,
+          };
+        }),
+        Array.from({ length: Math.floor(Math.random() * 5) + 1 }).map(() => {
+          return {
+            date: new Date(),
+            type: "revenue",
+            payment_method: "transfer",
+            description: "descripcion",
+            amount: Math.floor(Math.random() * 1000) + 1,
+            BranchId: branchs[1].id,
+            ConceptId: concepts[Math.floor(Math.random() * 80) + 1].id,
+          };
+        }),
+        Array.from({ length: Math.floor(Math.random() * 5) + 1 }).map(() => {
+          return {
+            date: new Date(),
+            type: "expense",
+            payment_method: "transfer",
+            description: "descripcion",
+            amount: Math.floor(Math.random() * 1000) + 1,
+            BranchId: branchs[1].id,
+            ConceptId: concepts[Math.floor(Math.random() * 80) + 1].id,
           };
         }),
       ].flat()
@@ -1093,7 +1141,7 @@ export async function createBulkDev() {
       AuthId: autht.id,
     });
     const authBO = await AuthBO.create({
-      email: "mati@gmail.com",
+      email: "toledo.nicolas.matias@gmail.com",
       password: encryptPassword("123123123"),
     });
     await UserBO.create({

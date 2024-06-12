@@ -10,9 +10,11 @@ import TreasuryNightExpenseRouter from "./treasury_night_expense";
 import TreasuryNightRetirementFinishRouter from "./treasury_night_retirement_finish";
 import TreasuryCentralRouter from "./treasury_central";
 import CashRegisterRouter from "./cash_register";
+import healthRouter from "./health";
 import ConceptRouter from "./concept";
 const router = express.Router();
 
+router.use("/health", healthRouter);
 router.use("/auth", AuthRouter);
 router.use("/user", UserRouter);
 router.use("/register_bar_closure", RegisterBarClosureRouter);

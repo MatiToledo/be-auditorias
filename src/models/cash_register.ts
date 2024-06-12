@@ -15,6 +15,8 @@ export class CashRegister extends Model {
   declare expenses_total: number;
   declare difference: number;
   declare cash_total: number;
+  declare postnet_total: number;
+  declare transfers_total: number;
   declare BranchId: UUID;
   declare Branch: Branch;
   public readonly createdAt!: Date;
@@ -64,10 +66,21 @@ CashRegister.init(
       type: DataTypes.BIGINT,
       allowNull: false,
     },
-
+    transfers_total: {
+      type: DataTypes.BIGINT,
+      allowNull: true,
+    },
+    postnet_total: {
+      type: DataTypes.BIGINT,
+      allowNull: true,
+    },
     difference: {
       type: DataTypes.BIGINT,
       allowNull: false,
+    },
+    comment: {
+      type: DataTypes.STRING,
+      allowNull: true,
     },
   },
   { sequelize, modelName: "CashRegister" }

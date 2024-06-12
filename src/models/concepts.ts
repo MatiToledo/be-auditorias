@@ -5,7 +5,10 @@ import { sequelize } from "../DB";
 export class Concept extends Model {
   declare id: CreationOptional<UUID>;
   declare name: string;
+  declare type: string;
   declare level: number;
+  declare typeId: UUID;
+  declare visible: boolean;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
@@ -28,6 +31,10 @@ Concept.init(
     level: {
       type: DataTypes.INTEGER,
       allowNull: false,
+    },
+    visible: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
     },
   },
   { sequelize, modelName: "Concept", paranoid: true }

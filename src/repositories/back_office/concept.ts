@@ -14,6 +14,16 @@ export class ConceptBackOfficeRepository
       throw new Error(`CONCEPT_NOT_CREATED`);
     }
   }
+
+  async findOne(name: string, level: number): Promise<Concept> {
+    try {
+      return await Concept.findOne({ where: { name, level } });
+    } catch (error) {
+      console.error(error);
+      throw new Error(`CONCEPT_NOT_FOUND`);
+    }
+  }
+
   async update(id: UUID, data: Partial<Concept>): Promise<Concept> {
     try {
       const [updatedInstitution, affectedRows] = await Concept.update(data, {

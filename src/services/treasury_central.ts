@@ -4,8 +4,8 @@ import {
   TreasuryCentralMovements,
   TreasuryCentralQuery,
 } from "../interfaces/treasury_central";
-import { TreasuryCentral } from "../models";
 import { TreasuryCentralRepository } from "../repositories/treasury_central";
+import { TreasuryCentral } from "../models";
 
 export class TreasuryCentralService implements ITreasuryCentralService {
   private treasuryCentralRepository = new TreasuryCentralRepository();
@@ -28,22 +28,88 @@ export class TreasuryCentralService implements ITreasuryCentralService {
       BranchId,
       queries
     );
-    let balance = 0;
-    const movementsWithBalance: TreasuryCentralMovements[] = movements.map(
-      (movement) => {
-        if (movement.type === "revenue") {
-          balance += movement.amount;
-        } else if (movement.type === "expense") {
-          balance -= movement.amount;
-        }
-
-        return {
-          ...movement.dataValues,
-          balance: balance,
-        };
-      }
-    );
+    const movementsWithBalance = await this.calculateBalances(movements);
 
     return movementsWithBalance;
+  }
+
+  async calculateBalances(treasury_centrals: TreasuryCentral[]): Promise<any> {
+    try {
+      const allMovements = await TreasuryCentral.findAll({
+        attributes: ["id", "payment_method", "type", "amount", "BranchId"],
+        order: [["createdAt", "ASC"]],
+      });
+      const allBranches = allMovements
+        .map((movement) => movement.BranchId)
+        .filter((value, index, self) => self.indexOf(value) === index);
+
+      let branchMovementsWithBalance = [];
+
+      for (const branch of allBranches) {
+        let balanceCash = 0;
+        let balanceBank = 0;
+        let balanceTransfer = 0;
+
+        const branchMovements = allMovements.filter(
+          (movement) => movement.BranchId === branch
+        );
+        function pushBalanceValue(balance, type, amount) {
+          if (type === "revenue") {
+            balance += amount;
+          } else if (type === "expense") {
+            balance -= amount;
+          }
+          return balance;
+        }
+        branchMovements.map((movement) => {
+          switch (movement.payment_method) {
+            case "cash":
+              balanceCash = pushBalanceValue(
+                balanceCash,
+                movement.type,
+                movement.amount
+              );
+              break;
+            case "bank":
+              balanceBank = pushBalanceValue(
+                balanceBank,
+                movement.type,
+                movement.amount
+              );
+              break;
+            case "transfer":
+              balanceTransfer = pushBalanceValue(
+                balanceTransfer,
+                movement.type,
+                movement.amount
+              );
+              break;
+
+            default:
+              break;
+          }
+          branchMovementsWithBalance.push({
+            id: movement.id,
+            balanceCash,
+            balanceBank,
+            balanceTransfer,
+          });
+        });
+      }
+      return treasury_centrals.map((treasury_central) => {
+        const movementWithHistoryBalance = branchMovementsWithBalance.find(
+          (movement) => movement.id === treasury_central.id
+        );
+        return {
+          ...treasury_central.dataValues,
+          balanceCash: movementWithHistoryBalance.balanceCash,
+          balanceBank: movementWithHistoryBalance.balanceBank,
+          balanceTransfer: movementWithHistoryBalance.balanceTransfer,
+        };
+      });
+    } catch (error) {
+      console.error(error);
+      throw new Error(`TREASURIES_CENTRAL_NOT_FOUND`);
+    }
   }
 }
