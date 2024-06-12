@@ -7,6 +7,7 @@ export class ConceptValidate {
       query: object({
         level: string().optional(),
         type: string().optional(),
+        visible: string().optional(),
       })
         .noUnknown(true)
         .strict(true),

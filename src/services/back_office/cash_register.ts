@@ -26,7 +26,6 @@ export class CashRegisterBackOfficeService
   }
 
   private buildQueriesFilters(queries: QueriesGetAll) {
-    console.log("queries: ", queries);
     const where = {
       [Op.and]: [],
     };

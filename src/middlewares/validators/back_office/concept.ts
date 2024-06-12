@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { Schema, number, object, string } from "yup";
+import { Schema, boolean, number, object, string } from "yup";
 
 export class ConceptBackOfficeValidate {
   static async create(req: Request, res: Response, next: NextFunction) {
@@ -8,6 +8,7 @@ export class ConceptBackOfficeValidate {
         name: string().required(),
         level: number().required(),
         type: string().optional(),
+        visible: boolean().required(),
       })
         .noUnknown(true)
         .strict(true),
@@ -46,6 +47,7 @@ export class ConceptBackOfficeValidate {
         name: string().optional(),
         type: string().optional(),
         level: number().optional(),
+        visible: boolean().optional(),
       })
         .noUnknown(true)
         .strict(true),

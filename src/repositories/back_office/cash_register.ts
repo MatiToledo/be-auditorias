@@ -19,7 +19,6 @@ export class CashRegisterBackOfficeRepository
     pagination: { offset: number; limit: number }
   ) {
     try {
-      console.log("where: ", where);
       return await CashRegister.findAndCountAll({
         where,
         include: [
@@ -49,6 +48,8 @@ export class CashRegisterBackOfficeRepository
           "treasury_expenses_total",
           "expenses_total",
           "cash_total",
+          "postnet_total",
+          "transfers_total",
           "difference",
           "comment",
           [Sequelize.literal('"Branch"."name"'), "branch"],

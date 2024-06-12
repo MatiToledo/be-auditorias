@@ -42,7 +42,14 @@ export class CashRegisterService implements ICashRegisterService {
       });
 
     const retirements_total = this.getTotalAmountRetirements(retirements);
-
+    const postnet_total = this.getTotalRetirementsFinishByType(
+      retirements_finish,
+      "postnet"
+    );
+    const transfers_total = this.getTotalRetirementsFinishByType(
+      retirements_finish,
+      "transfers"
+    );
     const retirements_finish_total =
       this.getTotalAmountRetirementsFinish(retirements_finish);
 
@@ -57,17 +64,17 @@ export class CashRegisterService implements ICashRegisterService {
       retirements_finish_total +
       retirements_finish_expenses_total;
     // TODO
-    // Cambio total efectivo y cambio gastos
-    // Sacar signo pesos cantidades
     // Agregar detalles gastos agrupados
+    // Cambio total efectivo y cambio gastos
     // Sacar obligarioriedad cant obs en egreso
-    // Doble click en autocomplete
-  
+
     const amount_theoretical = cash_total - expenses_total;
     const difference = amount_theoretical - body.amount_actual;
 
     return await this.cashRegisterRepository.create({
       ...body,
+      postnet_total,
+      transfers_total,
       amount_theoretical,
       retirements_total,
       retirements_finish_total,
@@ -755,6 +762,16 @@ export class CashRegisterService implements ICashRegisterService {
     let total = 0;
     for (const retirement of retirements) {
       total += retirement.amount;
+    }
+    return total;
+  }
+  private getTotalRetirementsFinishByType(
+    retirements: TreasuryNightRetirementFinish[],
+    type: "postnet" | "transfers"
+  ) {
+    let total = 0;
+    for (const retirement of retirements) {
+      total += retirement[type];
     }
     return total;
   }
