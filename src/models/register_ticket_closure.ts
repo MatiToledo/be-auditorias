@@ -12,10 +12,6 @@ export class RegisterTicketClosure extends Model {
   declare postnet_total: number;
   declare transfers_total: number;
   declare sold_total: number;
-  declare ticket_persons: number;
-  declare ticket_price: number;
-  declare persons_cant_branch: number;
-  declare persons_cant_bar: number;
   declare observations: string;
   declare photo: string;
   declare RegisterTicketId: UUID;
@@ -70,10 +66,6 @@ RegisterTicketClosure.init(
     earned_account_bar: {
       type: DataTypes.BIGINT,
       allowNull: true,
-    },
-    persons_cant_bar: {
-      type: DataTypes.BIGINT,
-      allowNull: false,
     },
     observations: {
       type: DataTypes.STRING,
