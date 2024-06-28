@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { Schema, number, object, string } from "yup";
+import { Schema, array, number, object, string } from "yup";
 
 export class RegisterTicketClosureValidate {
   static async create(req: Request, res: Response, next: NextFunction) {
@@ -12,10 +12,16 @@ export class RegisterTicketClosureValidate {
         postnet_total: number().required(),
         transfers_total: number().required(),
         sold_total: number().required(),
-        ticket_persons: number().required(),
-        ticket_price: number().required(),
-        persons_cant_branch: number().required(),
-        persons_cant_bar: number().required(),
+        tickets: array()
+          .of(
+            object({
+              name: string().required(),
+              quantity: number().required(),
+            })
+          )
+          .required(),
+        total_earned_account: number().required(),
+        earned_account_bar: number().required(),
         observations: string().optional(),
         photo: string().required(),
         RegisterTicketId: string().uuid().required(),

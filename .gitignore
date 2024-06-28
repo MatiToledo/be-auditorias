@@ -9,3 +9,7 @@ logs
 coverage
 .nyc_output
 .vscode
+config
+migrations
+models
+seeders
