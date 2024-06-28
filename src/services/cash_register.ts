@@ -583,7 +583,6 @@ export class CashRegisterService implements ICashRegisterService {
           retirement.RegisterBarId === columnId ||
           retirement.RegisterTicketId === columnId
       );
-      //TODO Pasar asociacion con RegisterBarId y RegisterTicketId
       if (correspondingRetirement) {
         amountRow.push({
           value: correspondingRetirement.expenses.toString(),
