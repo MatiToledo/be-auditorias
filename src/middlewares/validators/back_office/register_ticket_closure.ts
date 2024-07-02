@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { Schema, number, object, string } from "yup";
+import { Schema, array, number, object, string } from "yup";
 
 export class RegisterTicketClosureBackOfficeValidate {
   static async getAll(req: Request, res: Response, next: NextFunction) {
@@ -36,10 +36,16 @@ export class RegisterTicketClosureBackOfficeValidate {
         postnet_total: number().optional(),
         transfers_total: number().optional(),
         sold_total: number().optional(),
-        ticket_persons: number().optional(),
-        ticket_price: number().optional(),
-        persons_cant_branch: number().optional(),
-        persons_cant_bar: number().optional(),
+        tickets: array()
+          .of(
+            object({
+              name: string().required(),
+              quantity: number().required(),
+            })
+          )
+          .optional(),
+        total_earned_account: number().optional(),
+        earned_account_bar: number().optional(),
         observations: string().optional(),
         photo: string().optional().nullable(),
         RegisterTicketId: string().uuid().optional(),
