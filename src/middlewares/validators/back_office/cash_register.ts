@@ -29,24 +29,8 @@ export class CashRegisterBackOfficeValidate {
       body: object({
         date: string().optional(),
         amount_actual: number().optional(),
-        amount_theoretical: number().optional(),
-        retirements_total: number().optional(),
-        transfers_total: number().optional(),
-        expenses_total: number().optional(),
-        expenses_observations: string().optional(),
-        transfers_total_system: number().required(),
-        cash_total_system: number().required(),
-        observations: string().optional(),
-        consumptions: array()
-          .of(
-            object({
-              description: string().required(),
-              quantity: number().required(),
-            })
-          )
-          .optional(),
-        photo: string().optional().nullable(),
-        RegisterBarId: string().uuid().optional(),
+        earned_account: number().optional(),
+        comment: string().optional(),
       })
         .noUnknown(true)
         .strict(true),

@@ -48,6 +48,7 @@ export class CashRegisterBackOfficeRepository
           "treasury_expenses_total",
           "expenses_total",
           "cash_total",
+          "earned_account",
           "postnet_total",
           "transfers_total",
           "difference",
@@ -68,6 +69,30 @@ export class CashRegisterBackOfficeRepository
     } catch (error) {
       console.error(error);
       throw new Error(`CASH_REGISTER_NOT_FOUND`);
+    }
+  }
+  async findById(id: UUID): Promise<CashRegister> {
+    try {
+      return await CashRegister.findByPk(id);
+    } catch (error) {
+      console.error(error);
+      throw new Error(`CASH_REGISTER_NOT_FOUND`);
+    }
+  }
+
+  async update(id: UUID, data: Partial<CashRegister>): Promise<CashRegister> {
+    try {
+      const [updatedInstitution, affectedRows] = await CashRegister.update(
+        data,
+        {
+          where: { id },
+          returning: true,
+        }
+      );
+      return affectedRows[0];
+    } catch (error) {
+      console.error(error);
+      throw new Error(`CASH_REGISTER_NOT_UPDATED`);
     }
   }
 }

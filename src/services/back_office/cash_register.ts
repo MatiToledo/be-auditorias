@@ -6,6 +6,7 @@ import {
 import { buildPagination } from "../../libs/buildPagination";
 import { CashRegister } from "../../models/cash_register";
 import { CashRegisterBackOfficeRepository } from "../../repositories/back_office/cash_register";
+import { UUID } from "crypto";
 
 export class CashRegisterBackOfficeService
   implements ICashRegisterBackOfficeService
@@ -68,5 +69,12 @@ export class CashRegisterBackOfficeService
     }
 
     return where as WhereOptions;
+  }
+
+  async update(id: UUID, body: Partial<CashRegister>): Promise<CashRegister> {
+    const beforeData = await this.cashRegisterBackOfficeRepository.findById(id);
+    body.difference = beforeData.amount_theoretical - body.amount_actual;
+
+    return await this.cashRegisterBackOfficeRepository.update(id, body);
   }
 }
