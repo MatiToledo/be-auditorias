@@ -15,6 +15,7 @@ import { RegisterTicketService } from "./register_ticket";
 import { TreasuryNightExpenseService } from "./treasury_night_expense";
 import { TreasuryNightRetirementService } from "./treasury_night_retirement";
 import { TreasuryNightRetirementFinishService } from "./treasury_night_retirement_finish";
+import { addMethod } from "yup";
 
 export class CashRegisterService implements ICashRegisterService {
   private cashRegisterRepository = new CashRegisterRepository();
@@ -30,26 +31,31 @@ export class CashRegisterService implements ICashRegisterService {
         BranchId: body.BranchId,
         date: body.date,
       });
+
     const retirements =
       await this.TreasuryNightRetirementService.getAllByBranchAndDateId({
         BranchId: body.BranchId,
         date: body.date,
       });
+
     const expenses =
       await this.TreasuryNightExpenseService.getAllByBranchAndDateId({
         BranchId: body.BranchId,
         date: body.date,
       });
 
-    const retirements_total = this.getTotalAmountRetirements(retirements);
     const postnet_total = this.getTotalRetirementsFinishByType(
       retirements_finish,
       "postnet"
     );
+
     const transfers_total = this.getTotalRetirementsFinishByType(
       retirements_finish,
       "transfers"
     );
+
+    const retirements_total = this.getTotalAmountRetirements(retirements);
+
     const retirements_finish_total =
       this.getTotalAmountRetirementsFinish(retirements_finish);
 
@@ -57,12 +63,15 @@ export class CashRegisterService implements ICashRegisterService {
       this.getTotalExpensesRetirementsFinish(retirements_finish);
 
     const treasury_expenses_total = this.getTotalExpenses(expenses);
+
     const expenses_total =
       treasury_expenses_total + retirements_finish_expenses_total;
+
     const cash_total =
       retirements_total +
       retirements_finish_total +
       retirements_finish_expenses_total;
+
     // TODO
     // Agregar detalles gastos agrupados
     // Cambio total efectivo y cambio gastos
@@ -71,7 +80,7 @@ export class CashRegisterService implements ICashRegisterService {
     const amount_theoretical = cash_total - expenses_total;
     const difference = amount_theoretical - body.amount_actual;
 
-    return await this.cashRegisterRepository.create({
+    const cashRegister = await this.cashRegisterRepository.create({
       ...body,
       postnet_total,
       transfers_total,
@@ -84,6 +93,10 @@ export class CashRegisterService implements ICashRegisterService {
       cash_total,
       difference,
     });
+
+    const tableData = this.createCashRegisterTable(cashRegister);
+
+    return { ...cashRegister.dataValues, tableData } as any;
   }
 
   async checkIfExistByDayAndBranchId(
@@ -230,19 +243,28 @@ export class CashRegisterService implements ICashRegisterService {
 
     const retirements_finish_total =
       this.getTotalAmountRetirementsFinish(retirements_finish);
+    const retirements_finish_expenses_total =
+      await this.getTotalExpensesRetirementsFinish(retirements_finish);
     const treasury_expenses_total = this.getTotalExpenses(expenses);
+
     return {
       totalCashColumnLabels: ["Monto"],
       totalCashRowLabels: ["Total Eft", "Total Gastos", "Saldo real eft"],
       totalCashData: [
         [
           {
-            value: (retirements_total + retirements_finish_total).toString(),
+            value: (
+              retirements_total +
+              retirements_finish_total +
+              retirements_finish_expenses_total
+            ).toString(),
           },
         ],
         [
           {
-            value: treasury_expenses_total.toString(),
+            value: (
+              treasury_expenses_total + retirements_finish_expenses_total
+            ).toString(),
           },
         ],
         [
@@ -798,5 +820,51 @@ export class CashRegisterService implements ICashRegisterService {
       total += expense.total;
     }
     return total;
+  }
+  private createCashRegisterTable(data: CashRegister) {
+    const columns = [
+      { key: "", label: "" },
+      { key: "1", label: "Monto" },
+    ];
+    const total_sold =
+      data.postnet_total + data.transfers_total + data.cash_total;
+    const rows = [];
+    rows[0] = {
+      "": "Total venta",
+      1: total_sold,
+    };
+    rows[1] = {
+      "": "Total medio electronicos",
+      1: data.postnet_total + data.transfers_total,
+    };
+    rows[2] = {
+      "": "Total efectivo",
+      1: data.cash_total,
+    };
+    rows[3] = {
+      "": "Total gastos efectivo",
+      1: data.expenses_total,
+    };
+    rows[4] = {
+      "": "Efectivo a rendir",
+      1: data.cash_total - data.expenses_total,
+    };
+    rows[5] = {
+      "": "Efectivo rendido",
+      1: data.amount_actual,
+    };
+    rows[6] = {
+      "": "Diferencia",
+      1: data.difference,
+    };
+    rows[7] = {
+      "": "Cuenta ganado",
+      1: data.earned_account,
+    };
+    rows[8] = {
+      "": "Facturacion por persona",
+      1: total_sold / data.earned_account,
+    };
+    return { columns, rows };
   }
 }

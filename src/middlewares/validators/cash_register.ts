@@ -7,6 +7,7 @@ export class CashRegisterValidate {
       body: object({
         date: string().required(),
         amount_actual: number().required(),
+        earned_account: number().required(),
         comment: string().optional(),
         BranchId: string().uuid().required(),
       })

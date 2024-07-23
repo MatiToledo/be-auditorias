@@ -19,6 +19,7 @@ export class CashRegister extends Model {
   declare transfers_total: number;
   declare BranchId: UUID;
   declare Branch: Branch;
+  declare earned_account: number;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
@@ -77,6 +78,10 @@ CashRegister.init(
     difference: {
       type: DataTypes.BIGINT,
       allowNull: false,
+    },
+    earned_account: {
+      type: DataTypes.BIGINT,
+      allowNull: true,
     },
     comment: {
       type: DataTypes.STRING,
