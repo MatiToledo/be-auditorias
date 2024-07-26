@@ -72,11 +72,6 @@ export class CashRegisterService implements ICashRegisterService {
       retirements_finish_total +
       retirements_finish_expenses_total;
 
-    // TODO
-    // Agregar detalles gastos agrupados
-    // Cambio total efectivo y cambio gastos
-    // Sacar obligarioriedad cant obs en egreso
-
     const amount_theoretical = cash_total - expenses_total;
     const difference = amount_theoretical - body.amount_actual;
 
@@ -165,6 +160,7 @@ export class CashRegisterService implements ICashRegisterService {
         data: principalData,
       }),
       expensesDetails: this.createExpensesDetailsTableData(expenses),
+      expensesGrouped: this.createExpensesDetailsGroupedTableData(expenses),
       registers: this.reshapeData({
         columnLabels: registerColumnsLabels,
         rowLabels: registerRowsLabel,
@@ -205,6 +201,32 @@ export class CashRegisterService implements ICashRegisterService {
       quantity: expense.quantity,
       unit_price: expense.unit_price,
       total: expense.total,
+    }));
+
+    return { columns, rows };
+  }
+  private createExpensesDetailsGroupedTableData(
+    expenses: TreasuryNightExpense[]
+  ) {
+    const columns = [
+      {
+        key: "concept",
+        label: "Concepto",
+      },
+      { key: "total", label: "Total" },
+    ];
+    const groupedExpenses = expenses.reduce((acc, expense) => {
+      const concept = expense.Concept.name;
+      if (!acc[concept]) {
+        acc[concept] = 0;
+      }
+      acc[concept] += expense.total;
+      return acc;
+    }, {});
+
+    const rows = Object.entries(groupedExpenses).map(([concept, total]) => ({
+      concept,
+      total,
     }));
 
     return { columns, rows };
